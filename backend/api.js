@@ -12,12 +12,4 @@ mongoose.connection.on('error', () => {
   console.log('failed to connect to mongod');
 });
 
-
-
-
-
-
-
-
-
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
