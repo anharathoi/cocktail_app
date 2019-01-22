@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./User.js')
-
 
 const cocktailSchema = new Schema ({
    title: String,
@@ -9,8 +7,7 @@ const cocktailSchema = new Schema ({
    description: String,
    directions: String,
    ingredients: String,
-   available: Boolean,
-   createdBy:  {type: Schema.Types.ObjectId, ref: 'User' },
+   available: Boolean
 })
 
 module.exports = mongoose.model('Cocktail', cocktailSchema)
