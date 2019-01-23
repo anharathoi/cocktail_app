@@ -5,10 +5,16 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const session = require("express-session");
+
+router.use(session({ secret: "cats" }));
+router.use(passport.initialize());
+router.use(passport.session());
+
 
 const generateToken = (user) => {
   const token = jwt.sign(
-    { username: user.username },
+    { email: user.email },
     'cocktail-app-gael', 
     { expiresIn: '1h' }
   );
@@ -55,6 +61,93 @@ router.post('/register', (req,res) => {
 })
 
 // LOGIN
+passport.serializeUser((user, done) => {
+  done(null, user.email);
+});
+
+passport.deserializeUser((email, done) => {
+  User.findOne({ email:email }, (err, user) => {
+    done(err, user);
+  });
+});
+
+
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+},
+  (email, password, done) => {
+    console.log('anhar errors for days')
+    User.findOne({ email:email }, (err, user) => {
+      console.log(`${user}`)
+      if (err) { 
+        console.log('anhar says error')
+        return done(err);
+      }
+      if (!user) { 
+        console.log('anhar says error2')
+        return done(null, false, { message: 'Incorrect email' });
+      }
+      
+      bcrypt.compare( password, user.password, (err, resp) => {
+        if(err) {
+          return done(null, false, { message: 'Incorrect password' }); 
+        }
+        return done(null, user);
+      });
+    });
+  }
+))
+
+const authenticateUser = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) { 
+      console.log('anhar says error4')
+      return next(err) }
+    if (!user) { 
+      console.log(`anhar says ${user}`)
+      return res.status(401).send(info.message) }
+    req.logIn(user, (err) => {
+      if (err) { 
+        console.log('anhar says error6')
+        return next(err) }
+      return res.send('Successfully authenticated');
+    });
+  })(req, res, next);
+}
+
+
+router.post('/login', authenticateUser) 
+
+router.get('/me', (req,res) => {
+  res.send(req.user)
+})
+// router.post('/login', (req, res) => {
+//   const {email, password} = req.body;
+//   if (email && password){
+//       User.findOne({email})
+//       .then(doc => {
+//           if(doc){
+//               bcrypt.compare( password, doc.password, function(err, resp) {
+//                   if(resp) {
+//                       const token = generateToken(doc);
+//                       console.log('password match')
+//                       return res.send({token});
+//                       // Passwords match
+//                   } else {
+//                       // Passwords don't match
+//                       console.log('password not match')
+//                    return res.status(403).send('BAD CREDENTIALS')
+//                   } 
+//                 });
+          
+//           } else {
+          
+//               return res.status(403).send({msg:'BAD CREDENTIALS'});
+//           }
+//       });
+//   }    
+// })
 
 
 
