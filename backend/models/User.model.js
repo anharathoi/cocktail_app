@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    userField: String,
-    passwordField: String,
+    email: String,
+    password: String,
     session: Boolean,
     phone: Number, 
     deliveryAddress: String,
@@ -31,3 +31,11 @@ and so on - this is to make fields required
 |--------------------------------------------------
 */
 
+    // date: {
+    //     type: Date,
+    //     default: Date.now
+    // },
+    // admin: {
+    //     type: Boolean,
+    //     default: false
+    // }
