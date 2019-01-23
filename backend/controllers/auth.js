@@ -4,7 +4,16 @@ const User = require('../models/User.model')
 const passport = require('passport') 
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
 
+const generateToken = (user) => {
+  const token = jwt.sign(
+    { username: user.username },
+    'cocktail-app-gael', 
+    { expiresIn: '1h' }
+  );
+  return token;
+}
 
 // REGISTER //
 
@@ -33,8 +42,8 @@ router.post('/register', (req,res) => {
           })
           user.save(err => {
             if (err) return res.status(400).send('there was an error')
-            //const token = generateToken(user);
-            return res.send(user)
+            const token = generateToken(user);
+            return res.send(token)
           })
         })
       }
@@ -44,5 +53,9 @@ router.post('/register', (req,res) => {
   })
   } 
 })
+
+// LOGIN
+
+
 
 module.exports = router;
