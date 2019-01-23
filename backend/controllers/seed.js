@@ -76,7 +76,11 @@
 
 // // post to login
 
-// // passport.use(new LocalStrategy(
+
+// // passport.use(new LocalStrategy({
+//   usernameField: 'email',
+//   passwordField: 'password'
+// },
 // //   (email, password, done) => {
 // //     console.log('anhar errors for days')
 // //     User.findOne({ email:email }, (err, user) => {
@@ -112,7 +116,8 @@
 // //   })(req, res, next);
 // // }
 // // router.post('/login', {}) 
-// passport.use('/login', new LocalStrategy({
+
+//  passport.use('/login', new LocalStrategy({
 //   usernameField: 'email',
 //   passwordField: 'password'
 // }, async (email, password, done) => {
