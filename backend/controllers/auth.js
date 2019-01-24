@@ -5,18 +5,23 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const cookieSession = require('cookie-session')
+// const cookieSession = require('cookie-session')
+const session = require("express-session");
 
-const oneDay = 1000 * 60 * 60 * 24;
+router.use(session({ secret: "cats" }));
+// router.use(passport.initialize());
+// router.use(passport.session());
 
-const cookie = cookieSession({
-  maxAge: oneDay,
-  keys: ['secret-key']
-});
+// const oneDay = 1000 * 60 * 60 * 24;
+
+// const cookie = cookieSession({
+//   maxAge: oneDay,
+//   keys: ['secret-key']
+// });
 
 router.use(passport.initialize());
 router.use(passport.session());
-router.use(cookie)
+// router.use(cookie)
 
 const generateToken = (user) => {
   const token = jwt.sign(
@@ -123,7 +128,7 @@ const authenticateUser = (req, res, next) => {
       }
 
       // req.session.user = user
-      return res.send(user.email);
+      return res.send("Successfully authenticated");
     });
   })(req, res, next);
 }
@@ -134,6 +139,12 @@ router.post('/login', authenticateUser)
 router.get('/me', (req,res) => {
   res.send(req.user)
 })
+
+router.post('/logout', (req, res) => {
+  req.logout();
+  res.send('Successfully logged out');
+});
+
 // router.post('/login', (req, res) => {
 //   const {email, password} = req.body;
 //   if (email && password){
