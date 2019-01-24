@@ -1,0 +1,6 @@
+// after payment we get -
+  // customer object
+    // from this, we want to push the customer_id in the user
+    // redirect the customer to the profile page
+
+// Subscription >> hard-coded at the moment

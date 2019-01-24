@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dotenv = require('dotenv')
+// const dotenv = require('dotenv');
 require('dotenv').config();
 
 // console.log(process.env.REACT_APP_STRIPE_SECRET_KEY)
@@ -9,21 +9,23 @@ const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY) // thi
 router.post('/api/stripe', (req, res, next) =>{
 	const { token, email } = req.body
 	console.log("--------------")
-	console.log(email)
-	console.log(`this is ${JSON.stringify(token)}`)
+	// console.log(email)
+	// console.log(`this is ${JSON.stringify(token)}`)
   stripe.customers.create({
 		email: email,
 		source: token.id,
     }, ((err, customer) => {
 			// console.log(err)
-			console.log(`this is customer ${customer}`)
+			// console.log(`this is customer if${JSON.stringify(customer)}`)
       if(err) {
 				res.send({
 					success: false,
 					message: err
 				})
       } else {
-				console.log(`this is customer ${customer}2`)
+				console.log("--------------")
+				console.log(`this is customer else ${JSON.stringify(customer)}`)
+				console.log("--------------")
 					const { id } = customer
 					stripe.subscriptions.create({
 						customer: id, 
@@ -34,7 +36,7 @@ router.post('/api/stripe', (req, res, next) =>{
 						],
 					}, function(err, subscription) {
 							console.log(`error : ${err}`)
-							console.log(`subscription:${subscription}`)
+							console.log(`subscription:${JSON.stringify(subscription)}`)
 								if (err) { 
 									res.send({
 										success: false,
