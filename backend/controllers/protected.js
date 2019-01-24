@@ -3,8 +3,6 @@ const Cocktail = require('../models/Cocktail.model')
 const User = require('../models/User.model')
 const router = express.Router();
 
-
-
 /////////////// ADMIN //////////////
 // get cocktails
 router.get('/cocktails', (req, res) => {

@@ -5,12 +5,18 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const session = require("express-session");
+const cookieSession = require('cookie-session')
 
-router.use(session({ secret: "cats" }));
+const oneDay = 1000 * 60 * 60 * 24;
+
+const cookie = cookieSession({
+  maxAge: oneDay,
+  keys: ['secret-key']
+});
+
 router.use(passport.initialize());
 router.use(passport.session());
-
+router.use(cookie)
 
 const generateToken = (user) => {
   const token = jwt.sign(
@@ -77,15 +83,15 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 },
   (email, password, done) => {
-    console.log('anhar errors for days')
+    // console.log('anhar errors for days')
     User.findOne({ email:email }, (err, user) => {
-      console.log(`${user}`)
+      // console.log(`${user}`)
       if (err) { 
-        console.log('anhar says error')
+        // console.log('anhar says error')
         return done(err);
       }
       if (!user) { 
-        console.log('anhar says error2')
+        // console.log('anhar says error2')
         return done(null, false, { message: 'Incorrect email' });
       }
       
@@ -93,6 +99,7 @@ passport.use(new LocalStrategy({
         if(err) {
           return done(null, false, { message: 'Incorrect password' }); 
         }
+        
         return done(null, user);
       });
     });
@@ -102,16 +109,21 @@ passport.use(new LocalStrategy({
 const authenticateUser = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) { 
-      console.log('anhar says error4')
-      return next(err) }
+      // console.log('anhar says error4')
+      return next(err)
+    }
     if (!user) { 
-      console.log(`anhar says ${user}`)
-      return res.status(401).send(info.message) }
+      // console.log(`anhar says ${user}`)
+      return res.status(401).send(info.message)
+    }
     req.logIn(user, (err) => {
       if (err) { 
-        console.log('anhar says error6')
-        return next(err) }
-      return res.send('Successfully authenticated');
+        // console.log('anhar says error6')
+        return next(err)
+      }
+
+      // req.session.user = user
+      return res.send(user.email);
     });
   })(req, res, next);
 }
