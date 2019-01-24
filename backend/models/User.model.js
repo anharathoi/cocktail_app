@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    email: String,
+    email: {
+        type: String,
+        required: true
+    },
     password: String,
     session: Boolean,
     phone: Number, 
@@ -15,7 +18,11 @@ const userSchema = new mongoose.Schema({
     numberOfOrders: Number,
     stripeId: String,
     active: Boolean,
-    admin: Boolean,
+    admin: {
+        type: Boolean,
+        default: false
+    }
+
 })
 
 module.exports = mongoose.model('User', userSchema)
