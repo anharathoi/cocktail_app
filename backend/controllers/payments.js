@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 require('dotenv').config();
 
 // console.log(process.env.REACT_APP_STRIPE_SECRET_KEY)
+
 const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY) // this is not posting
 
 router.post('/api/stripe', (req, res, next) =>{
@@ -22,11 +23,11 @@ router.post('/api/stripe', (req, res, next) =>{
       source: token.id,
     }, ((err, customer) => {
 			// console.log(err)
-			console.log(`thi sis customer ${customer}`)
+			console.log(`this is customer ${customer}`)
       if(err) {
           res.send({
 						success: false,
-						message: 'Error'
+						message: err
           })
       } else {
 				console.log(`this is customer ${customer}2`)
