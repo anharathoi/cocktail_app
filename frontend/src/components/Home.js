@@ -6,7 +6,7 @@ import About from './About';
 
 export default function Home() {
   return (
-    <div>
+    <div id="home">
         <About />
         <HowItWorks/>
         <Register/>
