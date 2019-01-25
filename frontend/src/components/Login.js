@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Payment from './Payment';
+
 
 export default class Login extends Component {
   state = { }
@@ -37,7 +37,7 @@ export default class Login extends Component {
     }
 
     render() {
-      const { error, message, email } = this.state
+      const { error, message} = this.state
       
         return (
           <>
@@ -50,7 +50,7 @@ export default class Login extends Component {
               <button onClick={this.logoutHandle}>Logout</button>
               <button onClick={this.submitForm}>Login</button>
             </form>
-            { email && <Payment email={email} /> }
+            
             { error && <p>{ error }</p> }
             { message && <p>{ message }</p>}
           </>
