@@ -57,6 +57,9 @@ router.post('/api/stripe', (req, res, next) =>{
 									success: true,
 									message: 'Success'
 								})
+								// res.redirect(
+								// 	'http:/localhost:3000/userprofile'
+								// )
 							}
 						}
 					)

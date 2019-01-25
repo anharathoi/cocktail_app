@@ -128,7 +128,9 @@ const authenticateUser = (req, res, next) => {
       }
 
       // req.session.user = user
-      return res.send("Successfully authenticated");
+      return res.send(user);
+      
+      
     });
   })(req, res, next);
 }
