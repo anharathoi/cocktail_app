@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import Payment from './Payment';
 
 export default class Register extends React.Component {
-  state = { }
+  state = { isSubmitted: false }
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
@@ -16,7 +17,7 @@ export default class Register extends React.Component {
 
     axios.post(url, data)
       .then(resp => {
-        this.setState({ message: 'well done buddy you just registered for a cocktail subscription', error: null})
+        this.setState({ message: 'well done buddy you just registered for a cocktail subscription', error: null, isSubmitted: true})
       })
       .catch(err => {
           console.log(err.response)
@@ -26,7 +27,7 @@ export default class Register extends React.Component {
         })
   }
   render() {
-    const { error, message } = this.state
+    const { error, message, email } = this.state
     return (
       <>
         <h2>Sign up for a Cocktail Subscription</h2>
@@ -45,18 +46,9 @@ export default class Register extends React.Component {
           <input type="number" id="phone" onChange={this.handleInputChange}/><br/>
           <label htmlFor="deliveryAddress">Delivery Address:</label>
           <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/><br/>
-          {/* <label htmlFor="dateJoined">dateJoined:</label>
-          <input type="text" id="dateJoined" onChange={this.handleInputChange}/><br/>
-          <label htmlFor="numberOfOrders">Number of Orders:</label>
-          <input type="text" id="numberOfOrders" onChange={this.handleInputChange}/><br/>
-          <label htmlFor="stripeId">Stripe Id:</label>
-          <input type="text" id="stripeId" onChange={this.handleInputChange}/><br/>
-          <label htmlFor="active">Active:</label>
-          <input type="text" id="active" onChange={this.handleInputChange}/><br/>
-          <label htmlFor="admin">Admin</label>
-          <input type="text" id="admin" onChange={this.handleInputChange}/><br/> */}
           <button onClick={this.submitForm}>Join Up</button>
         </form>
+          {this.state.isSubmitted && email && < Payment email={email}/>}
           { error && <p>{ error }</p> }
           { message && <p>{ message }</p>}
         </>

@@ -1,0 +1,10 @@
+// after payment we get -
+  // customer object
+    // from this, we want to push the customer_id in the user
+    // require the user model
+      //find the user by email
+      // then add the cutomer id inside
+      // and save
+    // redirect the customer to the profile page
+
+// Subscription >> hard-coded at the moment

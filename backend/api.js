@@ -3,7 +3,8 @@ const app = express();
 const passport = require('passport');
 const mongoose = require('mongoose');
 const PORT = 5000;
-const cors = require('cors')
+const cors = require('cors');
+
 
 app.use(cors())
 app.use(express.json());
