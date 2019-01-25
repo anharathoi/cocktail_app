@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Redirect } from 'react-router-dom'
+
 
 export default class Login extends Component {
   state = { }
@@ -17,7 +19,8 @@ export default class Login extends Component {
     axios.post(url, data)
       .then(resp => {
         console.log(resp)
-        this.setState({ message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email })
+        const { admin } = resp.data
+        this.setState({ admin: admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email })
       })
       .catch(err => {
         console.log(err.response)
@@ -39,8 +42,15 @@ export default class Login extends Component {
     render() {
       const { error, message} = this.state
       
-        return (
-          <>
+      if (this.state.admin) {
+        return <Redirect to="/admin" />
+      } 
+      else if (this.state.admin === false) {
+        return <Redirect to="/userprofile" />
+      }
+      else {
+      return (
+        <div>
             <h2>Sign In</h2>
             <form>
               <label htmlFor="email">email</label>
@@ -53,7 +63,10 @@ export default class Login extends Component {
             
             { error && <p>{ error }</p> }
             { message && <p>{ message }</p>}
-          </>
+        
+
+        </div>
       )
   }
+}
 }

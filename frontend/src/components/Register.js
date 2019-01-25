@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Payment from './Payment';
+import { Route , Redirect} from 'react-router-dom'
 
 export default class Register extends React.Component {
   state = { isSubmitted: false }
@@ -51,6 +52,8 @@ export default class Register extends React.Component {
           {this.state.isSubmitted && email && < Payment email={email}/>}
           { error && <p>{ error }</p> }
           { message && <p>{ message }</p>}
+
+          {/* { user.stripeId && <Link to = /admin/>} */}
         </>
   )
 }

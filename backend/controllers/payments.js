@@ -40,7 +40,7 @@ router.post('/api/stripe', (req, res, next) =>{
 						customer: id, 
 						items: [
 							{
-								plan: "plan_EOj3sJNhbq39cy",
+								plan: "plan_EOUE6qieRKFekI",
 							},
 						],
 					}, function(err, subscription) {
@@ -57,6 +57,9 @@ router.post('/api/stripe', (req, res, next) =>{
 									success: true,
 									message: 'Success'
 								})
+								// res.redirect(
+								// 	'http:/localhost:3000/userprofile'
+								// )
 							}
 						}
 					)
