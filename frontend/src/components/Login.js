@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar'
 
 import { Redirect } from 'react-router-dom'
 
@@ -50,22 +51,25 @@ export default class Login extends Component {
       }
       else {
       return (
-        <div style={{paddingTop: '40px'}}>
-            <h2>Sign In</h2>
-            <form>
-              <label htmlFor="email">email</label>
-              <input type="email" id="email" onChange={this.handleInputChange}/><br/>
-              <label htmlFor="password">Password: </label>
-              <input type="string" id="password" onChange={this.handleInputChange}/><br/>
-              <button onClick={this.logoutHandle}>Logout</button>
-              <button onClick={this.submitForm}>Login</button>
-            </form>
-            
-            { error && <p>{ error }</p> }
-            { message && <p>{ message }</p>}
-        
+        <>
+          <Navbar/>
+          <div style={{paddingTop: '40px'}}>
+              <h2>Sign In</h2>
+              <form>
+                <label htmlFor="email">email</label>
+                <input type="email" id="email" onChange={this.handleInputChange}/><br/>
+                <label htmlFor="password">Password: </label>
+                <input type="string" id="password" onChange={this.handleInputChange}/><br/>
+                <button onClick={this.logoutHandle}>Logout</button>
+                <button onClick={this.submitForm}>Login</button>
+              </form>
+              
+              { error && <p>{ error }</p> }
+              { message && <p>{ message }</p>}
+          
 
-        </div>
+          </div>
+        </>
       )
   }
 }

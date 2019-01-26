@@ -1,11 +1,15 @@
 import React from 'react'
+import Navbar from './Navbar'
 
 export default function WhoWeAre() {
   return (
-    <div style={{paddingTop: '40px'}}>
-      We are two blokes that enjoy cocktails.
+    <>
+      <Navbar/>
+      <div style={{paddingTop: '40px'}}>
+        We are two blokes that enjoy cocktails.
 
-      We want to share that with you.
-    </div>
+        We want to share that with you.
+      </div>
+    </>
   )
 }

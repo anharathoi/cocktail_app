@@ -23,25 +23,18 @@ class App extends React.Component {
     
         <div className="App">
           <div className="Main">
-            <Navbar/>
-              <Switch>
-                <Route path="/" component={Home} exact/>
-                <Route path="/Admin" component={Admin} exact/>
-                <Route path="/UserProfile" component={UserProfile} exact/>
-
-                <Route path="/who_we_are" component={WhoWeAre} exact/>
-
-                <Route path="/terms" component={Terms} exact/>
-
-                <Route path="/privacy" component={Privacy} exact/>
-
-                <Route path="/liquor_licence" component={LiquorLicence} exact/>
-
-                <Route path="/faqs" component={Faqs} exact/>
-
-                <Route path="/contact_us" component={ContactUs} exact/>
-              </Switch>
-            </div>
+            <Switch>
+              <Route path="/" component={Home} exact/>
+              <Route path="/Admin" component={Admin} exact/>
+              <Route path="/UserProfile" component={UserProfile} exact/>
+              <Route path="/who_we_are" component={WhoWeAre} exact/>
+              <Route path="/terms" component={Terms} exact/>
+              <Route path="/privacy" component={Privacy} exact/>
+              <Route path="/liquor_licence" component={LiquorLicence} exact/>
+              <Route path="/faqs" component={Faqs} exact/>
+              <Route path="/contact_us" component={ContactUs} exact/>
+            </Switch>
+          </div>
             <Footer />
         </div>
       
