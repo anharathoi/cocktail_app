@@ -50,7 +50,7 @@ export default class Login extends Component {
       }
       else {
       return (
-        <div>
+        <div style={{paddingTop: '40px'}}>
             <h2>Sign In</h2>
             <form>
               <label htmlFor="email">email</label>

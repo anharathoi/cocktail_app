@@ -6,7 +6,7 @@ import About from './About';
 
 export default function Home() {
   return (
-    <div id="home">
+    <div id="home" style={{paddingTop: '40px'}}>
         <About />
         <HowItWorks/>
         <Register/>
