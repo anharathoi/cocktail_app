@@ -1,11 +1,23 @@
-import React, { Component } from 'react'
 
-export default class Admin extends Component {
+import React, { Component } from 'react'
+import './Admin.css';
+import AdminSidebar from './AdminSidebar.js'
+import AdminUserChart from './AdminUserChart.js'
+
+class Admin extends Component {
   render() {
     return (
-      <div>
-          What up i am admin
+      <div className="Admin" >
+        <navbar>
+        <AdminSidebar />
+        </navbar>
+        <div id="page-wrap">
+          <h1>Admin Dashboard </h1>
+          <AdminUserChart/>
+        </div>
       </div>
-    )
+    );
   }
 }
+
+export default Admin;

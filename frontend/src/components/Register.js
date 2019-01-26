@@ -30,7 +30,7 @@ export default class Register extends React.Component {
   render() {
     const { error, message, email } = this.state
     return (
-      <>
+      <div id="register" style={{paddingTop: '40px'}}>
         <h2>Sign up for a Cocktail Subscription</h2>
         <form>
           <label htmlFor="firstName">First Name:</label>
@@ -54,7 +54,7 @@ export default class Register extends React.Component {
           { message && <p>{ message }</p>}
 
           {/* { user.stripeId && <Link to = /admin/>} */}
-        </>
+        </div>
   )
 }
 }

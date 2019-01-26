@@ -34,7 +34,7 @@ export default class Payment extends Component {
     } 
     else {
     return (
-      <div>
+      <div style={{paddingTop: '40px'}}>
         <StripeCheckout
           token = {this.onToken}
           stripeKey = {"pk_test_315Jrr5E4VK9O1motqWvTJS9"}
