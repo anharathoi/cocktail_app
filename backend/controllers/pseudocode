@@ -8,3 +8,27 @@
     // redirect the customer to the profile page
 
 // Subscription >> hard-coded at the moment
+
+
+//////////////////////////// Deleted Code Snippets //////////////////////
+
+// Cookie session config in auth.js
+    
+    const cookieSession = require('cookie-session')
+    // const oneDay = 1000 * 60 * 60 * 24;
+
+    // const cookie = cookieSession({
+    //   maxAge: oneDay,
+    //   keys: ['secret-key']
+    // });
+
+    // router.use(cookie)
+
+// Passport used in auth.js /login route from online tutorial
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  })( req, res, next);
+})

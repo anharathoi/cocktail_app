@@ -21,7 +21,7 @@ export default class Login extends Component {
       .then(resp => {
         console.log(resp)
         const { admin } = resp.data
-        this.setState({ admin: admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email })
+        this.setState({ admin: admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true })
       })
       .catch(err => {
         console.log(err.response)
@@ -33,10 +33,9 @@ export default class Login extends Component {
     logoutHandle = (e) => {
       e.preventDefault()
       const url = "http://localhost:5000/logout"
-      axios.post(url)
+      axios.get(url)
       .then(resp => {
-        console.log(resp)
-        this.setState({ message: 'You have logged out', error: null, email: null })
+        this.setState({ message: 'You have logged out', error: null, email: null, loggedIn: false })
       })
     }
 
@@ -60,14 +59,11 @@ export default class Login extends Component {
                 <input type="email" id="email" onChange={this.handleInputChange}/><br/>
                 <label htmlFor="password">Password: </label>
                 <input type="string" id="password" onChange={this.handleInputChange}/><br/>
-                <button onClick={this.logoutHandle}>Logout</button>
                 <button onClick={this.submitForm}>Login</button>
               </form>
-              
+              {this.state.loggedIn && <button onClick={this.logoutHandle}>Logout</button>}
               { error && <p>{ error }</p> }
               { message && <p>{ message }</p>}
-          
-
           </div>
         </>
       )

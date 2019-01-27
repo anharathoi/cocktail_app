@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Admin from './components/Admin'
 import UserProfile from './components/UserProfile'
@@ -11,7 +10,7 @@ import LiquorLicence from './components/LiquorLicence'
 import Privacy from './components/Privacy'
 import Terms from './components/Terms'
 import WhoWeAre from './components/WhoWeAre'
-import { BrowserRouter, Route , Switch } from 'react-router-dom'
+import { Route , Switch } from 'react-router-dom'
 
 
 require('dotenv').config()
