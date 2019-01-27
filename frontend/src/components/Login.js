@@ -19,7 +19,7 @@ export default class Login extends Component {
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {
-        console.log(resp)
+        // console.log(resp)
         const { admin } = resp.data
         this.setState({ admin: admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true })
       })

@@ -29,7 +29,13 @@ const generateToken = (user) => {
   );
   return token;
 }
+// isAuthenticated middleware
 
+const isAuthenticated = (req, res, next) => {
+  if(!req.user) res.status(403).send('Not authorized')
+
+  next();
+}
 // REGISTER //
 router.post('/register', (req,res) => {
   const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active} = req.body;
@@ -67,7 +73,6 @@ router.post('/register', (req,res) => {
   })
   } 
 })
-
 // LOGIN //
 const authenticateUser = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
@@ -85,25 +90,28 @@ const authenticateUser = (req, res, next) => {
         return next(err)
       }
       req.session.user = user
+      console.log(user.email) // prints user email - checked
+      const token = generateToken(user)
       // res.send(req.session)
-      return res.send("Welcome " + user.email);      
+      return res.send("Welcome " + user.email + " token: "+ JSON.stringify(jwt.decode(token)));
     });
   })(req, res, next);
 }
 
 router.post('/login', authenticateUser) 
 
-router.get('/me', (req,res) => {
+router.get('/me', isAuthenticated, (req,res) => {
   res.send(req.user)
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout',isAuthenticated, (req, res) => {
+  
   // if(!req.user){
   //   console.log("hello" + user)
   //   req.send("nobody is logged in")
   // }
   // console.log(req.session)
-  console.log(req)
+  // console.log(req)
   req.logout();
   res.redirect('/');
 });
