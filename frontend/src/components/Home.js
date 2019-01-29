@@ -8,13 +8,13 @@ import Navbar from './Navbar'
 export default function Home() {
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <div id="home" style={{paddingTop: '40px'}}>
         <About />
         <HowItWorks/>
         <Register/>
         <Login />
       </div>
-      </>
+    </>
   )
 }

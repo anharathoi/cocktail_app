@@ -1,6 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../models/User.model');
+const passportJWT = require("passport-jwt");
+const JWTStrategy   = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
 module.exports = (passport) =>{
   passport.use(new LocalStrategy({
@@ -30,7 +33,23 @@ module.exports = (passport) =>{
       .catch(err => console.log(err))
     }
   ))
-  
+
+  passport.use(new JWTStrategy({
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey   : 'cocktail-app-gael'
+    },
+    function (jwtPayload, cb) {
+      //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+      return User.findOne({email: jwtPayload.email})
+        .then(user => {
+          return cb(null, user);
+        })
+        .catch(err => {
+          return cb(err);
+        });
+    }
+  ));
+
   passport.serializeUser((user, done) => {
     done(null, user.email);
   });

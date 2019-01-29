@@ -12,18 +12,6 @@
 
 //////////////////////////// Deleted Code Snippets //////////////////////
 
-// Cookie session config in auth.js
-    
-    const cookieSession = require('cookie-session')
-    // const oneDay = 1000 * 60 * 60 * 24;
-
-    // const cookie = cookieSession({
-    //   maxAge: oneDay,
-    //   keys: ['secret-key']
-    // });
-
-    // router.use(cookie)
-
 // Passport used in auth.js /login route from online tutorial
 
 router.post('/login', (req, res, next) => {
@@ -32,3 +20,29 @@ router.post('/login', (req, res, next) => {
     failureRedirect: '/login',
   })( req, res, next);
 })
+
+
+// // isAuthenticated middleware
+// const isAuthenticated = (req, res, next) => {
+//   const { token } = req.headers;
+//   const decoded = jwt.verify(token, 'cocktail-app-gael'); // jwt secret
+//   const { email }= decoded;
+//   User.findOne({email})
+//   .then( user => {
+//     next(null, user);
+//   })
+// }
+
+
+// Cookie Session
+//   const oneDay = 1000 * 60 * 60 * 24;
+//   const cookie = cookieSession({
+//     maxAge: oneDay,
+//     keys: ['secret-key']
+//   });
+
+// router.use(cookie)
+
+
+// const session = require("express-session");
+// const cookieSession = require('cookie-session')

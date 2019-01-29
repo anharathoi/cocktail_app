@@ -4,23 +4,16 @@ const User = require('../models/User.model')
 const passport = require('passport');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const session = require("express-session");
+
 
 // Passport Config
 require('../config/passport')(passport);
-
-// Express session
-router.use(session({
-  secret: "cats",
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: null } // defines when the cookie should expire, e.g. { maxAge : 60000 }
-}));
 
 // Passport Middleware
 router.use(passport.initialize());
 router.use(passport.session());
 
+// JWT token create
 const generateToken = (user) => {
   const token = jwt.sign(
     { email: user.email },
@@ -29,13 +22,7 @@ const generateToken = (user) => {
   );
   return token;
 }
-// isAuthenticated middleware
 
-const isAuthenticated = (req, res, next) => {
-  if(!req.user) res.status(403).send('Not authorized')
-
-  next();
-}
 // REGISTER //
 router.post('/register', (req,res) => {
   const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active} = req.body;
@@ -73,9 +60,10 @@ router.post('/register', (req,res) => {
   })
   } 
 })
+
 // LOGIN //
 const authenticateUser = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', {session: false}, (err, user, info) => {
     if (err) { 
       // console.log('anhar says error4')
       return next(err)
@@ -84,36 +72,33 @@ const authenticateUser = (req, res, next) => {
       // console.log(`anhar says ${user}`)
       return res.status(401).send(info.message)
     }
-    req.logIn(user, (err) => {
+    req.logIn(user, {session: false}, (err) => {
       if (err) { 
         // console.log('anhar says error6')
         return next(err)
       }
-      req.session.user = user
-      console.log(user.email) // prints user email - checked
+
+      // console.log(user.email) // prints user email - checked
       const token = generateToken(user)
       // res.send(req.session)
-      return res.send("Welcome " + user.email + " token: "+ JSON.stringify(jwt.decode(token)));
+      // setting cookie in the header
+      // res.setHeader('token', token)
+      return res.send({user,token});
     });
   })(req, res, next);
 }
 
 router.post('/login', authenticateUser) 
 
-router.get('/me', isAuthenticated, (req,res) => {
+router.get('/me', passport.authenticate('jwt', {session: false}), (req,res) => {
+  console.log(req.user)
   res.send(req.user)
 })
 
-router.get('/logout',isAuthenticated, (req, res) => {
-  
-  // if(!req.user){
-  //   console.log("hello" + user)
-  //   req.send("nobody is logged in")
-  // }
-  // console.log(req.session)
-  // console.log(req)
+router.get('/logout',passport.authenticate('jwt', {session: false}),(req, res) => {
+  const {email} = req.user
   req.logout();
-  res.redirect('/');
+  res.send( `${email} has successfully logged out`);
 });
 
 module.exports = router;
