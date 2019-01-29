@@ -1,9 +1,8 @@
 const express = require('express');
-const Cocktail = require('../models/Cocktail.model')
-const User = require('../models/User.model')
 const router = express.Router();
+const Cocktail = require('../../../models/Cocktail.model');
 
-/////////////// ADMIN //////////////
+
 // get cocktails
 router.get('/cocktails', (req, res) => {
   Cocktail.find({})
@@ -61,35 +60,5 @@ router.put('/admin/cocktail/:title', (req, res) => {
     res.status(400).send(err);
   })
 })
-
-// get customer-info -ADMIN
-router.get('/admin/users', (req,res) => {
-  User.find({})
-  .then(users => {
-    res.send(users);
-  })
-  .catch(err => {
-    res.status(400).send(err);
-  })
-})
-
-// maybe post/get for transaction depending on what stripe does - Anhar thinks so!
-
-// get active customers
-//////////////// all users ////////////
-
-// get profile - customer
-router.get('/admin/users/:firstName', (req, res) => {
-  const {firstName} = req.params;
-  // const {password} = req.headers;
-  User.findOne({firstName})
-  .then( user => {
-    res.send(user);
-  })
-})
-
-// put user profile
-
-// get transaction history
 
 module.exports = router;

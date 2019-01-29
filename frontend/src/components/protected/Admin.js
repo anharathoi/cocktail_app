@@ -8,9 +8,9 @@ class Admin extends Component {
   render() {
     return (
       <div className="Admin" >
-        <navbar>
+        <nav>
         <AdminSidebar />
-        </navbar>
+        </nav>
         <div id="page-wrap">
           <h1>Admin Dashboard </h1>
           <AdminUserChart/>
