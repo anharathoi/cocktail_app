@@ -8,10 +8,23 @@ The most important aspects of creating quality software, is to ensure the User h
 The characteristics that ensure quality software are:
  maintainability, correctness, reusability, reliability, portability, and efficiency.
 
-- What libraries are being used in the app and why?
+- What libraries are being used in the app and why
+
+The libraries used in the app are the following: MongoDB, Express, React and Node. These libraries form a popular collection of technologies known as the MERN stack. All of the below applications are written using JavaScript syntax so when writing using these technologies there is no need to get across different languages, but rather just the different syntax types they all use.
+
+** MongoDB is a popular database that is document based and data can still be relational and written in JavaScript syntax, items can be stored within JavaScript objects and which makes the data easier to manipulate when using JavaScript in other elements of the tech stack.
+
+** Express is a framework that functions within Node, it makes creating server-side applications realtively quick and simple, and adds very useful features to the existing Node library.
+
+** React is a front end library written in JavaScript. It is powerful and very popular in the developer community due to its abaility to create applications using single dynamic pages all of which are declared and controlled within components, making the various aspects easier to manage.
 
 
 - A team is about to engage in a project, developing a website for a small business. What knowledge and skills would they need in order to develop the project?
+
+** A team about to engage in such a project will require the following skills:
+
+    - The ability to code, and understand coding guides/documents
+    - Project management - The team would be well served by incorporating project management tools such as daily stand ups, tracking of tasks and who is carrying them out and 
 
 - Within your own project what knowledge or skills were required to complete your project, and overcome challenges?
 

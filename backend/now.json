@@ -1,1 +1,14 @@
-{}
+{
+    "name": "cocktail-app",
+    "alias": "cocktail-app",
+    "version": 2,
+    "builds": [
+    { "src": "api.js", "use": "@now/node-server" }
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "api.js" }
+    ],
+    "env": {
+        "DB_PROD_URL": "mongodb://LDibs:Ld125689@ds147073.mlab.com:47073/cocktail-app"
+    }
+}
