@@ -23,7 +23,7 @@ export default class Logout extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     // if(this.props.loggedIn === true){
       return (
         <div>

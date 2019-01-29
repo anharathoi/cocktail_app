@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Logout from './Logout'
+import Logout from '../Logout'
 
 export default class UserProfile extends Component {
   state = {}

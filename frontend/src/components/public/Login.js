@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import Logout from './Logout'
+import Logout from '../Logout'
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
-// axios.defaults.withCredentials = true;
-
 
 export default class Login extends Component {
   state = { }
@@ -58,24 +56,29 @@ export default class Login extends Component {
         return <Redirect to="/userprofile"/>
       }
       else {
-        return (
-          <>
-            {/* <Navbar/> */}
-            <div style={{paddingTop: '40px'}}>
-                <h2>Sign In</h2>
-                <form>
-                  <label htmlFor="email">email</label>
-                  <input type="email" id="email" onChange={this.handleInputChange}/><br/>
-                  <label htmlFor="password">Password: </label>
-                  <input type="string" id="password" onChange={this.handleInputChange}/><br/>
-                  <button onClick={this.submitForm}>Login</button>
-                </form>
-                {this.state.token && <Logout clearToken={this.clearToken}/>}
-                { error && <p>{ error }</p> }
-                { message && <p>{ message }</p>}
-            </div>
-          </>
-        )
-  }
-}
+        if(!this.state.token){
+          return (
+            <>
+              {/* <Navbar/> */}
+              <div style={{paddingTop: '40px'}}>
+                  <h2>Sign In</h2>
+                  <form>
+                    <label htmlFor="email">email</label>
+                    <input type="email" id="email" onChange={this.handleInputChange}/><br/>
+                    <label htmlFor="password">Password: </label>
+                    <input type="string" id="password" onChange={this.handleInputChange}/><br/>
+                    <button onClick={this.submitForm}>Login</button>
+                  </form>
+                  { message && <p>{ message }</p>}
+                  { error && <p>{ error }</p> }
+              </div>
+            </>
+          )
+        } else {   
+            return (
+              <Logout clearToken={this.clearToken}/>
+            ) 
+        }
+      }
+    }
 }

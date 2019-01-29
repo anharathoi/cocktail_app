@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import Footer from './components/Footer'
-import Admin from './components/Admin'
-import UserProfile from './components/UserProfile'
-import Home from './components/Home'
-import ContactUs from './components/ContactUs'
-import Faqs from './components/Faqs'
-import LiquorLicence from './components/LiquorLicence'
-import Privacy from './components/Privacy'
-import Terms from './components/Terms'
-import WhoWeAre from './components/WhoWeAre'
+import Footer from './components/public/Footer'
+import Admin from './components/protected/Admin'
+import UserProfile from './components/protected/UserProfile'
+import Home from './components/public/Home'
+import ContactUs from './components/public/ContactUs'
+import Faqs from './components/public/Faqs'
+import LiquorLicence from './components/public/LiquorLicence'
+import Privacy from './components/public/Privacy'
+import Terms from './components/public/Terms'
+import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
 
 
