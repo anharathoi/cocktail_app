@@ -11,27 +11,43 @@ import Privacy from './components/public/Privacy'
 import Terms from './components/public/Terms'
 import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
-
+import Logout from './components/Logout';
+import Navbar from './components/public/Navbar'
 
 require('dotenv').config()
 
 
 class App extends React.Component {
+  state = {}
+
+  setToken = (token) => {
+    this.setState({token: token})
+    console.log("This is from App " + this.state.token)
+  }
+
+  clearToken = () => {
+    this.setState({token: null})
+  }
+
   render() {
     return (
     
         <div className="App">
           <div className="Main">
             <Switch>
-              <Route path="/" component={Home} exact/>
-              <Route path="/Admin" component={Admin} exact/>
               <Route path="/UserProfile" component={UserProfile} exact/>
+              <Route
+                exact path="/"
+                render={(props) => <Home {...props} setToken={this.setToken}  />}
+              />
+              <Route path="/Admin" component={Admin} exact/>
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>
               <Route path="/liquor_licence" component={LiquorLicence} exact/>
               <Route path="/faqs" component={Faqs} exact/>
               <Route path="/contact_us" component={ContactUs} exact/>
+              <Logout/>
             </Switch>
           </div>
             <Footer />

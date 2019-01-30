@@ -14,11 +14,13 @@ export default class Login extends Component {
       this.setState({token})
     }
   }
-  
+
+
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
   }
+
   submitForm = (e) => {
     e.preventDefault()
     // console.log(this.state)
@@ -32,8 +34,11 @@ export default class Login extends Component {
         const { admin } = user
         // const admin = user.admin
         // console.log(admin)// console logs false
+        console.log("Login token " + token)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
+        // console.log("props from login " + this.props.setToken)
+        this.props.setToken(token)
       })
       .catch(err => {
         console.log(err.response)
@@ -42,7 +47,8 @@ export default class Login extends Component {
         }
       })
     }
-   clearToken = () => {
+
+    clearToken = () => {
      this.setState({token: null})
    }
 

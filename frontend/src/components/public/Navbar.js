@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Navbar.css'
 import { HashLink as Link } from "react-router-hash-link"
 // import { Hashlink as Link } from 'react-router-hash-link'
+import Logout from '../Logout'
 
 export default class Navbar extends Component {
     constructor(props) {

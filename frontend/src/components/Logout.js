@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom';
 
 export default class Logout extends Component {
   logoutHandle = (e) => {
@@ -18,6 +17,7 @@ export default class Logout extends Component {
       Cookies.remove('token');
       // this.setState({ message: 'You have logged out', error: null, email: null, loggedIn: false})
       this.props.clearToken()
+      
     })
     .catch( err => console.log(err))
   }
