@@ -70,4 +70,4 @@ export default function Home(props) {
   )
 }
 
-1. Login will setToken to app.js
+// 

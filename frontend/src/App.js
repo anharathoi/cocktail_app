@@ -26,10 +26,7 @@ class App extends React.Component {
     this.setState({token})
     console.log("App.js component mounted "+ token)
   }
-  componentDidUpdate(){
-    // console.log("App.js component updated")
-    // console.log(this.state)
-  }
+
   setToken = (token) => {
     this.setState({token: token})
     // console.log("This is from App " + this.state.token)
