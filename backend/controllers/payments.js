@@ -19,7 +19,7 @@ router.post('/api/stripe', (req, res, next) =>{
 			User.findOne({email})
 			.then( user => {
 				// console.log("--------------")
-				// console.log('this is inside mongoose query')
+				// console.log('this is inside mongoose query '+ customer)
 				// console.log("--------------")
 				user.stripeId = customer.id;
 				return user.save();
@@ -40,7 +40,7 @@ router.post('/api/stripe', (req, res, next) =>{
 						customer: id, 
 						items: [
 							{
-								plan: "plan_EOUE6qieRKFekI",
+								plan: "plan_EOj3sJNhbq39cy",
 							},
 						],
 					}, function(err, subscription) {
