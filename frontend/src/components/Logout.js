@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 
 export default class Logout extends Component {
   logoutHandle = (e) => {
@@ -26,9 +27,7 @@ export default class Logout extends Component {
     // console.log(this.props)
     // if(this.props.loggedIn === true){
       return (
-        <div>
-          <button onClick={this.logoutHandle}>Logout</button>
-        </div>
+          <Link to="#" onClick={this.logoutHandle}>Logout</Link>
       )
     }
 }

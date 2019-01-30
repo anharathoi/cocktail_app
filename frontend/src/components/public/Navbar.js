@@ -39,6 +39,7 @@ export default class Navbar extends Component {
                 <li><Link to='/#about'>About</Link></li>
                 <li><Link to='/#how-it-works'>How it Works</Link></li>
                 <li><Link to='/#register' >Register</Link></li>
+                {this.props.token && <li><Logout {...this.props}/></li>}
             </ul>
         </nav>
       </>

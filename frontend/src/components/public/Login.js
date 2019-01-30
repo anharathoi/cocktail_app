@@ -15,7 +15,6 @@ export default class Login extends Component {
     }
   }
 
-
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
@@ -48,11 +47,12 @@ export default class Login extends Component {
       })
     }
 
-    clearToken = () => {
-     this.setState({token: null})
-   }
+  //   clearToken = () => {
+  //    this.setState({token: null})
+  //  }
 
     render() {
+      console.log(this.state)
       const { error, message} = this.state
 
       if (this.state.admin) {
@@ -62,7 +62,7 @@ export default class Login extends Component {
         return <Redirect to="/userprofile"/>
       }
       else {
-        if(!this.state.token){
+        if(!this.props.token){
           return (
             <>
               {/* <Navbar/> */}
@@ -82,7 +82,8 @@ export default class Login extends Component {
           )
         } else {   
             return (
-              <Logout clearToken={this.clearToken}/>
+              <p>You're currently Logged in</p>
+              // <Logout {...this.props}/>
             ) 
         }
       }
