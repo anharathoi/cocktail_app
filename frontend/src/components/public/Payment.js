@@ -11,7 +11,7 @@ export default class Payment extends Component {
   onToken = (token) => {
     const email = this.props.email
     // console.log(token)
-    axios.post('http://localhost:5000/api/stripe', {
+    axios.post('https://cocktail-app.now.sh/api/stripe', {
       token,
       email
     })

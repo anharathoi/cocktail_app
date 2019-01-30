@@ -6,7 +6,7 @@ import Logout from '../Logout'
 export default class UserProfile extends Component {
   state = {}
   componentDidMount (){
-    const url = 'http://localhost:5000/me'
+    const url = 'https://cocktail-app.now.sh/me'
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {
