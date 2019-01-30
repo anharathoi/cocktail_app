@@ -7,7 +7,7 @@ export default class Logout extends Component {
   logoutHandle = (e) => {
     e.preventDefault()
     console.log("logging out")
-    const url = "http://localhost:5000/logout";
+    const url = "https://cocktail-app.now.sh/logout";
     const token = Cookies.get('token')
     axios.get(url, {
       headers: {
