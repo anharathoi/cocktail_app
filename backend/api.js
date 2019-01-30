@@ -10,8 +10,8 @@ app.use(cors())
 app.use(express.json());
 app.use(passport.initialize());
 
-//mongoose.connect(process.env.DB_DEV_URL)
-mongoose.connect(process.env.DB_PROD_URL);
+mongoose.connect(process.env.DB_DEV_URL)
+// mongoose.connect(process.env.DB_PROD_URL);
 mongoose.connection.on('connected', () => {
   console.log('connected to mongod');
 });
