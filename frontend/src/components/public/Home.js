@@ -3,6 +3,9 @@ import Register from './Register'
 import Login from './Login'
 import HowItWorks from './HowItWorks';
 import About from './About';
+import Navbar from './Navbar'
+import CreateCocktail from '../protected/CreateCocktail'
+
 
 
 export default function Home(props) {
@@ -14,7 +17,12 @@ export default function Home(props) {
         <About />
         <HowItWorks/>
         <Register/>
+
+    {/*<Login />*/}
+        <CreateCocktail />
+
         <Login {...props}/>
+
       </div>
     </>
   )
