@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 
 export default class Logout extends Component {
   logoutHandle = (e) => {
     e.preventDefault()
     console.log("logging out")
-    const url = "http://localhost:5000/logout";
+    const url = "https://cocktail-app.now.sh/logout";
     const token = Cookies.get('token')
     axios.get(url, {
       headers: {
@@ -18,6 +18,7 @@ export default class Logout extends Component {
       Cookies.remove('token');
       // this.setState({ message: 'You have logged out', error: null, email: null, loggedIn: false})
       this.props.clearToken()
+      
     })
     .catch( err => console.log(err))
   }
@@ -26,9 +27,7 @@ export default class Logout extends Component {
     // console.log(this.props)
     // if(this.props.loggedIn === true){
       return (
-        <div>
-          <button onClick={this.logoutHandle}>Logout</button>
-        </div>
+          <Link to="#" onClick={this.logoutHandle}>Logout</Link>
       )
     }
 }

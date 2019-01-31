@@ -11,7 +11,7 @@ export default class Payment extends Component {
   onToken = (token) => {
     const email = this.props.email
     // console.log(token)
-    axios.post('http://localhost:5000/api/stripe', {
+    axios.post('https://cocktail-app.now.sh/api/stripe', {
       token,
       email
     })
@@ -37,8 +37,7 @@ export default class Payment extends Component {
       <div style={{paddingTop: '40px'}}>
         <StripeCheckout
           token = {this.onToken}
-          stripeKey = {"pk_test_315Jrr5E4VK9O1motqWvTJS9"}
-         
+          stripeKey = {"pk_test_22vQKgTT4CWWMUuAzR2OsHUn"}
         />
       </div>
     )

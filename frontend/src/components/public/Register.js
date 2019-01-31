@@ -12,7 +12,7 @@ export default class Register extends React.Component {
     e.preventDefault()
     // console.log(this.state)
     const {  firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin } = this.state
-    const url = "http://localhost:5000/register"
+    const url = "https://cocktail-app.now.sh/register"
     const data = { firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin}
 
     axios.post(url, data)

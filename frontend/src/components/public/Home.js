@@ -6,7 +6,10 @@ import About from './About';
 import Navbar from './Navbar'
 import CreateCocktail from '../protected/CreateCocktail'
 
-export default function Home() {
+
+
+export default function Home(props) {
+  // console.log(props)
   return (
     <>
       {/* <Navbar/> */}
@@ -14,8 +17,12 @@ export default function Home() {
         <About />
         <HowItWorks/>
         <Register/>
-        <Login />
+
+    {/*<Login />*/}
         <CreateCocktail />
+
+        <Login {...props}/>
+
       </div>
     </>
   )

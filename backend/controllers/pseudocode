@@ -46,3 +46,28 @@ router.post('/login', (req, res, next) => {
 
 // const session = require("express-session");
 // const cookieSession = require('cookie-session')
+
+////////////// Refactoring Needed on the following places ////////////
+29/JAN/2019
+// the logout component clears the cookies set on the browser
+  // Howver, the userprofile and the login page need to render on logout so that they dont't show the Logout button anymore
+  // At the moment, it is done in a way so that userprofile and the logout component renders when they have token in the state
+  // So, for them to rerender, we need to clear the token inside of the state
+  // Currently we have a  cleartoken method defined in both login and userprofile which are passed as the props in the Logout in each of those component which IS NOT VERY DRY
+
+//Logout props from home
+export default function Home(props) {
+  return (
+    <>
+      < Navbar/>
+      <div id="home" style={{paddingTop: '40px'}}>
+        <About />
+        <HowItWorks/>
+        <Register/>
+        <Login {...this.props} />
+      </div>
+    </>
+  )
+}
+
+// 
