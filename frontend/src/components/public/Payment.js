@@ -6,22 +6,29 @@ import { Redirect } from 'react-router-dom'
 
 require('dotenv').config()
 export default class Payment extends Component {
-  state = { payment: false}
+  state = { 
+    payment: false
+  }
   // state = {}
   onToken = (token) => {
     const email = this.props.email
+    const selectedOption = this.props.selectedOption
+    // console.log(selectedOption)
     // console.log(token)
-    axios.post('https://cocktail-app.now.sh/api/stripe', {
+    // axios.post('https://cocktail-app.now.sh/api/stripe', { // PROD
+    const data = {
       token,
-      email
-    })
+      email,
+      selectedOption
+    }
+    axios.post('http://localhost:5000/api/stripe', data)
     .then( response => {
       console.log(response)
-      const { success} = response.data
+      const { success } = response.data
       this.setState({ 
         success
       })
-      
+ 
     })
     .catch ( err => {
       console.log(err.response)
