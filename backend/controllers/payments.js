@@ -12,6 +12,7 @@ router.post('/api/stripe', (req, res, next) => {
 	    source: token.id,
     }, ((err, customer) => {
 			User.findOne({email})
+
                 .then( user => {
                     user.stripeId = customer.id;
                     return user.save();
@@ -74,5 +75,6 @@ router.post('/api/stripe', (req, res, next) => {
         })
     )}
 )
+
 
 module.exports = router;
