@@ -25,7 +25,7 @@ const generateToken = (user) => {
 
 // REGISTER //
 router.post('/register', (req,res) => {
-  const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active} = req.body;
+  const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active, selectedOption} = req.body;
   if (email) {
     User.findOne({email})
     .then(user => {
@@ -45,7 +45,8 @@ router.post('/register', (req,res) => {
             admin,
             dateJoined,
             numberOfOrders,
-            active
+            active,
+            selectedOption
           })
           user.save(err => {
             if (err) return res.status(400).send('there was an error')
