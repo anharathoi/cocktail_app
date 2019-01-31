@@ -105,7 +105,7 @@ export default class Register extends React.Component {
           selectedOptions={this.state.frequencyOptions}
           /> */}
 
-<div className="form-check">
+          <div className="form-check">
             <label htmlFor="frequency">Monthly Frequency</label>
             <input type="radio" id="frequency1" value="monthlyFrequency" name="frequency" checked={this.state.selectedOption === "monthlyFrequency"} onChange={this.handleFrequencyChange}/>
           </div>
