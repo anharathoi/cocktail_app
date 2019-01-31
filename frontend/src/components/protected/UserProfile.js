@@ -5,7 +5,9 @@ import Cookies from 'js-cookie';
 export default class UserProfile extends Component {
   state = {}
   componentDidMount (){
-    const url = 'https://cocktail-app.now.sh/me'
+    // const url = 'https://cocktail-app.now.sh/me' // PROD
+
+    const url = 'http://localhost:5000/me' // 
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {
