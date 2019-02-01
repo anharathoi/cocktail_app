@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.admin)
+    console.log(this.state.token)
     return (
         <div className="App">
           <div className="Main">
