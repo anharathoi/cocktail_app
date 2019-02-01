@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Payment from './Payment';
-import Frequency from './Frequency'
+import Frequency from './Frequency';
+import Cookies from 'js-cookie';
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -16,17 +17,23 @@ export default class Register extends React.Component {
   //thinking i may have to add in all of the fields within this.state.  and then below set the state of each of these components in this.setState.
   
   componentDidMount = () => {
-
     // const url = 'https://cocktail-app.now.sh/me' //PROD
-    const url = 'https://localhost:5000/me' // DEV
-      axios.get(url)
-      .then(res => res.json())
-      // .then(res => console.log(res))
-			.then(data => {
-				this.setState({
-					selectedFrequency: data.frequencyOptions	
-				});
-			});
+    const url = 'http://localhost:5000/me' // DEV
+    const token = Cookies.get('token')
+    // console.log("this is token " + token)
+    if(token){
+      axios.get(url, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      })
+      .then(resp => {
+        const {token} = resp.data
+        this.setState({
+          selectedFrequency: resp.data.frequencyOptions
+        });
+      });
+    }
   }
   
   // handleFrequencySelection = (e) => {
@@ -65,6 +72,9 @@ export default class Register extends React.Component {
     axios.post(url, data)
       .then(resp => {
         this.setState({ message: 'well done buddy you just registered for a cocktail subscription', error: null, isSubmitted: true })
+        const {token} = resp.data
+        Cookies.set('token', token)
+        this.props.setToken(token)
         console.log(resp)
       })
       .catch(err => {
