@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
 
 export default class UserProfile extends Component {
   state = {}
@@ -13,10 +14,10 @@ export default class UserProfile extends Component {
         }
       })
       .then ( resp => {
-        const {email, firstName, lastName, phone, deliveryAddress} = resp.data
+        const {email, firstName, lastName, phone, deliveryAddress, admin} = resp.data
         // console.log(email)
         // const {admin} = user
-        this.setState({email,firstName, lastName, phone, deliveryAddress})
+        this.setState({email,firstName, lastName, phone, deliveryAddress, admin})
       })
       .catch( err => console.log(err) )
   }
@@ -26,7 +27,7 @@ export default class UserProfile extends Component {
 
     render() {
       // console.log("This is userprofile props " + this.props.clearToken)
-      if(this.props.token){
+      if(this.props.token && !this.state.admin){
         return (
         <>
           <div>
@@ -39,6 +40,11 @@ export default class UserProfile extends Component {
           </div> 
         </>
         )
+      } 
+      else if(this.props.token && this.state.admin){
+        return (
+           <Redirect to="/admin"></Redirect>
+          )
       }
       else {
         return (

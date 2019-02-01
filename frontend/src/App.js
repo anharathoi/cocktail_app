@@ -11,9 +11,9 @@ import Privacy from './components/public/Privacy'
 import Terms from './components/public/Terms'
 import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
-import Logout from './components/Logout';
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
+import Customers from './components/protected/Customers'
 require('dotenv').config()
 
 
@@ -25,6 +25,7 @@ class App extends React.Component {
     const token = Cookies.get('token')
     this.setState({token})
     console.log("App.js component mounted "+ token)
+    // if(token)
   }
 
   setToken = (token) => {
@@ -36,22 +37,33 @@ class App extends React.Component {
     this.setState({token: null})
   }
 
+  setAdmin = (isAdmin) =>{
+    this.setState({admin: isAdmin})
+  }
+
   render() {
-    // console.log(this.state.token)
+    console.log(this.state.admin)
     return (
         <div className="App">
           <div className="Main">
-            <Navbar token={this.state.token} clearToken={this.clearToken}/>
+          {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken}/>}
             <Switch>
               <Route
                 exact path="/"
-                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token}/>}
+                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} adminStatus={this.setAdmin}/> }
               />
               <Route
                 exact path="/UserProfile"
                 render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} />}
               />
-              <Route path="/Admin" component={Admin} exact/>
+             <Route
+                exact path="/Admin"
+                render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
+              />
+              <Route
+                exact path="/admin/customers"
+                render={(props) => <Customers {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
+              />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>

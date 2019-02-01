@@ -91,7 +91,7 @@ const authenticateUser = (req, res, next) => {
 router.post('/login', authenticateUser) 
 
 router.get('/me', passport.authenticate('jwt', {session: false}), (req,res) => {
-  console.log(req.user)
+  // console.log(req.user)
   res.send(req.user)
 })
 
