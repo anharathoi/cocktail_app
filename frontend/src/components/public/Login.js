@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from './Navbar';
-import Logout from '../Logout'
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
@@ -36,11 +34,12 @@ export default class Login extends Component {
         console.log("Login token " + token)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
-        // console.log("props from login " + this.props.setToken)
         this.props.setToken(token)
+        this.props.setAdmin(admin)
+        console.log("props from login " + this.props.setAdmin)
       })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response)
         if (err.response === 403) {
           this.setState({ error: 'Nope!', message: null})
         }
@@ -52,7 +51,7 @@ export default class Login extends Component {
   //  }
 
     render() {
-      console.log(this.state)
+      // console.log(this.state)
       const { error, message} = this.state
 
       if (this.state.admin) {
