@@ -24,7 +24,9 @@ export default class Login extends Component {
     // console.log(this.state)
     const { email, password } = this.state
     // headers: { authorization: localStorage.getItem('token') }
-    const url = "https://cocktail-app.now.sh/login"
+    
+    // const url = "https://cocktail-app.now.sh/login" // PROD
+    const url = "http://localhost:5000/login" // DEV
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {

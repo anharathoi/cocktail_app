@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    selectedOption: String
+    selectedOption: String,
+    last4: String
 
 
 })
