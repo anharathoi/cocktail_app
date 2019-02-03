@@ -90,7 +90,7 @@ export default class Register extends React.Component {
     const { error, message, email, selectedOption } = this.state
     return (
       <div>
-        <div className="site-form" id="register" style={{paddingTop: '40px'}}>
+        <div className="site-form registration" id="register" style={{paddingTop: '40px'}}>
           <h2>Sign up for a Cocktail Subscription</h2>
           <form>
             <div>

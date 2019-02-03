@@ -1,8 +1,10 @@
 html {
+  box-sizing: border-box;
   scroll-behavior: smooth;
 }
 .App {
-  text-align: center;
+  font-family: 'Ropa Sans', sans-serif;
+  text-align: justify;
   display: flex;
   min-height: 100vh;
   flex-direction: column;

@@ -1,8 +1,8 @@
 .footer {
     width: 100%;
     margin: 0;
-    background: #f4f5f2;
-    color: green;
+    background: #292E31;
+    margin-top: 25px;
 }
 ul {
     list-style: none;
@@ -22,9 +22,9 @@ li {
     cursor: pointer; 
     /* not 100% sure what cursor: point; does - GUY research this */
 }
-li:hover {
-    background: yellow;
-    color: pink;
+li:hover,
+Li:active {
+    background: #f2f2f2;
 }
 .fixed-nav {
     position: fixed;
