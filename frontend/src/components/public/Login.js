@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import './Form.css'
 
 export default class Login extends Component {
   state = { }
@@ -64,21 +65,25 @@ export default class Login extends Component {
       else {
         if(!this.props.token){
           return (
-            <>
+            <div>
               {/* <Navbar/> */}
-              <div style={{paddingTop: '40px'}}>
+              <div className="site-form">
                   <h2>Sign In</h2>
-                  <form>
-                    <label htmlFor="email">email</label>
-                    <input type="email" id="email" onChange={this.handleInputChange}/><br/>
-                    <label htmlFor="password">Password: </label>
-                    <input type="string" id="password" onChange={this.handleInputChange}/><br/>
-                    <button onClick={this.submitForm}>Login</button>
+                  <form >
+                    <div>
+                      <label htmlFor="email">email</label>
+                      <input type="email" id="email" onChange={this.handleInputChange}/>
+                    </div>
+                    <div>
+                      <label htmlFor="password">Password: </label>
+                      <input type="password" id="password" onChange={this.handleInputChange}/>
+                    </div>
+                    <button onClick={this.submitForm} className>Login</button>
                   </form>
                   { message && <p>{ message }</p>}
                   { error && <p>{ error }</p> }
               </div>
-            </>
+            </div>
           )
         } else {   
             return (

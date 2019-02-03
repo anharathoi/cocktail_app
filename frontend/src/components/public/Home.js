@@ -11,12 +11,7 @@ import Cookies from 'js-cookie';
 
 export default class Home extends React.Component {
   state = {}
-  // componentDidMount = () => {
-  //   const token = Cookies.get('token')
-  //   this.props.setToken(token)
-  // }
-  
-  // console.log(props)
+
   render() {
     return (
       <>
@@ -25,9 +20,7 @@ export default class Home extends React.Component {
           <About />
           <HowItWorks/>
           <Register {...this.props}/>
-          {/*<Login />*/}
           <CreateCocktail />
-  
           <Login {...this.props}/>
   
         </div>

@@ -15,7 +15,7 @@ router.get('/admin/users',passport.authenticate('jwt', {session: false}), (req,r
   User.find({})
   .then(customers => {
     if(req.user.admin){
-      res.send(customers);
+      res.send({customers, admin:req.user.admin});
     } else {
       return res.status(403).send("Admin privileges required")
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
+import Login from '../public/Login'
 
 export default class UserProfile extends Component {
   state = {}
@@ -51,7 +52,8 @@ export default class UserProfile extends Component {
       else {
         return (
           <div style={{paddingTop: '40px'}}>
-            Please Log in to see details
+          Please Log in to see details
+            < Login {...this.props}/>
           </div>
         )
   }

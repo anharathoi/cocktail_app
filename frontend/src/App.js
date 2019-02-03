@@ -13,7 +13,6 @@ import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
-import Customers from './components/protected/Customers'
 require('dotenv').config()
 
 
@@ -60,10 +59,6 @@ class App extends React.Component {
                 exact path="/Admin"
                 render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
               />
-              <Route
-                exact path="/admin/customers"
-                render={(props) => <Customers {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
-              />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>
@@ -72,7 +67,7 @@ class App extends React.Component {
               <Route path="/contact_us" component={ContactUs} exact/>
             </Switch>
           </div>
-            <Footer />
+          {!this.state.admin && <Footer />}
         </div>
       
     );

@@ -4,6 +4,9 @@ import AdminSidebar from './AdminSidebar.js'
 import AdminUserChart from './AdminUserChart.js'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Customers from './Customers';
+import Login from '../public/Login';
+import { Route , Switch } from 'react-router-dom'
 
 class Admin extends Component {
   state = {}
@@ -32,6 +35,7 @@ class Admin extends Component {
           <div id="page-wrap">
             <h1>Admin Dashboard </h1>
             <AdminUserChart/>
+            <Customers {...this.props}/>
           </div>
         </div>
       );
@@ -39,7 +43,11 @@ class Admin extends Component {
     // else if(this.props.) 
    else {
      return (
+       <div style={{paddingTop: '40px'}}>
        <p> ACCESS DENIED</p>
+          Please Log in to see details
+            < Login {...this.props}/>
+        </div>
      )
    }
   }
