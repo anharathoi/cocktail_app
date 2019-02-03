@@ -19,7 +19,6 @@ export default class Logout extends Component {
       Cookies.remove('token');
       // this.setState({ message: 'You have logged out', error: null, email: null, loggedIn: false})
       this.props.clearToken()
-      
     })
     .catch( err => console.log(err))
   }

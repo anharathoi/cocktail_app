@@ -6,6 +6,7 @@ import About from './About';
 import Navbar from './Navbar'
 import CreateCocktail from '../protected/CreateCocktail'
 import Cookies from 'js-cookie';
+import './Home.css'
 
 
 
@@ -14,17 +15,18 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <>
+      <div>
         {/* <Navbar/> */}
-        <div id="home" style={{paddingTop: '40px'}}>
+        <div id="home" className="home">
           <About />
           <HowItWorks/>
-          <Register {...this.props}/>
-          <CreateCocktail />
-          <Login {...this.props}/>
-  
+
+            <Register {...this.props}/>
+            {/* <CreateCocktail /> */}
+            <Login {...this.props}/>
+
         </div>
-      </>
+      </div>
     )
   }
   }

@@ -7,8 +7,6 @@ import Login from '../public/Login'
 export default class UserProfile extends Component {
   state = {}
   componentDidMount (){
-    // const url = 'https://cocktail-app.now.sh/me' // PROD
-
     const url = 'http://localhost:5000/me' // 
     const token = Cookies.get('token')
       axios.get(url, {
@@ -30,7 +28,7 @@ export default class UserProfile extends Component {
 
     render() {
       // console.log("This is userprofile props " + this.props.clearToken)
-      if(this.props.token && !this.state.admin){
+      if(this.props.token && !this.props.admin){
         return (
         <>
           <div>
@@ -44,7 +42,7 @@ export default class UserProfile extends Component {
         </>
         )
       } 
-      else if(this.props.token && this.state.admin){
+      else if(this.props.token && this.props.admin){
         return (
            <Redirect to="/admin"></Redirect>
           )

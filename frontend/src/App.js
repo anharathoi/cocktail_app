@@ -13,6 +13,7 @@ import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
+import axios from 'axios'
 require('dotenv').config()
 
 
@@ -23,8 +24,24 @@ class App extends React.Component {
   componentDidMount(){
     const token = Cookies.get('token')
     this.setState({token})
-    console.log("App.js component mounted "+ token)
+    // console.log("App.js component mounted "+ token)
     // if(token)
+  }
+
+  componentWillMount(){
+    const token = Cookies.get('token')
+    const url = 'http://localhost:5000/me' // 
+    axios.get(url, {
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    })
+    .then ( resp => {
+      const { admin } = resp.data
+      this.setState({admin})
+      console.log("this is in state " + this.state.admin + "this is the save var " + admin)
+    })
+    .catch( err => console.log(err) )
   }
 
   setToken = (token) => {
@@ -41,11 +58,11 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.token)
     return (
         <div className="App">
           <div className="Main">
-          {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>}
+          {/* {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>} */}
+          <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>
             <Switch>
               <Route
                 exact path="/"

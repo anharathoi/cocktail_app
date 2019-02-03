@@ -6,7 +6,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Customers from './Customers';
 import Login from '../public/Login';
-import { Route , Switch } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Admin extends Component {
   state = {}
@@ -21,12 +21,13 @@ class Admin extends Component {
       .then ( resp => {
         const {email, firstName, lastName, admin} = resp.data
         this.setState({email,firstName, lastName, admin})
-        this.props.setAdmin(admin)
+        // this.props.setAdmin(admin)
       })
       .catch( err => console.log(err) )
   }
   render() {
-    if(this.props.token && this.state.admin){
+    console.log(this.props.admin)
+    if(this.props.token && this.props.admin){
       return (
         <div className="Admin" >
           <nav>
@@ -40,16 +41,18 @@ class Admin extends Component {
         </div>
       );
     }
-
-   else {
-     return (
-       <div style={{paddingTop: '40px'}}>
-       <p> ACCESS DENIED</p>
-          Please Log in to see details
-            < Login {...this.props}/>
-        </div>
-     )
-   }
+    else if(this.props.token && !this.props.admin) {
+      return <Redirect to="/userprofile"></Redirect>
+    }
+    else {
+      return (
+        <div style={{paddingTop: '40px'}}>
+        <p> ACCESS DENIED</p>
+            Please Log in to see details
+              < Login {...this.props}/>
+          </div>
+      )
+    }
   }
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function HowItWorks() {
   return (
-    <div id="how-it-works" style={{paddingTop: '40px'}}>
+    <div id="how-it-works" className="how-it-works">
 
     {/* The paddingTop style is so that the sliding/dynamic navbar doesn't cover the first part of the section when it jumps - the header is 38px, this is why i choose 40 as padding */}
     

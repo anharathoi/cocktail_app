@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function About() {
   return (
-    <div id="about" style={{paddingTop: '40px'}}>
+    <div id="about" className="about">
       {/* <p>Courtesy of slipsum - the samuel l jackson version of lorem ipsum</p> */}
 
       <h3>About</h3>

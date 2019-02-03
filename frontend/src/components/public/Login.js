@@ -33,12 +33,12 @@ export default class Login extends Component {
         const { admin } = user
         // const admin = user.admin
         // console.log(admin)// console logs false
-        console.log("Login token " + token)
+        // console.log("Login token " + token)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
         this.props.setToken(token)
         this.props.setAdmin(admin)
-        console.log("props from login " + this.props.setAdmin)
+        // console.log("props from login " + this.props.setAdmin)
       })
       .catch(err => {
         // console.log(err.response)
@@ -67,7 +67,7 @@ export default class Login extends Component {
           return (
             <div>
               {/* <Navbar/> */}
-              <div className="site-form">
+              <div className="site-form login">
                   <h2>Sign In</h2>
                   <form >
                     <div>
