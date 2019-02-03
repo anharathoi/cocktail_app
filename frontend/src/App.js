@@ -13,7 +13,6 @@ import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
-import Customers from './components/protected/Customers'
 require('dotenv').config()
 
 
@@ -46,23 +45,19 @@ class App extends React.Component {
     return (
         <div className="App">
           <div className="Main">
-          {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken}/>}
+          {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>}
             <Switch>
               <Route
                 exact path="/"
-                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} adminStatus={this.setAdmin}/> }
+                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin}/> }
               />
               <Route
                 exact path="/UserProfile"
-                render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} />}
+                render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
               />
              <Route
                 exact path="/Admin"
-                render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
-              />
-              <Route
-                exact path="/admin/customers"
-                render={(props) => <Customers {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken}  setAdmin={this.setAdmin}/>}
+                render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
               />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
@@ -72,7 +67,7 @@ class App extends React.Component {
               <Route path="/contact_us" component={ContactUs} exact/>
             </Switch>
           </div>
-            <Footer />
+          {!this.state.admin && <Footer />}
         </div>
       
     );

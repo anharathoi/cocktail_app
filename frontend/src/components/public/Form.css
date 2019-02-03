@@ -1,0 +1,43 @@
+.site-form{
+  font-family: 'Ropa Sans', sans-serif;
+  background: #292E31;
+  width: 49%;
+  margin: auto;
+  text-align: center;
+  border: #d89638 2px solid;
+  color: #d89638;
+  /* padding: 10% 10%; */
+}
+.site-form h2{
+  text-align: center;
+}
+
+.site-form form label{
+  display: inline-block;
+  width: 160px;
+  margin: 2%;
+  text-align: left;
+}
+.form-check{
+  /* text-align: right; */
+}
+.form-check input {
+  margin: -24%;
+  text-align: left;
+}
+.site-form form input{
+  text-align: left
+}
+.site-form form button {
+  position: absolute;
+  margin: 10px auto;
+
+}
+.site-form input {
+  width: 50%;
+}
+
+.site-form form button {
+  position: relative;
+  display: inline-block;
+}

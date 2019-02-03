@@ -28,7 +28,7 @@ export default class Logout extends Component {
     // console.log(this.props)
     // if(this.props.loggedIn === true){
       return (
-          <Link to="#" onClick={this.logoutHandle}>Logout</Link>
+        <Link to="#" onClick={this.logoutHandle}>Logout</Link>
       )
     }
 }

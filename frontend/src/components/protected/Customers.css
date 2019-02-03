@@ -1,0 +1,10 @@
+.customers {
+  justify-content: center;
+  overflow-x:auto;
+  padding: 10px 40px;
+}
+.customers .customers-table {
+  text-align: left;
+  margin: 40px auto;
+  padding: 10px;
+}

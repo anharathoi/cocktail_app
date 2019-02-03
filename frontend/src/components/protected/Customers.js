@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import AdminSidebar from './AdminSidebar.js';
+import './Customers.css';
 
 export default class Customers extends Component {
   state = {customers: []}
@@ -13,9 +14,9 @@ export default class Customers extends Component {
           'Authorization': `bearer ${token}`
         }
       })
-      .then ( resp => {
-        console.log(resp)
-        this.setState({customers: resp.data, token})
+      .then( resp => {
+        const {admin, customers} = resp.data
+        this.setState({customers: customers, token})
       })
       .catch( err => {
         this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
@@ -26,25 +27,39 @@ export default class Customers extends Component {
     return (
       <div>
         <nav>
-          <AdminSidebar {...this.props}/>
+          {/* <AdminSidebar {...this.props}/> */}
         </nav>
-        Your Customers:
-        {this.state.customers.map(customer => 
-          { return(
-            <div key={customer._id}>
-              <h4>{customer.firstName} {customer.lastName}</h4>
-              <li>Email: {customer.email}</li>
-              <li>Phone: {customer.phone}</li>
-              <li>Delivery Address: {customer.deliveryAddress}</li>
-              <li>Number of orders: {customer.numberOfOrders}</li>
-            </div>
-            )
-          }
-        )}
-      </div>
         
-        )
-      } else {
+        <div id="customers" className="customers">
+          <h2>Your Customers</h2>
+          <table className="customers-table pure-table pure-table-horizontal">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th> 
+                <th>Delivery Address</th>
+                <th>Number of Orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.customers.map(customer => 
+                { return(
+                    <tr key={customer._id}>
+                      <td>{customer.firstName} {customer.lastName}</td>
+                      <td> {customer.email} </td>
+                      <td>{customer.phone}</td>
+                      <td>{customer.deliveryAddress}</td>
+                      <td>{customer.numberOfOrders}</td>
+                    </tr>
+                  )
+                }
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )} else {
         return(
           <div>
             <h1>Admin privileges required</h1>
