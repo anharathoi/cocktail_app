@@ -29,8 +29,9 @@ export default class Navbar extends Component {
     
     
   render() {
+    console.log(this.props)
     return (
-      <>
+      <div>
         {/* <div>We can also put a message up here if we want to</div> */}
         <nav className={this.state.scroll > this.state.top ? "fixed-nav" : ""}>
             <ul>
@@ -38,10 +39,11 @@ export default class Navbar extends Component {
                 <li><Link to='/#about'>About</Link></li>
                 <li><Link to='/#how-it-works'>How it Works</Link></li>
                 <li><Link to='/#register' >Register</Link></li>
+                {/* {this.props.admin && <li><Link to='/admin/#customers'>ADMIN</Link></li>} */}
                 {this.props.token && <li><Logout {...this.props}/></li>}
             </ul>
         </nav>
-      </>
+      </div>
     )
   }
 }

@@ -34,13 +34,13 @@ class Admin extends Component {
           </nav>
           <div id="page-wrap">
             <h1>Admin Dashboard </h1>
-            <AdminUserChart/>
+            {/* <AdminUserChart/> */}
             <Customers {...this.props}/>
           </div>
         </div>
       );
     }
-    // else if(this.props.) 
+
    else {
      return (
        <div style={{paddingTop: '40px'}}>

@@ -17,7 +17,6 @@ export default class Customers extends Component {
       .then( resp => {
         const {admin, customers} = resp.data
         this.setState({customers: customers, token})
-        this.props.setAdmin(admin)
       })
       .catch( err => {
         this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
@@ -30,28 +29,33 @@ export default class Customers extends Component {
         <nav>
           {/* <AdminSidebar {...this.props}/> */}
         </nav>
-        <h1>Your Customers</h1>
-        <div id="customers">
-          <table className="pure-table pure-table-horizontal">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th> 
-              <th>Delivery Address</th>
-              <th>Number of Orders</th>
-            </tr>
-          {this.state.customers.map(customer => 
-            { return(
-                <tr key={customer._id}>
-                  <td>{customer.firstName} {customer.lastName}</td>
-                  <td> {customer.email} </td>
-                  <td>{customer.phone}</td>
-                  <td>{customer.deliveryAddress}</td>
-                  <td>{customer.numberOfOrders}</td>
-                </tr>
-              )
-            }
-          )}
+        
+        <div id="customers" className="customers">
+          <h2>Your Customers</h2>
+          <table className="customers-table pure-table pure-table-horizontal">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th> 
+                <th>Delivery Address</th>
+                <th>Number of Orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.customers.map(customer => 
+                { return(
+                    <tr key={customer._id}>
+                      <td>{customer.firstName} {customer.lastName}</td>
+                      <td> {customer.email} </td>
+                      <td>{customer.phone}</td>
+                      <td>{customer.deliveryAddress}</td>
+                      <td>{customer.numberOfOrders}</td>
+                    </tr>
+                  )
+                }
+              )}
+            </tbody>
           </table>
         </div>
       </div>
