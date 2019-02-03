@@ -77,3 +77,39 @@ export default function Home(props) {
 
 - change Link to sth else
 - make a different onsubmits so that on the render component changes instead of going to different pages
+
+
+Search Component codes for later
+//import React, { Component } from 'react'
+
+export default class Search extends Component {
+  state = {}
+  handleInputChange = (e) => {
+    const { value, id } = e.currentTarget;
+    this.setState({ [id]: value})
+    console.log(this.state)
+  }
+  hadndleSearch = (e) => {
+    e.preventDefault()
+    const {searchTerm} = this.state
+    console.log(searchTerm) 
+
+  }
+
+  render() {
+    return (
+      <div>
+          <form>
+            <input
+              placeholder="Search for..."
+              id="searchTerm"
+              ref={input => this.search = input}
+              onChange={this.handleInputChange}
+            />
+            <button onClick={this.handleSearch}>Search</button>
+            <p>{this.state.query}</p>
+          </form>
+      </div>
+    )
+  }
+}
