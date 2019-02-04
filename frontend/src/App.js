@@ -16,7 +16,6 @@ import Navbar from './components/public/Navbar'
 import axios from 'axios'
 require('dotenv').config()
 
-
 class App extends React.Component {
 
   state = {}
