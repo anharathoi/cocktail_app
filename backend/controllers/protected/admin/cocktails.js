@@ -31,7 +31,9 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
 
 // post cocktails
  router.post('/newcocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
-  if(req.user.admin){
+   console.log('here')
+  if(req.user.admin){ 
+    console.log(req.user)
     const {title, photo, description, directions, ingredients, available} = req.body;
     Cocktail.create ({
       title,

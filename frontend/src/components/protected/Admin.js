@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Customers from './Customers';
 import Login from '../public/Login';
+import CreateCocktail from './CreateCocktail'
 import { Redirect } from 'react-router-dom'
 
 class Admin extends Component {
@@ -37,6 +38,7 @@ class Admin extends Component {
             <h1>Admin Dashboard </h1>
             {/* <AdminUserChart/> */}
             <Customers {...this.props}/>
+            <CreateCocktail admin={this.state.admin}/>
           </div>
         </div>
       );
