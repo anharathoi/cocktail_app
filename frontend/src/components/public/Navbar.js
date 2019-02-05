@@ -29,7 +29,7 @@ export default class Navbar extends Component {
     
     
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         {/* <div>We can also put a message up here if we want to</div> */}

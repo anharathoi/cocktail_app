@@ -14,10 +14,10 @@ router.use(passport.session());
 // get cocktails
 router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, res) => {
   Cocktail.find({})
-  .then(doc =>{
+  .then(cocktails =>{
     if(req.user.admin){
-      console.log(`hello ${doc}`)
-      return res.send(doc)
+      console.log(`hello ${cocktails}`)
+      return res.send(cocktails)
     } else {
         return res.status(403).send("Admin privileges required")
     }
@@ -56,8 +56,8 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
  })
 
 // delete cocktails
-router.delete('/admin/cocktail',passport.authenticate('jwt', {session: false}), (req, res) => {
-  const {title} = req.body;
+router.delete('/admin/cocktail/delete/:title',passport.authenticate('jwt', {session: false}), (req, res) => {
+  const {title} = req.params;
   Cocktail.findOneAndRemove({title})
   .then( cocktail => {
     if(req.user.admin){

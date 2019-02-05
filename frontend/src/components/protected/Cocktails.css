@@ -1,0 +1,10 @@
+.cocktails {
+    justify-content: center;
+    overflow-x:auto;
+    padding: 10px 40px;
+  }
+  .cocktails .cocktails-table {
+    text-align: left;
+    margin: 40px auto;
+    padding: 10px;
+  }
