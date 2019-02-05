@@ -16,7 +16,6 @@ import Navbar from './components/public/Navbar'
 import axios from 'axios'
 require('dotenv').config()
 
-
 class App extends React.Component {
 
   state = {}
@@ -30,18 +29,20 @@ class App extends React.Component {
 
   componentWillMount(){
     const token = Cookies.get('token')
-    const url = 'http://localhost:5000/me' // 
-    axios.get(url, {
-      headers: {
-        'Authorization': `bearer ${token}`
-      }
-    })
-    .then ( resp => {
-      const { admin } = resp.data
-      this.setState({admin})
-      console.log("this is in state " + this.state.admin + "this is the save var " + admin)
-    })
-    .catch( err => console.log(err) )
+    const url = 'http://localhost:5000/me' //
+    if (token) { 
+      axios.get(url, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      })
+      .then ( resp => {
+        const { admin } = resp.data
+        this.setState({admin})
+        // console.log("this is in state " + this.state.admin + "this is the save var " + admin)
+      })
+      .catch( err => console.log(err) )
+    }
   }
 
   setToken = (token) => {

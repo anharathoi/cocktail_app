@@ -4,13 +4,32 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false }
+  state = { isSubmitted: false, available:true, photo: null }
+
+  handleUpload = (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('file', file)
+    console.log(formData.get('file'))
+    let config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    axios.post('http://localhost:5000/upload', formData, config)
+    .then( (res) => {
+      const photo= res.data.secure_url
+      this.setState({ photo })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   handleInputChange = (e) => {
-      console.log(e.currentTarget.value)
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
-    console.log(`this is ${JSON.stringify(this.state)}`)
+    // console.log(`this is ${JSON.stringify(this.state)}`)
   }
 
   getData = () => {
@@ -39,10 +58,10 @@ export default class CreateCocktail extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault()
-    console.log(`this is ${JSON.stringify(this.state)}`)
-    // console.log(this.state)
-    const {  title, photo, description, directions, ingredients } = this.state
-    // console.log(this.state.available)
+    // console.log(`this is ${JSON.stringify(this.state)}`)
+    const {  title, description, directions, ingredients, photo } = this.state
+    console.log(this.state.available)
+    // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
     const available = JSON.parse(this.state.available)
     const url = "http://localhost:5000/newcocktail"
     const data = { title, photo, description, directions, ingredients, available}
@@ -96,9 +115,9 @@ export default class CreateCocktail extends React.Component {
                 <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
                 <label htmlFor="available">Currently Available?:</label>
                 <select type="boolean" id="available" onChange={this.handleInputChange}> 
-                        <option name="true">true</option>
-                        <option name="false">false</option>
-                    </select><br/>
+                    <option name="true">true</option>
+                    <option name="false">false</option>
+                </select><br/>
                 <button onClick={this.submitForm}>Create Cocktail</button>
                 </form>
                 {this.state.isSubmitted}
@@ -114,5 +133,5 @@ export default class CreateCocktail extends React.Component {
         else {
             return null
         }
-    }
+    }       
 }

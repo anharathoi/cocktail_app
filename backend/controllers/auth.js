@@ -18,7 +18,7 @@ const generateToken = (user) => {
   const token = jwt.sign(
     { email: user.email },
     'cocktail-app-gael', 
-    { expiresIn: '1h' }
+    { expiresIn: '7d' }
   );
   return token;
 }

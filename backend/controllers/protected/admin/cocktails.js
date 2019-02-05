@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Cocktail = require('../../../models/Cocktail.model');
 const passport = require('passport');
-
+const multer = require('multer');
+const {uploadFile} = require('../../../utils/cloudinary.js')
 // Passport Config
 require('../../../config/passport')(passport);
 
@@ -10,6 +11,9 @@ require('../../../config/passport')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
 
+// multer Config
+const storage = multer.memoryStorage();
+const upload = multer({ storage })
 
 // get cocktails
 router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, res) => {
@@ -73,24 +77,39 @@ router.delete('/admin/cocktail/delete/:title',passport.authenticate('jwt', {sess
 
 // put/patch cocktails
 router.patch('/admin/cocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
-  const {title} = req.body;
-  const {newtitle} = req.body;
+  const {title} = req.body
+  const {newtitle} = req.body
   Cocktail.findOne({title})
   .then( cocktail => {   
     if(req.user.admin){
       console.log(newtitle)
       console.log(title)
       console.log(cocktail)
-      cocktail.title = newtitle;
-      cocktail.save();
-      res.send(cocktail);
+      cocktail.title = newtitle
+      cocktail.save()
+      res.send(cocktail)
     } else {
         return res.status(403).send("Admin privileges required")
     }
   })
   .catch ( err => {
-    res.status(400).send(err);
+    res.status(400).send(err)
   })
 })
 
-module.exports = router;
+// Upload Image
+
+router.post('/upload', upload.single('file'), (req, res) => {
+  const { buffer } = req.file
+  // console.log(buffer)
+  uploadFile(buffer)
+  .then( resp => {
+    const { secure_url } = resp
+    console.log(secure_url)
+    // console.log(secure_url)
+    res.send(resp)
+  })
+  .catch(err => res.status(500).send('there was an error with cloudinary'))
+})
+
+module.exports = router

@@ -28,7 +28,7 @@ class Admin extends Component {
       .catch( err => console.log(err) )
   }
   render() {
-    console.log(this.props.admin)
+    // console.log(this.props.admin)
     if(this.props.token && this.props.admin){
       return (
         <div className="Admin" >
@@ -37,7 +37,7 @@ class Admin extends Component {
           </nav>
           <div id="page-wrap">
             <h1>Admin Dashboard </h1>
-            {/* <AdminUserChart/> */}
+            <AdminUserChart/>
             <Customers {...this.props}/>
             <CreateCocktail admin={this.state.admin}/>
           </div>
