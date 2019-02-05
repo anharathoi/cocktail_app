@@ -51,7 +51,7 @@ export default class Cocktails extends Component {
                   { return(
                       <tr key={cocktail._id}>
                         <td>{cocktail.title}</td>
-                        <td> {cocktail.photo} </td>
+                        <td> <img style={{height:"140px"}} src={cocktail.photo}/> </td>
                         <td>{cocktail.description}</td>
                         <td>{cocktail.directions}</td>
                         <td>{cocktail.ingredients}</td>
