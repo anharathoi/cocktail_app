@@ -15,7 +15,7 @@ export default class Customers extends Component {
         }
       })
       .then( resp => {
-        const {admin, customers} = resp.data
+        const {customers} = resp.data
         this.setState({customers: customers, token})
       })
       .catch( err => {
@@ -27,7 +27,7 @@ export default class Customers extends Component {
     return (
       <div>
         <nav>
-          {/* <AdminSidebar {...this.props}/> */}
+          <AdminSidebar {...this.props}/>
         </nav>
         
         <div id="customers" className="customers">

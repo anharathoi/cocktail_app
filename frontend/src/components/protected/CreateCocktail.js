@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available:true }
+  state = { isSubmitted: false, available:true, photo: null }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
@@ -79,7 +79,11 @@ export default class CreateCocktail extends React.Component {
                   <option name="false" >false</option>
           </select><br/>
           <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
-          <button onClick={this.submitForm}>Create Cocktail</button>
+          <div>
+            {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
+          </div>
+          
+          {this.state.photo  && <button onClick={this.submitForm}>Create Cocktail</button> }
         </form>
           {this.state.isSubmitted}
           { error && <p>{ error }</p> }
