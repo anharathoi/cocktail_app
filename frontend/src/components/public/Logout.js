@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Redirect, withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class Logout extends Component {
   logoutHandle = (e) => {

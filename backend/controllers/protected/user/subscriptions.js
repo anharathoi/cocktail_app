@@ -120,7 +120,7 @@ router.post('/updatetoquarterlysubscription', (req, res)  => { // DEV
             subscriptionId, 
             { plan: "plan_EOUE6qieRKFekI" },
                 function(err, subscription) {
-                   console.log(`144 ${subscription}`);
+                   console.log(subscription);
 
                    User.findOneAndUpdate({email}, { subscriptionId: subscription.id}, {upsert: true})
                    .then((res) => {
@@ -146,7 +146,7 @@ router.post('/updatetomonthlysubscription', (req, res)  => { // DEV
         subscriptionId, 
         { plan: "plan_EOUDCdORXev2JW" },
                 function(err, subscription) {
-                   console.log(`169 ${subscription}`);
+                   console.log(subscription);
 
                    User.findOneAndUpdate({email}, { subscriptionId: subscription.id}, {upsert: true})
                    .then((res) => {
@@ -163,111 +163,6 @@ router.post('/updatetomonthlysubscription', (req, res)  => { // DEV
 })
 
 
-    // const subscriptionId
-    // (async () => {
-    // const subscription = await 
-    
-// })
-    // } else if (selectedOption === "monthlyFrequency") {
-    //     stripe.subscriptions.retrieve('sub_ESYiZLc1rThxvQ'); // currently hardcoded for v@v.com - 
-    //     // clg the object - currently the 'sub_49...' thing
-    //     // then if =monthlyFrequency - do this // else if =quarterly //else sign up
-    //     stripe.subscriptions.update('sub_ESYiZLc1rThxvQ', {
-    //         cancel_at_period_end: false,
-    //         items: [{
-    //             id: subscription.items.data[0].id,
-    //             plan: 'plan_EOUE6qieRKFekI', //hardcoded plan id for Quarterly
-    //         }]
-    //     });
-    // }
-
-    //         User.findOne({email})
-            
-    //             .then( user => {
-    //                 user.stripeId = customer.id;
-    //                 user.paymentSource = customer.sources.data[0]
-
-
-//                     //from stripe docs : "subscriptions": {
-//     // "object": "list",
-//     // "data": [
-
-//     // ],
-//     // is one of the things that the customer object gives us back
-
-//         // stripe.customers.update("cus_ESIYCuRVvEJM1h", {
-//         //     source: token.id,
-//         // })
-
-
-
-//             // customer: "cus_ESIYCuRVvEJM1h", //this is HARDCODED FOR MY DATABASE
-            
-
-//             const { id } = customer
-
-
-//             if (selectedOption === "monthlyFrequency") {
-//                 const { id } = customer
-//                 stripe.subscriptions.create({
-//                     customer: id, 
-//                     items: [
-//                         {
-//                             plan: "plan_EOUDCdORXev2JW",
-//                         },
-//                     ],
-//                 }, function(err, subscription) {
-//                     if (err) { 
-//                         res.send({
-//                             success: false,
-//                             message: 'Error'
-//                         })
-//                     }
-//                     else {
-//                         res.send({
-//                         success: true,
-//                         message: 'Success'
-//                     })
-//                 }
-//             })
-//         }
-//         else if (selectedOption === "quarterlyFrequency") {
-//                 const { id } = customer
-//                 console.log('hello')
-//                 stripe.subscriptions.create({
-//                     customer: id, 
-//                     items: [
-//                         {
-//                             plan: "plan_EOUE6qieRKFekI",
-//                         },
-//                     ],
-//                 }, function(err, subscription) {
-//                     if (err) { 
-//                         res.send({
-//                             success: false,
-//                             message: 'Error'
-//                         })
-//                     }
-//                     else {
-//                         res.send({
-//                         success: true,
-//                         message: 'Success'
-//                     })
-//                 }
-//             })
-//         }
-          
-// })
-
-
-
-
-
-
-
-
-
-
 /**
 |--------------------------------------------------
 | DELETE A SUBSCRIPTION FROM A CUSTOMER
@@ -277,7 +172,6 @@ router.post('/updatetomonthlysubscription', (req, res)  => { // DEV
 router.post('/cancelsubscription', (req, res)  => {
 
     const {subscriptionId, email} = req.body
-   
     console.log(req.body) 
 
     stripe.subscriptions.del(
@@ -298,6 +192,5 @@ router.post('/cancelsubscription', (req, res)  => {
     );
 
 })
-
 
 module.exports = router;

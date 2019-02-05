@@ -11,45 +11,43 @@ import Privacy from './components/public/Privacy'
 import Terms from './components/public/Terms'
 import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
-import Logout from './components/Logout';
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
 require('dotenv').config()
 
-
 class App extends React.Component {
 
-  state = {}
+  // state = {}
 
-  componentDidMount(){
-    const token = Cookies.get('token')
-    this.setState({token})
-    console.log("App.js component mounted "+ token)
-  }
+  // componentDidMount(){
+  //   const token = Cookies.get('token')
+  //   this.setState({token})
+  //   console.log("App.js component mounted "+ token)
+  // }
 
-  setToken = (token) => {
-    this.setState({token: token})
-    // console.log("This is from App " + this.state.token)
-  }
+  // setToken = (token) => {
+  //   this.setState({token: token})
+  //   // console.log("This is from App " + this.state.token)
+  // }
 
-  clearToken = () => {
-    this.setState({token: null})
-  }
+  // clearToken = () => {
+  //   this.setState({token: null})
+  // }
 
   render() {
     // console.log(this.state.token)
     return (
         <div className="App">
           <div className="Main">
-            <Navbar token={this.state.token} clearToken={this.clearToken}/>
+            {/* <Navbar token={this.state.token} clearToken={this.clearToken}/> */}
             <Switch>
               <Route
-                exact path="/"
-                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token}/>}
+                exact path="/" component={Home}
+                // render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token}/>}
               />
               <Route
-                exact path="/UserProfile"
-                render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} />}
+                exact path="/UserProfile" component={UserProfile}
+                // render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} />}
               />
               <Route path="/Admin" component={Admin} exact/>
               <Route path="/who_we_are" component={WhoWeAre} exact/>

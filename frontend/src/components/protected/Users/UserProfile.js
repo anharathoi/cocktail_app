@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import './UserProfile.css'
 import CardUpdate from './Cards/CardUpdate';
-import Logout from '../../public/Logout'
+import Logout from './../../public/Logout'
 import UpdateToMonthly from './Subscriptions/UpdateToMonthly';
 import UpdateToQuarterly from './Subscriptions/UpdateToQuarterly';
 // import AddSubscription from './Subscriptions/AddSubscription';
@@ -187,7 +187,26 @@ updateCardView = (paymentSource) => {
 
 ////////////// ABOVE WORKING OUT THE NEXT MONTH ///////////
 
+// UPDATING TO A QUARTERLY SUBSCRIPTION - CHANGING FROM MONTHLY
+updateQuarterlySubscription = () => {
+  // const url = "https/something /updatetoquarterlysubscription" // PROD
+  const url = "http://localhost:5000/updatetoquarterlysubscription" // DEV
+  const data = {
+      email: this.email,
+      subscriptionId: this.subscriptionId
+  }
 
+  axios.post(url, data)
+      .then(response => {
+          // const { success } = response.d ata
+        console.log(response);
+        console.log(data);
+          })
+      
+      .catch ( err => {
+        console.log(err.response)
+      }) 
+}
 
 
 
