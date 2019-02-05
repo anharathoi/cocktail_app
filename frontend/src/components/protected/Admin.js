@@ -29,7 +29,7 @@ class Admin extends Component {
   }
   render() {
     // console.log(this.props.admin)
-    if(this.props.token && this.props.admin){
+
       return (
         <div className="Admin" >
           <nav>
@@ -43,19 +43,6 @@ class Admin extends Component {
           </div>
         </div>
       );
-    }
-    else if(this.props.token && !this.props.admin) {
-      return <Redirect to="/userprofile"></Redirect>
-    }
-    else {
-      return (
-        <div style={{paddingTop: '40px'}}>
-        <p> ACCESS DENIED</p>
-            Please Log in to see details
-              < Login {...this.props}/>
-          </div>
-      )
-    }
   }
 }
 
