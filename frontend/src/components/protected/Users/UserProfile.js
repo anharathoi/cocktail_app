@@ -41,6 +41,27 @@ export default class UserProfile extends Component {
       .catch(err => console.log(err) )
   }
 
+  onToken = (token) => {
+    const { stripeId, email } = this.state;
+    // const url = 'https://cocktail-app.now.sh/updatecard' //PROD
+    const url = 'http://localhost:5000/updatecard' // DEV
+    const data = { token, stripeId, email }
+    // console.log(data)
+
+    axios.post(url, data)
+        .then(response => {
+        // console.log(response)
+        // console.log(data);
+        const { success } = response.data
+            this.setState({ 
+                success
+            })
+        })
+        .catch ( err => {
+          console.log(err.response)
+        })
+}  
+
 // Function
 updateCardDetails = (e) => {
   this.updateCardView(e)
@@ -72,26 +93,7 @@ updateCardView = (paymentSource) => {
     })
 }
 
-onToken = (token) => {
-      const { stripeId, email } = this.state;
-      // const url = 'https://cocktail-app.now.sh/updatecard' //PROD
-      const url = 'http://localhost:5000/updatecard' // DEV
-      const data = { token, stripeId, email }
-      // console.log(data)
-  
-      axios.post(url, data)
-          .then(response => {
-          // console.log(response)
-          // console.log(data);
-          const { success } = response.data
-              this.setState({ 
-                  success
-              })
-          })
-          .catch ( err => {
-            console.log(err.response)
-          })
-}  
+
 
 /////////// ADDED THIS FFROM CARDUPDATE.JS SO I CAN PASS IT AS PROPS FUNCTIONAL STUFF - DELETE IF IT SCREWS  
 

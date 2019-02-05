@@ -13,11 +13,12 @@ export default class Login extends Component {
       this.setState({token})
     }
   }
-  
+
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
   }
+
   submitForm = (e) => {
     e.preventDefault()
     // console.log(this.state)
@@ -33,8 +34,11 @@ export default class Login extends Component {
         const { admin } = user
         // const admin = user.admin
         // console.log(admin)// console logs false
+        console.log("Login token " + token)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
+        // console.log("props from login " + this.props.setToken)
+        this.props.setToken(token)
       })
       .catch(err => {
         console.log(err.response)
@@ -43,11 +47,13 @@ export default class Login extends Component {
         }
       })
     }
-   clearToken = () => {
-     this.setState({token: null})
-   }
+
+  //   clearToken = () => {
+  //    this.setState({token: null})
+  //  }
 
     render() {
+      console.log(this.state)
       const { error, message} = this.state
 
       if (this.state.admin) {
@@ -57,7 +63,7 @@ export default class Login extends Component {
         return <Redirect to="/userprofile"/>
       }
       else {
-        if(!this.state.token){
+        if(!this.props.token){
           return (
             <>
               {/* <Navbar/> */}
@@ -77,7 +83,8 @@ export default class Login extends Component {
           )
         } else {   
             return (
-              <Logout clearToken={this.clearToken}/>
+              <p>You're currently Logged in</p>
+              // <Logout {...this.props}/>
             ) 
         }
       }

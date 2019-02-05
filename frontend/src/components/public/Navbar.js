@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Navbar.css'
 import { HashLink as Link } from "react-router-hash-link"
 // import { Hashlink as Link } from 'react-router-hash-link'
+import Logout from '../Logout'
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -38,6 +39,7 @@ export default class Navbar extends Component {
                 <li><Link to='/#about'>About</Link></li>
                 <li><Link to='/#how-it-works'>How it Works</Link></li>
                 <li><Link to='/#register' >Register</Link></li>
+                {this.props.token && <li><Logout {...this.props}/></li>}
             </ul>
         </nav>
       </>
