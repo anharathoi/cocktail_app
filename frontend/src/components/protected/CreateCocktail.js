@@ -115,10 +115,15 @@ export default class CreateCocktail extends React.Component {
                 <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
                 <label htmlFor="available">Currently Available?:</label>
                 <select type="boolean" id="available" onChange={this.handleInputChange}> 
-                    <option name="true">true</option>
-                    <option name="false">false</option>
+                  <option name="true" >true</option>
+                  <option name="false" >false</option>
                 </select><br/>
-                <button onClick={this.submitForm}>Create Cocktail</button>
+                <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
+                <div>
+                  {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
+                </div>
+          
+          {this.state.photo  && <button onClick={this.submitForm}>Create Cocktail</button> }
                 </form>
                 {this.state.isSubmitted}
                 { error && <p>{ error }</p> }
