@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User.model')
 const passport = require('passport');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
+const User = require('../../models/User.model')
 
 // Passport Config
-require('../config/passport')(passport);
+require('../../config/passport')(passport);
 
 // Passport Middleware
 router.use(passport.initialize());
@@ -25,7 +25,7 @@ const generateToken = (user) => {
 
 // REGISTER //
 router.post('/register', (req,res) => {
-  const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active, selectedOption} = req.body;
+  const {firstName, lastName, email, password, phone, deliveryAddress, admin, dateJoined, numberOfOrders, active, selectedOption, streetAddress, suburb, postcode, ausState,} = req.body;
   if (email) {
     User.findOne({email})
     .then(user => {
@@ -46,7 +46,11 @@ router.post('/register', (req,res) => {
             dateJoined,
             numberOfOrders,
             active,
-            selectedOption
+            selectedOption,
+            streetAddress, 
+            suburb, 
+            postcode, 
+            ausState,
           })
           user.save(err => {
             if (err) return res.status(400).send('there was an error')
@@ -92,7 +96,7 @@ const authenticateUser = (req, res, next) => {
 router.post('/login', authenticateUser) 
 
 router.get('/me', passport.authenticate('jwt', {session: false}), (req,res) => {
-  console.log(req.user)
+  // console.log(req.user)
   res.send(req.user)
 })
 

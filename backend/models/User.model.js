@@ -23,12 +23,20 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     selectedOption: String,
-    last4: String
+    paymentSource: Array,
+    subscriptionId: String,
+    streetAddress: String, 
+    suburb: String, 
+    postcode: Number, 
+    ausState: String,
 
 
 })
 
 module.exports = mongoose.model('User', userSchema)
+
+
+//thinking that for ausState is could be a drop down
 
 /**
 |--------------------------------------------------
