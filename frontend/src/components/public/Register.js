@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Payment from './Payment';
-import Frequency from './Frequency';
+// import Frequency from './Frequency';
 import Cookies from 'js-cookie';
 import './Form.css'
 
@@ -29,7 +29,7 @@ export default class Register extends React.Component {
         }
       })
       .then(resp => {
-        const {token} = resp.data
+        // const {token} = resp.data
         this.setState({
           selectedFrequency: resp.data.frequencyOptions
         });
@@ -76,7 +76,7 @@ export default class Register extends React.Component {
         const {token} = resp.data
         Cookies.set('token', token)
         this.props.setToken(token)
-        console.log(resp)
+        // console.log(resp)
       })
       .catch(err => {
           console.log(err.response)

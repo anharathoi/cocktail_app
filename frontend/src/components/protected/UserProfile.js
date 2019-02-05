@@ -9,6 +9,7 @@ export default class UserProfile extends Component {
   componentDidMount (){
     const url = 'http://localhost:5000/me' // 
     const token = Cookies.get('token')
+    if (token) {
       axios.get(url, {
         headers: {
           'Authorization': `bearer ${token}`
@@ -21,6 +22,7 @@ export default class UserProfile extends Component {
         this.setState({email,firstName, lastName, phone, deliveryAddress, admin})
       })
       .catch( err => console.log(err) )
+    }
   }
     // clearToken = () => {
     //   this.setState({token: null})
