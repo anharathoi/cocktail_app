@@ -13,17 +13,45 @@ import WhoWeAre from './components/public/WhoWeAre'
 import { Route , Switch } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
+import axios from 'axios'
 require('dotenv').config()
 
 class App extends React.Component {
 
   // state = {}
 
+<<<<<<< HEAD
   // componentDidMount(){
   //   const token = Cookies.get('token')
   //   this.setState({token})
   //   console.log("App.js component mounted "+ token)
   // }
+=======
+  componentDidMount(){
+    const token = Cookies.get('token')
+    this.setState({token})
+    // console.log("App.js component mounted "+ token)
+    // if(token)
+  }
+
+  componentWillMount(){
+    const token = Cookies.get('token')
+    const url = 'http://localhost:5000/me' //
+    if (token) { 
+      axios.get(url, {
+        headers: {
+          'Authorization': `bearer ${token}`
+        }
+      })
+      .then ( resp => {
+        const { admin } = resp.data
+        this.setState({admin})
+        // console.log("this is in state " + this.state.admin + "this is the save var " + admin)
+      })
+      .catch( err => console.log(err) )
+    }
+  }
+>>>>>>> ffb28f2a7e7b19e1c8d3b32f64b471f018941dde
 
   // setToken = (token) => {
   //   this.setState({token: token})
@@ -34,11 +62,15 @@ class App extends React.Component {
   //   this.setState({token: null})
   // }
 
+  setAdmin = (isAdmin) =>{
+    this.setState({admin: isAdmin})
+  }
+
   render() {
-    // console.log(this.state.token)
     return (
         <div className="App">
           <div className="Main">
+<<<<<<< HEAD
             {/* <Navbar token={this.state.token} clearToken={this.clearToken}/> */}
             <Switch>
               <Route
@@ -48,8 +80,23 @@ class App extends React.Component {
               <Route
                 exact path="/UserProfile" component={UserProfile}
                 // render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} />}
+=======
+          {/* {!this.state.admin && <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>} */}
+          <Navbar token={this.state.token} clearToken={this.clearToken} adminStatus={this.state.admin}/>
+            <Switch>
+              <Route
+                exact path="/"
+                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin}/> }
               />
-              <Route path="/Admin" component={Admin} exact/>
+              <Route
+                exact path="/UserProfile"
+                render={(props) => <UserProfile {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
+              />
+             <Route
+                exact path="/Admin"
+                render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
+>>>>>>> ffb28f2a7e7b19e1c8d3b32f64b471f018941dde
+              />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>
@@ -58,7 +105,7 @@ class App extends React.Component {
               <Route path="/contact_us" component={ContactUs} exact/>
             </Switch>
           </div>
-            <Footer />
+          {!this.state.admin && <Footer />}
         </div>
       
     );

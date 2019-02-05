@@ -3,26 +3,28 @@ import Register from './Register'
 import Login from './Login'
 import HowItWorks from './HowItWorks';
 import About from './About';
+<<<<<<< HEAD
 import CreateCocktail from '../protected/CreateCocktail'
+=======
+import './Home.css'
+>>>>>>> ffb28f2a7e7b19e1c8d3b32f64b471f018941dde
 
 
 
-export default function Home(props) {
-  // console.log(props)
-  return (
-    <>
-      {/* <Navbar/> */}
-      <div id="home" style={{paddingTop: '40px'}}>
-        <About />
-        <HowItWorks/>
-        <Register/>
+export default class Home extends React.Component {
+  state = {}
 
-    {/*<Login />*/}
-        <CreateCocktail />
-
-        <Login {...props}/>
-
+  render() {
+    return (
+      <div>
+        <div id="home" className="home">
+          <About />
+          <HowItWorks/>
+          <Register {...this.props}/>
+          <Login {...this.props}/>
+        </div>
       </div>
-    </>
-  )
-}
+    )
+  }
+  }
+  

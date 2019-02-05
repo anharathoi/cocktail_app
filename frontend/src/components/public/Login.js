@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 // import Logout from './Logout'
+=======
+>>>>>>> ffb28f2a7e7b19e1c8d3b32f64b471f018941dde
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import './Form.css'
 
 export default class Login extends Component {
   state = { }
@@ -24,9 +28,14 @@ export default class Login extends Component {
     // console.log(this.state)
     const { email, password } = this.state
     // headers: { authorization: localStorage.getItem('token') }
+<<<<<<< HEAD
     
     // const url = "https://cocktail-app.now.sh/login" // PROD
     const url = "http://localhost:5000/login" // DEV
+=======
+    // const url = "https://cocktail-app.now.sh/login" // PROD url
+    const url = "http://localhost:5000/login" //DEV url
+>>>>>>> ffb28f2a7e7b19e1c8d3b32f64b471f018941dde
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {
@@ -34,14 +43,15 @@ export default class Login extends Component {
         const { admin } = user
         // const admin = user.admin
         // console.log(admin)// console logs false
-        console.log("Login token " + token)
+        // console.log("Login token " + token)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
-        // console.log("props from login " + this.props.setToken)
         this.props.setToken(token)
+        this.props.setAdmin(admin)
+        // console.log("props from login " + this.props.setAdmin)
       })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response)
         if (err.response === 403) {
           this.setState({ error: 'Nope!', message: null})
         }
@@ -53,7 +63,7 @@ export default class Login extends Component {
   //  }
 
     render() {
-      console.log(this.state)
+      // console.log(this.state)
       const { error, message} = this.state
 
       if (this.state.admin) {
@@ -65,21 +75,25 @@ export default class Login extends Component {
       else {
         if(!this.props.token){
           return (
-            <>
+            <div>
               {/* <Navbar/> */}
-              <div style={{paddingTop: '40px'}}>
+              <div className="site-form login">
                   <h2>Sign In</h2>
-                  <form>
-                    <label htmlFor="email">email</label>
-                    <input type="email" id="email" onChange={this.handleInputChange}/><br/>
-                    <label htmlFor="password">Password: </label>
-                    <input type="string" id="password" onChange={this.handleInputChange}/><br/>
+                  <form >
+                    <div>
+                      <label htmlFor="email">email</label>
+                      <input type="email" id="email" onChange={this.handleInputChange}/>
+                    </div>
+                    <div>
+                      <label htmlFor="password">Password: </label>
+                      <input type="password" id="password" onChange={this.handleInputChange}/>
+                    </div>
                     <button onClick={this.submitForm}>Login</button>
                   </form>
                   { message && <p>{ message }</p>}
                   { error && <p>{ error }</p> }
               </div>
-            </>
+            </div>
           )
         } else {   
             return (

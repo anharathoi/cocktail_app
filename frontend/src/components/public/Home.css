@@ -1,0 +1,17 @@
+.home {
+  text-align: justify;
+}
+
+.about {
+  margin: 5%;
+  padding-bottom: 40px;
+  border-bottom: 2px #D89638 solid;
+  border-width: 100%;
+}
+
+.how-it-works {
+  margin: 0 5%;
+  padding-bottom: 40px;
+  border-bottom: 2px #D89638 solid;
+  border-width: 100%;
+}

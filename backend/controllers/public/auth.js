@@ -18,7 +18,7 @@ const generateToken = (user) => {
   const token = jwt.sign(
     { email: user.email },
     'cocktail-app-gael', 
-    { expiresIn: '1h' }
+    { expiresIn: '7d' }
   );
   return token;
 }
@@ -55,7 +55,7 @@ router.post('/register', (req,res) => {
           user.save(err => {
             if (err) return res.status(400).send('there was an error')
             const token = generateToken(user);
-            return res.send(token)
+            return res.send({user,token})
           })
         })
       }

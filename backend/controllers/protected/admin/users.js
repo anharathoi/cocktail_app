@@ -1,12 +1,24 @@
 const express = require('express');
 const User = require('../../../models/User.model')
 const router = express.Router();
+const passport = require('passport');
+
+// Passport Config
+require('../../../config/passport')(passport);
+
+// Passport Middleware
+router.use(passport.initialize());
+router.use(passport.session());
 
 // get customer-info -ADMIN
-router.get('/admin/users', (req,res) => {
+router.get('/admin/users',passport.authenticate('jwt', {session: false}), (req,res) => {
   User.find({})
-  .then(users => {
-    res.send(users);
+  .then(customers => {
+    if(req.user.admin){
+      res.send({customers, admin:req.user.admin});
+    } else {
+      return res.status(403).send("Admin privileges required")
+    }
   })
   .catch(err => {
     res.status(400).send(err);
