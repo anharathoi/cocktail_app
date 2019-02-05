@@ -3,7 +3,6 @@ import Register from './Register'
 import Login from './Login'
 import HowItWorks from './HowItWorks';
 import About from './About';
-import Navbar from './Navbar'
 
 export default function Home() {
   return (

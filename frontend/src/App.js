@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import Footer from './components/public/Footer'
-import Admin from './components/protected/Admin'
-import UserProfile from './components/protected/UserProfile'
+import Admin from './components/protected/Admin/Admin'
+import UserProfile from './components/protected/Users/UserProfile'
 import Home from './components/public/Home'
 import ContactUs from './components/public/ContactUs'
 import Faqs from './components/public/Faqs'
@@ -24,8 +24,8 @@ class App extends React.Component {
           <div className="Main">
             <Switch>
               <Route path="/" component={Home} exact/>
-              <Route path="/Admin" component={Admin} exact/>
-              <Route path="/UserProfile" component={UserProfile} exact/>
+              <Route path="/Admin" component={Admin} />
+              <Route path="/UserProfile" component={UserProfile} />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>

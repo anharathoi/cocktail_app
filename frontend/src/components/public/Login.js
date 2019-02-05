@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Navbar from './Navbar';
-import Logout from '../Logout'
+import Logout from './Logout'
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 

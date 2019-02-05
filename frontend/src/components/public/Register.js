@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Payment from './Payment';
-import Frequency from './Frequency'
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -10,38 +9,19 @@ export default class Register extends React.Component {
       isSubmitted: false,
       frequencyOptions: []
     }
-  //   this.handleFrequencySubmit = this.handleFrequencySubmit.bind(this)
-	// 	this.handleFrequencySelection = this.handleFrequencySelection.bind(this);
   }
-  //thinking i may have to add in all of the fields within this.state.  and then below set the state of each of these components in this.setState.
-  
-  componentDidMount = () => {
 
+  componentDidMount = () => {
     // const url = 'https://cocktail-app.now.sh/me' //PROD
     const url = 'http://localhost:5000/me' // DEV
-
-
-    
       axios.get(url)
       .then(res => res.json())
-      // .then(res => console.log(res))
 			.then(data => {
 				this.setState({
 					selectedFrequency: data.frequencyOptions	
 				});
 			});
   }
-  
-  // handleFrequencySelection = (e) => {
-  //   const newSelection = e.target.value;
-	// 	let newSelectionArray;
-	// 	if(this.state.selectedFrequency.indexOf(newSelection) > -1) {
-	// 		newSelectionArray = this.state.selectedFrequency.filter(s => s !== newSelection)
-	// 	} else {
-	// 		newSelectionArray = [...this.state.selectedFrequency, newSelection];
-	// 	}
-	// 	this.setState({ selectedFrequency: newSelectionArray }, () => console.log('frequency selection', this.state.selectedFrequency));
-  // }
 
   handleFrequencyChange = (e) => {
     this.setState({
@@ -49,22 +29,19 @@ export default class Register extends React.Component {
     });
   };
 
-  // state = { isSubmitted: false }
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
   }
 
   submitForm = (e) => {
-    // console.log(this.state)
     e.preventDefault()
-    // // console.log(this.state)
-    const {  firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
-    
+    const {  firstName, lastName, email, password, session, phone, deliveryAddress, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
+  
     // // const url = "https://cocktail-app.now.sh/register" // PROD
     const url = "http://localhost:5000/register" //DEV
 
-    const data = { firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption}
+    const data = { firstName, lastName, email, password, session, phone, deliveryAddress, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption }
     axios.post(url, data)
       .then(resp => {
         this.setState({ message: 'well done buddy you just registered for a cocktail subscription', error: null, isSubmitted: true })
@@ -78,6 +55,7 @@ export default class Register extends React.Component {
       })
   }
 
+  
   render() {
     const { error, message, email, selectedOption } = this.state
     return (
@@ -86,27 +64,35 @@ export default class Register extends React.Component {
         <form>
           <label htmlFor="firstName">First Name:</label>
           <input type="text" id="firstName" onChange={this.handleInputChange}/><br/>
+          
           <label htmlFor="lastName">Last Name:</label>
           <input type="text" id="lastName" onChange={this.handleInputChange}/><br/>
+          
           <label htmlFor="email">email</label>
           <input type="email" id="email" onChange={this.handleInputChange}/><br/>
+          
           <label htmlFor="password">Password: </label>
           <input type="string" id="password" onChange={this.handleInputChange}/><br/>
-          {/* <label htmlFor="session">Session? - can probably get rid</label>
-          <input type="string" id="session" onChange={this.handleInputChange}/><br/> */}
+          
           <label htmlFor="phone">Phone number</label>
           <input type="number" id="phone" onChange={this.handleInputChange}/><br/>
+          
           <label htmlFor="deliveryAddress">Delivery Address:</label>
           <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/><br/>
 
-          {/* <Frequency
-          title={'What up - how often you want these cocktails?!?'}
-          setName={'frequency'} 
-          controlFunc={this.handleFrequencySelection}
-          type={'radio'}
-          options={this.state.frequencyOptions}
-          selectedOptions={this.state.frequencyOptions}
-          /> */}
+          <label htmlFor="streetAddress">Street Address:</label>
+          <input type="text" id="streetAddress" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="suburb">Suburb:</label>
+          <input type="text" id="suburb" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="postcode">Postcode:</label>
+          <input type="number" id="postcode" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="ausState">State:</label>
+          <input type="text" id="ausState" onChange={this.handleInputChange}/><br/>
+
+
 
           <div className="form-check">
             <label htmlFor="frequency">Monthly Frequency</label>
@@ -120,11 +106,12 @@ export default class Register extends React.Component {
 
           <button onClick={this.submitForm}>Join Up</button>
         </form>
+
           {this.state.isSubmitted && email && <Payment email={email} selectedOption={selectedOption} />}
+          
           { error && <p>{ error }</p> }
           { message && <p>{ message }</p>}
 
-          {/* { user.stripeId && <Link to = /admin/>} */}
         </div>
   )
 }
