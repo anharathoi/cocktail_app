@@ -41,8 +41,7 @@ export default class Cocktails extends Component {
                   <th>Title</th>
                   <th>Photo</th>
                   <th>Description</th> 
-                  <th>Directions</th>
-                  <th>Ingredients</th>
+                  <th>Month available</th>
                   <th>Available</th>
                   <th>Delete</th>
                 </tr>
@@ -54,9 +53,8 @@ export default class Cocktails extends Component {
                         <td><Link to={`/admin/cocktail/${cocktail.title}`}>{cocktail.title}</Link></td>
                         <td> <img style={{height:"140px"}} src={cocktail.photo}/> </td>
                         <td>{cocktail.description}</td>
-                        <td>{cocktail.directions}</td>
-                        <td>{cocktail.ingredients}</td>
-                        <td>{JSON.stringify(cocktail.available)}</td>
+                        <td>{cocktail.availabilityMonth}</td>
+                        <td>{cocktail.available}</td>
                         <td><button onClick={this.handleDelete}>Delete</button></td>
                       </tr>
                     )

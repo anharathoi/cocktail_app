@@ -31,6 +31,16 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
   })
 })
 
+// publicly available cocktail
+router.get('/home/cocktail', (req, res) => {
+  Cocktail.find({available: true})
+  .then( cocktails => {
+    console.log(cocktails)
+    return res.send(cocktails)
+  })
+  .catch (err => res.status(404).send(err))
+})
+
 // get single cocktail by title
 router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false}), (req, res) => {
   let {title} = req.params;
@@ -52,14 +62,15 @@ router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false
    console.log('here')
   if(req.user.admin){ 
     // console.log(req.user)
-    const {title, photo, description, directions, ingredients, available} = req.body;
+    const {title, photo, description, directions, ingredients, available, availabilityMonth} = req.body;
     Cocktail.create ({
       title,
       photo,
       description,
       directions,
       ingredients,
-      available
+      available,
+      availabilityMonth
     })
     .then ( cocktail => {
       res.send(cocktail);
@@ -94,7 +105,7 @@ router.patch('/admin/cocktail/edit/:title', passport.authenticate('jwt', {sessio
 console.log(`edit ${req}`)
   const {title} = req.params;
   // const {newtitle} = req.body
-  const {available} = req.body
+  const {available, availabilityMonth} = req.body
   console.log(available)
   Cocktail.findOne({title})
   .then( cocktail => {   
@@ -103,6 +114,7 @@ console.log(`edit ${req}`)
       // console.log(title)
       // console.log(cocktail)
       cocktail.available = available
+      cocktail.availabilityMonth = availabilityMonth
       cocktail.save()
       res.send(cocktail)
     } else {
