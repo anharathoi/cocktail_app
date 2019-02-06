@@ -38,6 +38,7 @@ export default class Navbar extends Component {
               <li><Link to='/#home'>The Back Bar</Link></li>
               {!this.props.adminStatus && <li><Link to='/#about'>About</Link></li>}
               {!this.props.adminStatus && <li><Link to='/#how-it-works'>How it Works</Link></li>}
+              {this.props.token && !this.props.adminStatus && <li><Link to='/userprofile'>Your Profile</Link></li>}
               {!this.props.token && <li><Link to='/#register' >Register/ Login</Link></li>}
               {this.props.adminStatus && <li><Link to='/admin/#customers'>Dashboard</Link></li>}
               {this.props.adminStatus && <li><Link to="/admin/cocktails">Cocktails</Link></li>} 
