@@ -63,7 +63,7 @@ export default class CreateCocktail extends React.Component {
     console.log(this.state.available)
     // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
     const available = JSON.parse(this.state.available)
-    const url = "http://localhost:800/newcocktail"
+    const url = "http://localhost:8000/newcocktail"
     const data = { title, photo, description, directions, ingredients, available}
     const token = Cookies.get('token')
         axios.post(url, data,{
