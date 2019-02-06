@@ -54,7 +54,7 @@ export default class CreateCocktail extends React.Component {
 
   componentDidMount() {
     this.getData()
-    }
+  }
 
   submitForm = (e) => {
     e.preventDefault()

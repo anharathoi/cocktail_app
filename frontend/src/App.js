@@ -14,6 +14,8 @@ import { Route , Switch } from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Navbar from './components/public/Navbar'
 import axios from 'axios'
+import Cocktail from './components/protected/Cocktail.js'
+
 require('dotenv').config()
 
 class App extends React.Component {
@@ -64,7 +66,7 @@ class App extends React.Component {
               <Route
                 exact path="/"
                 render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin}/> }
-              />)
+              />
 
               {this.state.token && !this.state.admin && (<Route
                 exact path="/UserProfile"
@@ -75,13 +77,18 @@ class App extends React.Component {
                 exact path="/Admin"
                 render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
               />
-
+            {/* <Route 
+              exact path="/admin/cocktail/:title" 
+              render={(props) => <Cocktail {...props} key={this.props.location.key} match={match} params={match.params}/> }
+            /> */}
+            <Route exact path="/admin/cocktail/:title" component={Cocktail}/>
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>
               <Route path="/liquor_licence" component={LiquorLicence} exact/>
               <Route path="/faqs" component={Faqs} exact/>
               <Route path="/contact_us" component={ContactUs} exact/>
+              
             </Switch>
           </div>
 

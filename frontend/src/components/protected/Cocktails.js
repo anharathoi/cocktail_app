@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import './Cocktails.css';
+import { Link } from 'react-router-dom';
 
 export default class Cocktails extends Component {
     state = {}
@@ -50,7 +51,7 @@ export default class Cocktails extends Component {
                 {this.props.cocktails.map(cocktail => 
                   { return(
                       <tr key={cocktail._id}>
-                        <td>{cocktail.title}</td>
+                        <td><Link to={`/admin/cocktail/${cocktail.title}`}>{cocktail.title}</Link></td>
                         <td> <img style={{height:"140px"}} src={cocktail.photo}/> </td>
                         <td>{cocktail.description}</td>
                         <td>{cocktail.directions}</td>

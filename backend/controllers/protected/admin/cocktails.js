@@ -30,14 +30,28 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
     res.status(400).send(err)
   })
 })
-    
-  // console.log("hello this is cocktails backend"+req.user.admin)
+
+// get single cocktail by title
+router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false}), (req, res) => {
+  let {title} = req.params;
+  Cocktail.findOne({title})
+  .then( cocktail => {
+    if(req.user.admin){
+      res.send(cocktail);
+    } else {
+        return res.status(403).send("Admin privileges required")
+    }
+  })
+  .catch ( err => {
+    res.status(400).send(err);
+  })
+})
 
 // post cocktails
  router.post('/newcocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
    console.log('here')
   if(req.user.admin){ 
-    console.log(req.user)
+    // console.log(req.user)
     const {title, photo, description, directions, ingredients, available} = req.body;
     Cocktail.create ({
       title,
@@ -82,9 +96,9 @@ router.patch('/admin/cocktail', passport.authenticate('jwt', {session: false}),(
   Cocktail.findOne({title})
   .then( cocktail => {   
     if(req.user.admin){
-      console.log(newtitle)
-      console.log(title)
-      console.log(cocktail)
+      // console.log(newtitle)
+      // console.log(title)
+      // console.log(cocktail)
       cocktail.title = newtitle
       cocktail.save()
       res.send(cocktail)
@@ -105,7 +119,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
   uploadFile(buffer)
   .then( resp => {
     const { secure_url } = resp
-    console.log(secure_url)
+    // console.log(secure_url)
     // console.log(secure_url)
     res.send(resp)
   })
