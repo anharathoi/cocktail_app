@@ -21,7 +21,7 @@ export default class Payment extends Component {
       email,
       selectedOption
     }
-    axios.post('http://localhost:5000/api/stripe', data)
+    axios.post('http://localhost:8000/api/stripe', data)
     .then( response => {
       console.log(response)
       const { success } = response.data

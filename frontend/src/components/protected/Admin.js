@@ -13,7 +13,7 @@ import { Redirect } from 'react-router-dom'
 class Admin extends Component {
   state = {}
   componentDidMount (){
-    const url = 'http://localhost:5000/me'
+    const url = 'http://localhost:8000/me'
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {

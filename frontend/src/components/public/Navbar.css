@@ -1,16 +1,50 @@
-nav {
+ nav {
     width: 100%;
     margin: 0;
     top: 0;
     background: #292E31;
+    z-index: 999;
+    position:fixed;
+    border-bottom:solid #D89638 1px;
 }
-ul {
+
+ nav img {
+    width: 100px;
+    margin: -20px;
+    /* margin-left: -80%; */
+}
+
+ .navlogo {
+    width: 100px;
+/* padding-right: 10%; */
+}
+
+
+ nav a:active {
+    color: #D89638;
+    background: none;
+}
+
+ nav a:active nav a:hover {
+    color: #D89638;
+}
+
+ nav a:hover {
+    color: rgb(255, 255, 255);
+    background: none;
+}
+
+ ul {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
 }
-li {
+
+
+
+
+ li {
     height: 100%;
     flex: 1;
     text-align: center;
@@ -19,32 +53,49 @@ li {
     align-items: center;
     transition: all 0.2s ease-in;
     cursor: pointer;
+    margin: -0.1%;
     /* not 100% sure what cursor: point; does - GUY research this */
 }
-li:hover,
-Li:active {
-    background: #f2f2f2;
+ li:hover,
+ Li:active {
+    background: #d89638;
 }
 
-li a {
+ li a {
     display: block;
     text-decoration: none;
     color: #D89638;
     padding: 10px;
+    text-transform: uppercase; 
 }
-li:hover a {
+ li:hover a {
     display: block;
     font-weight: bold;
+    background: none;
+    color: white;
 }
-.fixed-nav {
+
+ li:hover a:hover {
+    display: block;
+    font-weight: bold;
+    color: white;
+    background: none;
+}
+
+ .fixed-nav {
     position: fixed;
 }
-.content {
+
+ .fixed-nav img :hover {
+ opacity: 0;
+}
+
+ .content {
     width: 80%;
     margin: 0 auto;
     text-align: justify;
     padding-top: 20px;
 }
-.content > div {
+ .content > div {
     margin: 10px 0;
 }

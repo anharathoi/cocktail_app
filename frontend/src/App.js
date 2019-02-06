@@ -24,7 +24,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const token = Cookies.get('token')
-    const url = 'http://localhost:5000/me'
+    const url = 'http://localhost:8000/me'
 
     if (token) { 
       axios.get(url, {

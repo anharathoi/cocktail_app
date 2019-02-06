@@ -1,17 +1,149 @@
-.home {
-  text-align: justify;
-}
-
 .about {
-  margin: 5%;
-  padding-bottom: 40px;
-  border-bottom: 2px #D89638 solid;
-  border-width: 100%;
+
 }
 
 .how-it-works {
   margin: 0 5%;
   padding-bottom: 40px;
-  border-bottom: 2px #D89638 solid;
-  border-width: 100%;
+}
+
+
+/* h1 {
+    font-size:50px;
+    font-weight:300;
+    text-align:center;
+    font-weight:700
+}
+ 
+span {
+    color:#27ae60;
+    font-weight:700
+}
+ 
+h2 {
+    font-size:35px;
+    text-align:left;
+    margin-left:-20px
+} */
+ 
+nav.demo-nav {
+    width:350px;
+    margin:0 auto;
+    display:block
+}
+ 
+nav.demo-nav a {
+    font-size:19px;
+    display:inline-block;
+    text-align:center;
+    font-family:'Lato',sans-serif;
+    color:#27ae60;
+    font-weight:400;
+    padding:5px 15px;
+    text-transform:uppercase;
+    border-radius:2px;
+    letter-spacing:1px;
+    text-decoration:none;
+    margin-right:10px;
+    border:2px solid #ecf0f1;
+    border-radius:none
+}
+ 
+nav a.active,nav a:hover {
+    background:#ecf0f1;
+    color:#27ae60
+}
+
+
+/* Navigation styling */
+header {
+    height:250px;
+    background:#2ecc71;
+    padding:23px 0
+}
+ 
+nav.main-nav {
+    background:#fff;
+    height:60px;
+    z-index:170;
+    margin:0 auto;
+    border-bottom:1px solid #dadada;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    text-align: center;
+}
+ 
+nav.main-nav a {
+    font-family:'Lato',sans-serif;
+    font-size:20px;
+    text-decoration:none;
+    display:inline-block;
+    padding:15px 19px;
+    color:#27ae60;
+}
+ 
+
+/* Creating a 3 column layout for content */
+.content {
+    color:#222;
+    padding:50px;
+    -webkit-column-count:3;
+/* Chrome, Safari, Opera */
+    -moz-column-count:3;
+/* Firefox */
+    column-count:3;
+    -webkit-column-gap:40;
+    column-gap:40px;
+}
+ 
+
+/* Media Queries */
+@media all and (min-width: 360px) and (max-width: 480px) {
+    header {
+        padding:5px 0 55px;
+    }
+ 
+    nav.main-nav a {
+        font-size:17px;
+    }
+ 
+    nav.main-nav {
+        height:55px;
+    }
+ 
+ 
+    .content {
+        -webkit-column-count:1;
+        /* Chrome, Safari, Opera */
+        -moz-column-count:1;
+        /* Firefox */
+        column-count:1;
+    }
+}
+ 
+@media screen and (max-width: 480px) {
+    header {
+        padding:5px 0 55px;
+    }
+ 
+    nav.main-nav a {
+        font-size:17px;
+    }
+ 
+    nav.main-nav {
+        height:55px;
+    }
+ 
+
+ 
+    .content {
+        -webkit-column-count:1;
+        /* Chrome, Safari, Opera */
+        -moz-column-count:1;
+        /* Firefox */
+        column-count:1
+    }
 }
