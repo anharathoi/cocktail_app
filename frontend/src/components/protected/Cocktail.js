@@ -71,8 +71,8 @@ export default class Cocktail extends Component {
               <div>
                 <label htmlFor="Availability">Availability </label>
                 <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
-                  <option value="true" >True</option>
-                  <option value="false" >False</option>
+                  <option value={true} >True</option>
+                  <option value={false} >False</option>
                 </select>
                 <button onClick={this.handleSubmit}>Submit</button>
               </div>

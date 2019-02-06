@@ -114,8 +114,8 @@ export default class CreateCocktail extends React.Component {
               <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
               <label htmlFor="available">Currently Available?:</label>
               <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
-                <option value="true">True</option>
-                <option value="false">False</option>
+                <option value={true}>True</option>
+                <option value={false}>False</option>
               </select><br/>
               <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
               <div>
