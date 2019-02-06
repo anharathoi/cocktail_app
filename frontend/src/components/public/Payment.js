@@ -48,9 +48,6 @@ export default class Payment extends Component {
           panelLabel="Start my Subscription"
           data-panel-label = {"Welcome to Bottle Batched your cocktail subscription service"}
           image="https://i.pinimg.com/originals/3a/96/de/3a96de2e9c9321992a71814d31945399.jpg"
-         
-
-
           />
       </div>
     )

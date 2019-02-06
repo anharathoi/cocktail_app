@@ -3,6 +3,7 @@ import Register from './Register'
 import Login from './Login'
 import HowItWorks from './HowItWorks';
 import About from './About';
+import CocktailHome from './CocktailHome'
 import './Home.css'
 
 
@@ -16,7 +17,8 @@ export default class Home extends React.Component {
         <div id="home" className="home">
           <About />
           <HowItWorks/>
-          <Register {...this.props}/>
+          <CocktailHome/>
+          {!this.props.token && <Register {...this.props}/>}
           <Login {...this.props}/>
         </div>
       </div>
