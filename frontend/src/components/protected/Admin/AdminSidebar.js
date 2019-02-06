@@ -1,10 +1,10 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import './AdminSidebar.css'
-import Logout from '../Logout';
+import Logout from '../../public/Logout';
 import { Link } from 'react-router-dom';
 
-export default props => {
+function AdminSidebar(props) {
 	return (
 		<Menu>  
 			<Link className="menu-item" to="/admin/dashboard">
@@ -33,4 +33,5 @@ export default props => {
 	)
 }
 
+export default AdminSidebar
 //Change the above <a> tags to Link to="" for routing purposes

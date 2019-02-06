@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// import Logout from './Logout'
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './Form.css'
@@ -24,8 +25,9 @@ export default class Login extends Component {
     // console.log(this.state)
     const { email, password } = this.state
     // headers: { authorization: localStorage.getItem('token') }
-    // const url = "https://cocktail-app.now.sh/login" // PROD url
-    const url = "http://localhost:5000/login" //DEV url
+    
+    // const url = "https://cocktail-app.now.sh/login" // PROD
+    const url = "http://localhost:5000/login" // DEV
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import AdminSidebar from './AdminSidebar.js';
+import AdminSidebar from './Admin/AdminSidebar'
 import './Customers.css';
 
 export default class Customers extends Component {

@@ -12,11 +12,23 @@ export default class Register extends React.Component {
       isSubmitted: false,
       frequencyOptions: []
     }
-  //   this.handleFrequencySubmit = this.handleFrequencySubmit.bind(this)
-	// 	this.handleFrequencySelection = this.handleFrequencySelection.bind(this);
   }
+////////GUY COMMENTED OUT FOR MERGE
+  componentDidMount = () => {
+    // const url = 'https://cocktail-app.now.sh/me' //PROD
+    const url = 'http://localhost:5000/me' // DEV
+      axios.get(url)
+      .then(res => res.json())
+			.then(data => {
+				this.setState({
+					selectedFrequency: data.frequencyOptions	
+				});
+      });
+    }
   //thinking i may have to add in all of the fields within this.state.  and then below set the state of each of these components in this.setState.
-  
+  ////////////////END GUY COMMENTED OUT
+
+
   componentDidMount = () => {
     // const url = 'https://cocktail-app.now.sh/me' //PROD
     const url = 'http://localhost:5000/me' // DEV
@@ -36,17 +48,6 @@ export default class Register extends React.Component {
       });
     }
   }
-  
-  // handleFrequencySelection = (e) => {
-  //   const newSelection = e.target.value;
-	// 	let newSelectionArray;
-	// 	if(this.state.selectedFrequency.indexOf(newSelection) > -1) {
-	// 		newSelectionArray = this.state.selectedFrequency.filter(s => s !== newSelection)
-	// 	} else {
-	// 		newSelectionArray = [...this.state.selectedFrequency, newSelection];
-	// 	}
-	// 	this.setState({ selectedFrequency: newSelectionArray }, () => console.log('frequency selection', this.state.selectedFrequency));
-  // }
 
   handleFrequencyChange = (e) => {
     this.setState({
@@ -54,22 +55,19 @@ export default class Register extends React.Component {
     });
   };
 
-  // state = { isSubmitted: false }
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
   }
 
   submitForm = (e) => {
-    // console.log(this.state)
     e.preventDefault()
-    // // console.log(this.state)
-    const {  firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
-    
+    const {  firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
+  
     // // const url = "https://cocktail-app.now.sh/register" // PROD
     const url = "http://localhost:5000/register" //DEV
 
-    const data = { firstName, lastName, email, password, session, phone, deliveryAddress, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption}
+    const data = { firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption }
     axios.post(url, data)
       .then(resp => {
         this.setState({ message: 'well done buddy you just registered for a cocktail subscription', error: null, isSubmitted: true })
@@ -86,55 +84,51 @@ export default class Register extends React.Component {
       })
   }
 
+  
   render() {
     const { error, message, email, selectedOption } = this.state
     return (
-      <div>
-        <div className="site-form registration" id="register" style={{paddingTop: '40px'}}>
-          <h2>Sign up for a Cocktail Subscription</h2>
-          <form>
-            <div>
-              <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" onChange={this.handleInputChange}/>
-            </div>
-            <div>
-              <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" onChange={this.handleInputChange}/>
-            </div>
-            <div>
-              <label htmlFor="email">email</label>
-              <input type="email" id="email" onChange={this.handleInputChange}/>
-            </div>
-            <div>
-              <label htmlFor="password">Password: </label>
-              <input type="string" id="password" onChange={this.handleInputChange}/>
-            </div>
-            
-            {/* <label htmlFor="session">Session? - can probably get rid</label>
-            <input type="string" id="session" onChange={this.handleInputChange}/> */}
-            <div>
-              <label htmlFor="phone">Phone number</label>
-              <input type="number" id="phone" onChange={this.handleInputChange}/>
-            </div>
-            <div>
-              <label htmlFor="deliveryAddress">Delivery Address:</label>
-              <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/>
-            </div>
-            
+      <div id="register" style={{paddingTop: '40px'}}>
+        <h2>Sign up for a Cocktail Subscription</h2>
+        <form>
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" id="firstName" onChange={this.handleInputChange}/><br/>
+          
+          <label htmlFor="lastName">Last Name:</label>
+          <input type="text" id="lastName" onChange={this.handleInputChange}/><br/>
+          
+          <label htmlFor="email">email</label>
+          <input type="email" id="email" onChange={this.handleInputChange}/><br/>
+          
+          <label htmlFor="password">Password: </label>
+          <input type="string" id="password" onChange={this.handleInputChange}/><br/>
+          
+          {/* <label htmlFor="phone">Phone number</label>
+          <input type="number" id="phone" onChange={this.handleInputChange}/><br/>
+           */}
 
-            {/* <Frequency
-            title={'What up - how often you want these cocktails?!?'}
-            setName={'frequency'} 
-            controlFunc={this.handleFrequencySelection}
-            type={'radio'}
-            options={this.state.frequencyOptions}
-            selectedOptions={this.state.frequencyOptions}
-            /> */}
+          {/* <label htmlFor="deliveryAddress">Delivery Address:</label>
+          <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/><br/> */}
+          <h4>Where would you like your cocktails delivered?</h4>
 
-            <div className="form-check">
-              <label htmlFor="frequency">Monthly Frequency</label>
-              <input type="radio" id="frequency1" value="monthlyFrequency" name="frequency" checked={this.state.selectedOption === "monthlyFrequency"} onChange={this.handleFrequencyChange}/>
-            </div>
+          <label htmlFor="streetAddress">Street Address:</label>
+          <input type="text" id="streetAddress" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="suburb">Suburb:</label>
+          <input type="text" id="suburb" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="postcode">Postcode:</label>
+          <input type="number" id="postcode" onChange={this.handleInputChange}/><br/>
+
+          <label htmlFor="ausState">State:</label>
+          <input type="text" id="ausState" onChange={this.handleInputChange}/><br/>
+
+
+
+          <div className="form-check">
+            <label htmlFor="frequency">Monthly Frequency</label>
+            <input type="radio" id="frequency1" value="monthlyFrequency" name="frequency" checked={this.state.selectedOption === "monthlyFrequency"} onChange={this.handleFrequencyChange}/>
+          </div>
 
             <div className="form-check">
               <label htmlFor="frequency">Quarterly Frequency</label>
@@ -149,7 +143,7 @@ export default class Register extends React.Component {
 
             {/* { user.stripeId && <Link to = /admin/>} */}
           </div>
-        </div>
+        
   )
 }
 }

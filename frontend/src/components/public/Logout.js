@@ -7,8 +7,8 @@ class Logout extends Component {
   logoutHandle = (e) => {
     e.preventDefault()
     console.log("logging out")
-    // const url = "https://cocktail-app.now.sh/logout" // Prod url
-    const url = "http://localhost:5000/logout";
+    // const url = "https://cocktail-app.now.sh/logout" // PROD
+    const url = "http://localhost:5000/logout" // DEV
     const token = Cookies.get('token')
     axios.get(url, {
       headers: {
