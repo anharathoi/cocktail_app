@@ -78,14 +78,12 @@ class App extends React.Component {
                 exact path="/Admin"
                 render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
               />
-            {/* <Route 
-              exact path="/admin/cocktail/:title" 
-              render={(props) => <Cocktail {...props} key={this.props.location.key} match={match} params={match.params}/> }
-            /> */}
-            <Route
-              exact path="/admin/cocktails"
-              render={(props) => <CreateCocktail {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}/>
-            <Route exact path="/admin/cocktail/:title" component={Cocktail}/>
+              <Route
+                exact path="/admin/cocktails"
+                render={(props) => <CreateCocktail {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
+              />
+              <Route exact path="/admin/cocktail/:title" component={Cocktail}
+              />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>

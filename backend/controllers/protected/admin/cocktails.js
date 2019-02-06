@@ -20,7 +20,7 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
   Cocktail.find({})
   .then(cocktails =>{
     if(req.user.admin){
-      console.log(`hello ${cocktails}`)
+      // console.log(`hello ${cocktails}`)
       return res.send(cocktails)
     } else {
         return res.status(403).send("Admin privileges required")
@@ -90,16 +90,19 @@ router.delete('/admin/cocktail/delete/:title',passport.authenticate('jwt', {sess
 })
 
 // put/patch cocktails
-router.patch('/admin/cocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
-  const {title} = req.body
-  const {newtitle} = req.body
+router.patch('/admin/cocktail/edit/:title', passport.authenticate('jwt', {session: false}),(req, res) => {
+console.log(`edit ${req}`)
+  const {title} = req.params;
+  // const {newtitle} = req.body
+  const {available} = req.body
+  console.log(available)
   Cocktail.findOne({title})
   .then( cocktail => {   
     if(req.user.admin){
       // console.log(newtitle)
       // console.log(title)
       // console.log(cocktail)
-      cocktail.title = newtitle
+      cocktail.available = available
       cocktail.save()
       res.send(cocktail)
     } else {

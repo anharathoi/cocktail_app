@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available:true, photo: null }
+  state = { isSubmitted: false, available: true, photo: null }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
@@ -30,6 +30,7 @@ export default class CreateCocktail extends React.Component {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
     // console.log(`this is ${JSON.stringify(this.state)}`)
+    // console.log(value, id)
   }
 
   getData = () => {
@@ -112,9 +113,9 @@ export default class CreateCocktail extends React.Component {
               <label htmlFor="ingredients">Ingredients:</label>
               <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
               <label htmlFor="available">Currently Available?:</label>
-              <select type="boolean" id="available" onChange={this.handleInputChange}> 
-                <option name="true" >true</option>
-                <option name="false" >false</option>
+              <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
+                <option value="true">True</option>
+                <option value="false">False</option>
               </select><br/>
               <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
               <div>
