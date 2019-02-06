@@ -18,7 +18,7 @@ export default class Home extends React.Component {
           <About />
           <HowItWorks/>
           <CocktailHome/>
-          <Register {...this.props}/>
+          {!this.props.token && <Register {...this.props}/>}
           <Login {...this.props}/>
         </div>
       </div>
