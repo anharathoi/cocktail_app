@@ -3,64 +3,37 @@ const router = express.Router();
 const User = require('../../../models/User.model');
 require('dotenv').config();
 
+
+  // router.use(express.json());
+ 
+
 // /**
 // |--------------------------------------------------
 // | UPDATE USER PERSONAL DETAILS AND ADDRESS
 // |--------------------------------------------------
 // */
 
-// // UPDATE // - guy figure this shit out 
+router.put('/update-details', (req,res) => {
+  const { firstName, lastName, streetAddress, suburb, postcode, ausState, error, message, email } = req.params
+  console.log(req.body)
+  console.log(req.body.firstName)
+  console.log(req.body.email)
+  // res.send({ status: 'SUCCESS' });
+  
 
-
-
-router.patch('/update-details', (req,res) => {
-  const {firstName, lastName, email,  streetAddress, suburb, postcode, ausState, } = req.body;
-  if (email) {
-    User.findOne({email})
-    .then(user => {
-      
-      
-        router.put('/posts/:post/upvote', function(req, res, next)
-        {
-            req.post.upvote(function(err, post)
-            {
-                if(err) { return next(err); }
-                console.log(post);
-                res.json(post);
-            });
-        });
-      
-      
-    })
-}
+  User.findOneAndUpdate({ email: { $eq: req.body.email}}, {$set: {
+      firstName: req.body.firstName, 
+      lastName: req.body.lastName,  
+      streetAddress: req.body.streetAddress, 
+      suburb: req.body.suburb, 
+      postcode: req.body.postcode, 
+      ausState: req.body.ausState  
+  }}, {upsert: true},
+  function(err){
+    if (err) console.log(err);
+  })
+  
 })
-      
-      
-//         if (user) {
-//         return res.status(403).send('this user already exists')
-//       }
-//       else {
-//           const user = new User({
-//             firstName,
-//             lastName,
-//             email,
-//             streetAddress, 
-//             suburb, 
-//             postcode, 
-//             ausState,
-//           })
-//           user.save(err => {
-//             if (err) return res.status(400).send('there was an error')
-//             const token = generateToken(user);
-//             return res.send(token)
-//           })
-//         })
-//       }
-//     })
-//     .catch( err => {
-//     res.status(400).send(err)
-//   })
-//   } 
 
 
 module.exports = router

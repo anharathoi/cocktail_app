@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
     suburb: String, 
     postcode: Number, 
     ausState: String,
+    orderList: Array,
 
 
 })

@@ -6,7 +6,6 @@ import CardUpdate from './Cards/CardUpdate';
 import Logout from './../../public/Logout'
 import UpdateToMonthly from './Subscriptions/UpdateToMonthly';
 import UpdateToQuarterly from './Subscriptions/UpdateToQuarterly';
-// import AddSubscription from './Subscriptions/AddSubscription';
 import ListCustomerCharges from './ListCustomerCharges';
 import UpdateDetails from './UpdateDetails';
 
@@ -16,15 +15,18 @@ export default class UserProfile extends Component {
     subscriptionId: this.subscriptionId,
     selectedOption: this.selectedOption,
     stripeId: this.stripeId,
+    // orderList: this.orderList,
     message: null,
     error: null,
     
+    // Check to see if the below three are actually doing anything - has to do with dynamic render i think
     updateDetailsState: false,
     addMonthlySubscription: this.addMonthlySubscription,
     addQuarterlySubscription: this.addQuarterlySubscription,
   }
 
   componentDidMount() {
+
     // const url = 'https://cocktail-app.now.sh/me' // PROD
     const url = 'http://localhost:5000/me' // 
     const token = Cookies.get('token')
@@ -34,24 +36,83 @@ export default class UserProfile extends Component {
         },
       })
       .then ( resp => {
-        const {email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, } = resp.data
+        const { email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, orderList } = resp.data
 
-        this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, })
+        this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, orderList })
       })
       .catch(err => console.log(err) )
   }
 
+  // componentDidMount = () => {
+  //   const { stripeId, email, orderList } = this.state
+  //   // console.log(stripeId);
+
+  //   // const url = "https://coctail-app.now.sh/list-customer-orders" // PROD
+  //   const url = "http://localhost:5000/list-customer-orders" // DEV
+  //   const data = { stripeId, email, orderList }
+  //   console.log(data);
+
+  //   axios.post(url, data)
+  //      .then(resp => {
+  //     this.setState({ orderList, message: 'These are all your orders', error: null })
+  //     console.log(resp)
+  //   })
+  //   .catch(err => {
+  //       console.log(err.response)
+  //       if (err.response === 403) {
+  //         this.setState({ error: 'Nope!', message: null})
+  //       }
+  //   })
+
+  //  const amount = orderList
+  //  loop through the array of orderList - currently [0] for only the first charge
+  //  THEN FOR EACH RESULT - nest that - i want to assign it to Data
+
+
+  //  
+
+  //TO DO THIS JUST WRAP THEM ALL UP IN A PROMISE ALL - I.E. TO WRAP THEM UP WITHIN A COMPONENTDIDMOUNT
+
+  
+  
+  // .amount
+  //   will i need to make a map thing here - i.e. to get all arrays
+
+  //   const chargeAmount = amount.map((amount) =>
+  //     <li>{chargeAmount}</li>
+  //   );
+
+  //   // I then have to do the above for created and description
+  //   // created is given as a linux timestamp
+  //   // then in render <ul>{chargeAmount}</ul>
+  //   // so i might have to wrap that up in a table 
+
+  // }
+
+// <p>Amount: {this.state.orderList[0].data[0].amount}</p> 
+// <p>Created: {this.state.orderList[0].data[0].created}</p> 
+  
+// const orders = this.state.orderList[0] //this is to get 
+
+// const tableInfo = orders.map(())
+
+// <p>Amount: {this.state.orderList[0].data[0].amount}</p> 
+// <p>Created: {this.state.orderList[0].data[0].created}</p> 
+
+// <p>Amount: {this.state.orderList[0].data[1].amount}</p> 
+// <p>Created: {this.state.orderList[0].data[1].created}</p> 
+
   onToken = (token) => {
-    const { stripeId, email } = this.state;
+    const { stripeId, email } = this.state; 
     // const url = 'https://cocktail-app.now.sh/updatecard' //PROD
     const url = 'http://localhost:5000/updatecard' // DEV
     const data = { token, stripeId, email }
-    // console.log(data)
+    // console.log(`49  - UserProfile.js - update card  ${data}`)
 
     axios.post(url, data)
         .then(response => {
-        // console.log(response)
-        // console.log(data);
+          console.log(`53  - UserProfile.js - update card  ${response}`)
+        
         const { success } = response.data
             this.setState({ 
                 success
@@ -73,42 +134,23 @@ updateDetails = () => {
   });
 }
 
+/**
+|--------------------------------------------------
+| THE FOLLOWING TO BE IMPLEMENTED ONCE WE HAVE STRIPE ELEMENTS - OR CHANGE TO A LIFECYCLE METHOD TO AUTOMATICALLY RE RENDER UPDATES TO CARD
+|--------------------------------------------------
+*/
 // within the CardUpdate component
 // onClick={(e) => props.updateCardDetails}
 
-// Axios
-updateCardView = (paymentSource) => {
-  // const url = 'https://cocktail-app.now.sh/me' // PROD
-  const url = 'http://localhost:5000/me' // DEV
-  axios.get(url)
-    .then(({ data }) => {
-      this.setState((prevState) => {
-        return {
-          paymentSource: prevState.paymentSource
-        }
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
-
-
-
-/////////// ADDED THIS FFROM CARDUPDATE.JS SO I CAN PASS IT AS PROPS FUNCTIONAL STUFF - DELETE IF IT SCREWS  
-
-// handleDelete = e => {
-//   this.deleteEmployee(e)
-// }
-
-// deleteEmployee = id => {
-//   axios.delete(`http://${hostURL || window.location.host}/api/employees/${id}`)
+// updateCardView = (paymentSource) => {
+//   // const url = 'https://cocktail-app.now.sh/me' // PROD
+//   const url = 'http://localhost:5000/me' // DEV
+//   axios.get(url)
 //     .then(({ data }) => {
+//       // console.log(`89  - UserProfile.js - update card  ${data}`)
 //       this.setState((prevState) => {
 //         return {
-//           employees: prevState.employees.filter((employee) => {
-//             return employee._id !== id
-//           })
+//           paymentSource: prevState.paymentSource
 //         }
 //       })
 //     })
@@ -116,52 +158,6 @@ updateCardView = (paymentSource) => {
 //       console.log(err)
 //     })
 // }
-// //props to component
-// handleDelete={this.handleDelete}
-
-  // const url = 'https://cocktail-app.now.sh/me' // PROD
-//     const url = 'http://localhost:5000/me' // 
-//     axios.get(url)
-//       .then (resp => {
-//         const {
-//           paymentSource
-//         } = resp.data
-//       }).catch (err => console.log(err))   
-// }
-
-  // componentDidUpdate(prevProps, prevState){
-
-  //   if (prevProps.paymentSource !== this.props.paymentSource) {
-  
-  //   // const url = 'https://cocktail-app.now.sh/me' // PROD
-  //   const url = 'http://localhost:5000/me' // 
-  //     axios.get(url)
-  //     .then ( resp => {
-  //       const {email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId } = resp.data
-  //       this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId })
-  //     })
-  //     .catch(err => console.log(err) )
-  //   }
-  // }
-  // }
-  //     this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId })
-
-    // }).then((response) => {
-    //   this.setState.({
-
-      // }
-
-    // <p>Card Type: {this.state.paymentSource[0].brand}</p>
-    //         <p>Card on file: **** **** ****{this.state.paymentSource[0].last4}</p>
-    //         <p>Expiry Month: {this.state.paymentSource[0].exp_month}</p>
-    //         <p>Expiry Year: {this.state.paymentSource[0].exp_year}</p>
-    // const {email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, defaultSource, last4, sourceBrand, exp_month, exp_year } = resp.data
-    //       this.setState({email,firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, defaultSource, last4, sourceBrand, exp_month, exp_year })
-    //       // console.log(resp.data)
-
-          // When componentDidUpdate() is called, two arguments are passed: prevProps and prevState. This is the inverse of componentWillUpdate(). The passed values are what the values were, and this.props and this.state are the current values.
-  // }
-  
 /////////////////////// BELOW WORKING OUT THE NEXT MONTH ////////////
 
   // displayNextMonth = () => {
@@ -188,48 +184,50 @@ updateCardView = (paymentSource) => {
 ////////////// ABOVE WORKING OUT THE NEXT MONTH ///////////
 
 // UPDATING TO A QUARTERLY SUBSCRIPTION - CHANGING FROM MONTHLY
+
+/// GUY - YOU CHANGED THIS FROM AN ARROW FUNCTION TO A REGULAR FUNCTION - MAKE SURE YOU DIDN'T BREAK ANYTHING - IN FACT YOU REMOVED IT - DUPLICATED CODE
 updateQuarterlySubscription = () => {
+  const {  email, subscriptionId, } = this.state
+  console.log(this.state);
+  console.log("this is where it is not working");
+
   // const url = "https/something /updatetoquarterlysubscription" // PROD
   const url = "http://localhost:5000/updatetoquarterlysubscription" // DEV
-  const data = {
-      email: this.email,
-      subscriptionId: this.subscriptionId
-  }
+  const data = { email, subscriptionId }
 
   axios.post(url, data)
-      .then(response => {
-          // const { success } = response.d ata
-        console.log(response);
-        console.log(data);
-          })
-      
-      .catch ( err => {
-        console.log(err.response)
-      }) 
+    .then(resp => {
+      this.setState({ message: 'well done buddy you just changed to a QUARTERLY cocktail subscription', error: null })
+          // console.log(resp)
+    })
+    .catch(err => {
+      console.log(err.response)
+      if (err.response === 403) {
+        this.setState({ error: 'Nope!', message: null})
+      }
+    })
 }
 
 
-
   // CHANGING / UPDATING THE CUSTOMERS SUBSCRIPTION
-  quarterlyChange = () => {
-
-    const { subscriptionId, email } = this.state;
-    console.log("go go gadget choper")
-    // // const url = "https://cocktail-app.now.sh/updatetoquarterlysubscription" // PROD
-    const url = "http://localhost:5000/updatetoquarterlysubscription" //DEV
-    const data =  {subscriptionId, email} // ideally the subscription number
-    axios.post(url, data)
-      .then(resp => {
-        this.setState({ message: 'well done buddy you just changed to a QUARTERLY cocktail subscription', error: null })
-        // console.log(resp)
-      })
-      .catch(err => {
-          console.log(err.response)
-          if (err.response === 403) {
-            this.setState({ error: 'Nope!', message: null})
-          }
-      })
-  }
+  // quarterlyChange = () => {
+  //   const { subscriptionId, email } = this.state;
+  //   console.log("go go gadget choper")
+  //   // // const url = "https://cocktail-app.now.sh/updatetoquarterlysubscription" // PROD
+  //   const url = "http://localhost:5000/updatetoquarterlysubscription" //DEV
+  //   const data =  {subscriptionId, email} // ideally the subscription number
+  //   axios.post(url, data)
+  //     .then(resp => {
+  //       this.setState({ message: 'well done buddy you just changed to a QUARTERLY cocktail subscription', error: null })
+  //       // console.log(resp)
+  //     })
+  //     .catch(err => {
+  //         console.log(err.response)
+  //         if (err.response === 403) {
+  //           this.setState({ error: 'Nope!', message: null})
+  //         }
+  //     })
+  // }
   
   monthlyChange = () => {
     const { subscriptionId, email } = this.state;
@@ -252,25 +250,88 @@ updateQuarterlySubscription = () => {
   }
 
   listCustomerOrders = () => {
-    const {stripeId} = this.state
-    // console.log(stripeId);
+    const { stripeId, email, orderList } = this.state
+    console.log(this.state)
 
     // const url = "https://coctail-app.now.sh/list-customer-orders" // PROD
-    const url = "https://localhost:5000/list-customer-orders" // DEV
-    const data = {stripeId}
+    const url = "http://localhost:5000/list-customer-orders" // DEV
+    const data = { stripeId, email, orderList }
+    // console.log(data);
+
     axios.post(url, data)
-      .then((result) => {
-        console.log(result);
-        // .then ( resp => {
-        //   const {email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId } = resp.data
-  
-        //   this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId })
-        // })
-      })
-      .catch(err => console.log(err) )
+    .then(resp => {
+      const orders = resp.data.data //this is to get each object
+      console.log(resp)
+      console.log("HERERERERER  "+ orders)
+      this.setState({ orders, message: 'These are all your orders', error: null })
+     
 
+      // console.log(resp)
 
+    })
+    
+    .catch(err => {
+      console.log(err.response)
+      if (err.response === 403) {
+        this.setState({ error: 'Nope!', message: null})
+      }
+    })
   }
+
+  timeConverter = (UNIX_timestamp) => {
+    const a = new Date(UNIX_timestamp * 1000);
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const year = a.getFullYear();
+    const month = months[a.getMonth()];
+    const date = a.getDate();
+    const hour = a.getHours();
+    const min = a.getMinutes();
+    const sec = a.getSeconds();
+    const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+  }
+
+  moneyConverter = (Money) => {
+    const converted = parseInt(Money) 
+    const numstr = converted / 100
+    return '$' + numstr
+  }
+    // console.log(timeConverter(0));
+    // could possibly be wrapped in a tr/ instead of <>
+    
+
+  
+    // var myObject = { 'a': 1, 'b': 2, 'c': 3 };
+
+// for (var amount in orders) {
+//   if (orders.hasOwnProperty('amount')) {
+//     orders['amount'] = <li>{amount}</li>
+//   }
+// }
+// for (var key in orders) {
+//   if (orders.hasOwnProperty('created')) {
+//     orders[key] 
+  
+//   }
+// }
+
+// console.log(orders);
+// { 'a': 2, 'b': 4, 'c': 6 }
+
+  
+
+    
+    // const chargeAmount = amount.map((amount) =>
+//     <li>{chargeAmount}</li>
+//   );
+        
+    
+// <p>Amount: {this.state.orderList[0].data[0].amount}</p> 
+// <p>Created: {this.state.orderList[0].data[0].created}</p> 
+
+// <p>Amount: {this.state.orderList[0].data[1].amount}</p> 
+// <p>Created: {this.state.orderList[0].data[1].created}</p> 
+
 
 cancelSubscription = () => {
   const { subscriptionId, email, selectedOption } = this.state;
@@ -298,7 +359,7 @@ cancelSubscription = () => {
 addMonthlySubscription = () => {
   console.log("you just clicked on add monthly subscription");
   const { subscriptionId, email, selectedOption, stripeId } = this.state;
-  console.log(this.state)
+  // console.log(this.state)
   // // const url = "https://cocktail-app.now.sh/add-monthly-subscription" // PROD
   const url = "http://localhost:5000/add-monthly-subscription" //DEV
   const data =  { stripeId, subscriptionId, email, selectedOption }  // ideally the subscription number
@@ -339,7 +400,7 @@ addQuarterlySubscription = () => {
   
   render() {
     if (this.state.email) {
-      // const subscriptionId = this.state
+    
     return (
 
       <div>
@@ -362,8 +423,74 @@ addQuarterlySubscription = () => {
             <ListCustomerCharges
               stripeId={this.state.stripeId} // it is HERE
             />
+
+
+<button onClick={this.listCustomerOrders}>View all your orders</button>
+   
+ {this.state.orders && 
+    <>
+      <h4>Your Orders:</h4>
+        <table className="customers-table pure-table pure-table-horizontal">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Description</th> 
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.orders.map(order => 
+                { return (
+                <tr>
+
+
+{/* var date = new Date(unix_timestamp*1000);
+// Hours part from the timestamp
+var hours = date.getHours();
+// Minutes part from the timestamp
+var minutes = "0" + date.getMinutes();
+// Seconds part from the timestamp
+var seconds = "0" + date.getSeconds();
+
+// Will display time in 10:30:23 format
+var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+const date = new Date({order.created}*1000)
+
+const hours = date.getHours()
+
+const minutes = "0" + date.getMinutes()
+
+const second = "0" + date.getSeconds() */}
+
+                  <td>{this.timeConverter(order.created)}</td>
+                  <td>{this.moneyConverter(order.amount)}</td>  
+                  <td>Bottle Batched Subscription</td>
+                </tr>)
+              }
+              )}
+              </tbody>
+        </table>
+    </>
+
+ }
+ 
+
+
+{/* 
+<p>Amount: {this.state.orderList[0].data[0].amount}</p> 
+<p>Created: {this.state.orderList[0].data[0].created}</p> 
+
+<p>Amount: {this.state.orderList[0].data[1].amount}</p> 
+<p>Created: {this.state.orderList[0].data[1].created}</p>  */}
+{/* <p>Description: {this.state.orderList[0].data[0].description}</p>  */}
+
+
+
+
             <hr/>
         </div>
+
 
         <div className="plan-details">
             <h4>Your Subscription Details:</h4>
@@ -376,10 +503,17 @@ addQuarterlySubscription = () => {
 
             {/* Gives the user the option to change to the other frequency plan */}
             { this.state.selectedOption === "monthlyFrequency" && 
-            <UpdateToQuarterly
+            <>
+            {/* <UpdateToQuarterly
               email={this.state.email}
               subscriptionId={this.state.subscriptionId}
-            />}
+            /> */}
+            
+
+        <p>Want cocktails delivered every 3 months instead?</p>
+            <button onClick={this.state.updateQuarterlySubscription}>Change to Quarterly</button>
+            </>
+            }
 
             { this.state.selectedOption === "quarterlyFrequency" && 
             <UpdateToMonthly 
@@ -433,7 +567,6 @@ addQuarterlySubscription = () => {
             <hr/>
         </div>
 
-        <Logout/>
 
       </div>
     )}

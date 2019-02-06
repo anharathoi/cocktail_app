@@ -1,12 +1,32 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import './UserProfile.css'
+
 export default class UpdateDetails extends Component {
-    state = { 
+  constructor(props) {
+    super(props)
+    this.state = { 
       isSubmitted: false,
-      
+      // email: this.email,
+      // firstName: this.firstName, 
+      // lastName: this.lastName,  
+      // streetAddress: this.streetAddress, 
+      // suburb: this.suburb, 
+      // postcode: this.postcode, 
+      // ausState: this.ausState
+
+      email: this.email,
+      firstName: "", 
+      lastName: "",  
+      streetAddress: "", 
+      suburb: "", 
+      postcode: "", 
+      ausState: ""
     }
+
+  }
 
   componentDidMount() {
     // const url = 'https://cocktail-app.now.sh/me' // PROD
@@ -18,9 +38,8 @@ export default class UpdateDetails extends Component {
         },
       })
       .then ( resp => {
-        const {email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, } = resp.data
-
-        this.setState({email, firstName, lastName, phone, deliveryAddress, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState, })
+        const {email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState } = resp.data
+        this.setState({email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState })
       })
       .catch(err => console.log(err) )
   }
@@ -35,14 +54,15 @@ export default class UpdateDetails extends Component {
 
   submitForm = (e) => {
     e.preventDefault()
-    const {  firstName, lastName, email, deliveryAddress, streetAddress, suburb, postcode, ausState,  stripeId } = this.state
+    const {  firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message } = this.state
   
-    // // const url = "https://cocktail-app.now.sh/update-details" // PROD
+    // const url = "https://cocktail-app.now.sh/update-details:email" // PROD
     const url = "http://localhost:5000/update-details" //DEV
 
-    const data = { firstName, lastName, email, deliveryAddress, streetAddress, suburb, postcode, ausState,  stripeId }
-    const config = { headers: {'Content-Type': 'multipart/form-data' }}
-    axios.put(url, data, config)
+    const data = { firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message }
+    
+
+    axios.put(url, data)
       .then(resp => {
         this.setState({ message: 'well done buddy you just updated your details', error: null, isSubmitted: true })
         console.log(resp)
@@ -57,17 +77,15 @@ export default class UpdateDetails extends Component {
 
   render() {
     const { firstName, lastName, streetAddress, suburb, postcode, ausState, error, message, email } = this.state
-    // if (this.state.success) {
-    //   // return <Redirect to="/UserProfile" />
-    //   <p>Howdy Cowboy!!!</p>
-    // } 
-    // else {
+   
     console.log(this.state);
     return (
   
     <div>
-      <p>This is where we update those details y'all.</p>  <p>Just update what's changed.</p>
+      <p>This is where we update those details y'all. READY PLAYER ONE</p>  <p>Just update what's changed.</p>
       <form>
+
+        <input type="hidden" id="email" defaultValue={email} onChange={this.handleInputChange}/><br/>
 
         <label htmlFor="firstName">First Name:</label>
         <input type="text" id="firstName" defaultValue={firstName} onChange={this.handleInputChange}/><br/>
