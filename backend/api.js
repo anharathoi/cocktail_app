@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 const url = 'mongodb://localhost:27017/cocktail-app'// DEV_url
-mongoose.connect(url) // DEV_url
+mongoose.connect(url, { useNewUrlParser: true }) // DEV_url
 // mongoose.connect(process.env.DB_PROD_URL);
 mongoose.connection.on('connected', () => {
   console.log('connected to mongod');

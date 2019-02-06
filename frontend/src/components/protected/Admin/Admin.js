@@ -3,7 +3,12 @@ import './Admin.css';
 import AdminUserChart from './AdminUserChart.js'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Customers from './Customers';
+
+import Customers from '../Customers';
+// import Login from '../../public/Login';
+// import Cocktails from './Cocktails.js'
+import CreateCocktail from './../CreateCocktail'
+// import { Redirect } from 'react-router-dom'
 
 class Admin extends Component {
   state = {}

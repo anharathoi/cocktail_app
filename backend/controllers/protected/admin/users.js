@@ -25,15 +25,17 @@ router.get('/admin/users',passport.authenticate('jwt', {session: false}), (req,r
   })
 })
 
-// maybe post/get for transaction depending on what stripe does - Anhar thinks so!
+/**
+|--------------------------------------------------
+| GET INDIVIDUAL CUSTOMER FOR ADMIN 
+|--------------------------------------------------
+*/
 
-// get active customers
-//////////////// all users ////////////
-
-// get profile - customer
 router.get('/admin/users/:firstName', (req, res) => {
   const {firstName} = req.params;
   // const {password} = req.headers;
+  console.log(`37 - users.controller.js - list an individual customer for admin  ${req.params}`)
+
   User.findOne({firstName})
   .then( user => {
     res.send(user);
