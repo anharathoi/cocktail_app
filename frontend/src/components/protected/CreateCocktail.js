@@ -42,11 +42,8 @@ export default class CreateCocktail extends React.Component {
         }
     })
     .then( resp => {
-        console.log(resp.data)
         const cocktails = resp.data
-        console.log(cocktails)
         this.setState({cocktails: cocktails})
-    //   console.log(cocktails)
     })
     .catch( err => {
         this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})

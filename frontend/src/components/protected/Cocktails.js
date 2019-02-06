@@ -56,7 +56,7 @@ export default class Cocktails extends Component {
                         <td>{cocktail.description}</td>
                         <td>{cocktail.directions}</td>
                         <td>{cocktail.ingredients}</td>
-                        <td>{cocktail.available}</td>
+                        <td>{JSON.stringify(cocktail.available)}</td>
                         <td><button onClick={this.handleDelete}>Delete</button></td>
                       </tr>
                     )
