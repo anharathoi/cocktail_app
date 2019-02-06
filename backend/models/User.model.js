@@ -17,18 +17,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
-    session: Boolean,
    
     dateJoined: {
         type: Date,
         default: Date.now
     },
 
-    numberOfOrders: Number,
     stripeId: String,
 
-    active: Boolean,
     
     admin: {
         type: Boolean,
