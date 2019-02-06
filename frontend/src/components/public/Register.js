@@ -91,6 +91,9 @@ export default class Register extends React.Component {
       <div id="register" style={{paddingTop: '40px'}}>
         <h2>Sign up for a Cocktail Subscription</h2>
         <form>
+          <strong>You must be over 18 in order to sign up.</strong><br/>
+          {/* make a checkbox that is required for this */}
+
           <label htmlFor="firstName">First Name:</label>
           <input type="text" id="firstName" onChange={this.handleInputChange}/><br/>
           
@@ -103,12 +106,6 @@ export default class Register extends React.Component {
           <label htmlFor="password">Password: </label>
           <input type="string" id="password" onChange={this.handleInputChange}/><br/>
           
-          {/* <label htmlFor="phone">Phone number</label>
-          <input type="number" id="phone" onChange={this.handleInputChange}/><br/>
-           */}
-
-          {/* <label htmlFor="deliveryAddress">Delivery Address:</label>
-          <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/><br/> */}
           <h4>Where would you like your cocktails delivered?</h4>
 
           <label htmlFor="streetAddress">Street Address:</label>
