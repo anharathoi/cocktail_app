@@ -25,6 +25,8 @@ export default class Payment extends Component {
         this.setState({ 
           success
         })
+        // console.log(this.props)
+        this.props.setPayment()
       })
       .catch ( err => {
         console.log(err.response)
@@ -42,7 +44,7 @@ export default class Payment extends Component {
           amount = {8700}
           currency = "AUD"
           token = {this.onToken}
-          stripeKey = {"pk_test_315Jrr5E4VK9O1motqWvTJS9"}
+          stripeKey = {"pk_test_22vQKgTT4CWWMUuAzR2OsHUn"}
           // email={this.state.email}
           label="Join Bottle Batched"
           panelLabel="Start my Subscription"

@@ -26,6 +26,10 @@ const cocktailSchema = new Schema ({
       type: Boolean,
       required: true
   },
+  availabilityMonth: {
+     type: String,
+     required: true
+  }
 
 })
 

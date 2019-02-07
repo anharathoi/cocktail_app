@@ -58,7 +58,7 @@ export default class CreateCocktail extends React.Component {
     e.preventDefault()
     // console.log(`this is ${JSON.stringify(this.state)}`)
     const {  title, description, directions, ingredients, photo, available, availabilityMonth } = this.state
-    console.log(this.state.available)
+    console.log(availabilityMonth, available)
     // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
     // const available = JSON.parse(this.state.available)
     const url = "http://localhost:5000/newcocktail"
@@ -77,19 +77,8 @@ export default class CreateCocktail extends React.Component {
         .catch(err => {
             console.log(err.response)
             if (err.response === 403) {
-            this.setState({ error: 'Be a better admin!', message: null})
-        }
-
-    // axios.post(url, data)
-    //   .then(resp => {
-    //     this.setState({ message: 'well done buddy you just created a new cocktail', error: null, isSubmitted: true})
-    //   })
-    //   .catch(err => {
-    //       console.log(err.response)
-    //       if (err.response === 403) {
-    //         this.setState({ error: 'Be a better admin!', message: null})
-    //       }
-    // })
+              this.setState({ error: 'Be a better admin!', message: null})
+            }
          })
     }
 
@@ -115,7 +104,7 @@ export default class CreateCocktail extends React.Component {
                 <option value={false}>False</option>
               </select><br/>
 
-              <select defaultValue={this.state.available} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
+              <select defaultValue={this.state.availabilityMonth} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
                 <option value="this month">This Month</option>
                 <option value="next month">Next Month</option>
               </select><br/>
