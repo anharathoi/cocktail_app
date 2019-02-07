@@ -12,10 +12,20 @@ export default class Register extends React.Component {
       frequencyOptions: []
     }
   }
+  // componentDidMount = () => {
+  //   // const url = 'https://cocktail-app.now.sh/me' //PROD
+  //   const url = 'http://localhost:5000/me' // DEV
+  //     axios.get(url)
+  //     .then(res => res.json())
+	// 		.then(data => {
+	// 			this.setState({
+	// 				selectedFrequency: data.frequencyOptions	
+	// 			});
+  //     });
+  //   }
 
   componentDidMount = () => {
-    // const url = 'https://cocktail-app.now.sh/me' //PROD
-    const url = 'http://localhost:5000/me' // DEV
+    const url = `${process.env.REACT_APP_DOMAIN}/me`
     const token = Cookies.get('token')
     // console.log("this is token " + token)
 
@@ -49,8 +59,7 @@ export default class Register extends React.Component {
     e.preventDefault()
     const {  firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
   
-    // // const url = "https://cocktail-app.now.sh/register" // PROD
-    const url = "http://localhost:5000/register" //DEV
+    const url =  `${process.env.REACT_APP_DOMAIN}/register`
 
     const data = { firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption }
     axios.post(url, data)
@@ -69,6 +78,7 @@ export default class Register extends React.Component {
       })
   }
 
+  
   render() {
     const { error, message, email, selectedOption } = this.state
     return (
@@ -104,22 +114,27 @@ export default class Register extends React.Component {
           <label htmlFor="ausState">State:</label>
           <input type="text" id="ausState" onChange={this.handleInputChange}/><br/>
 
+
+
           <div className="form-check">
             <label htmlFor="frequency">Monthly Frequency</label>
             <input type="radio" id="frequency1" value="monthlyFrequency" name="frequency" checked={this.state.selectedOption === "monthlyFrequency"} onChange={this.handleFrequencyChange}/>
           </div>
 
-          <div className="form-check">
-            <label htmlFor="frequency">Quarterly Frequency</label>
-            <input type="radio" id="frequency2" value="quarterlyFrequency" name="frequency" checked={this.state.selectedOption === "quarterlyFrequency"} onChange={this.handleFrequencyChange}/>
-          </div>
+            <div className="form-check">
+              <label htmlFor="frequency">Quarterly Frequency</label>
+              <input type="radio" id="frequency2" value="quarterlyFrequency" name="frequency" checked={this.state.selectedOption === "quarterlyFrequency"} onChange={this.handleFrequencyChange}/>
+            </div>
 
-          <button onClick={this.submitForm}>JOIN UP</button>
-        </form>
+            <button onClick={this.submitForm}>JOIN UP</button>
+          </form>
             {this.state.isSubmitted && email && <Payment email={email} selectedOption={selectedOption} />}
             { error && <p>{ error }</p> }
             { message && <p>{ message }</p>}
+
+            {/* { user.stripeId && <Link to = /admin/>} */}
           </div>
+        
   )
 }
 }

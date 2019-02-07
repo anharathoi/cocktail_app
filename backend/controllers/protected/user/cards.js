@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../../../models/User.model');
 require('dotenv').config();
 
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 /**
 |--------------------------------------------------
@@ -21,10 +21,11 @@ router.post('/updatecard', (req, res)  => {
     
     User.findOneAndUpdate({email}, { paymentSource: token.card }, {upsert: true})
     .then((res) => {
-        console.log(`24 - cards.controller.js - update a card  ${res}`)
+        // console.log(`24 - cards.controller.js - update a card  ${res}`)
         })
         .catch((err) => {
-            console.log(`27 - cards.controller.js - update a card  ${err.response}`)
+            console.log(err);
+            // console.log(`27 - cards.controller.js - update a card  ${err.response}`)
         })
 })
 

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom';
-import Login from '../public/Login'
 
 export default class UserProfile extends Component {
   state = {}
   
   componentDidMount () {
-    const url = 'http://localhost:5000/me' // 
+    const url = `${process.env.REACT_APP_DOMAIN}/me`
     const token = Cookies.get('token')
     if (token) {
       axios.get(url, {
@@ -18,8 +16,7 @@ export default class UserProfile extends Component {
       })
       .then ( resp => {
         const {email, firstName, lastName, phone, deliveryAddress, admin} = resp.data
-        // console.log(email)
-        // const {admin} = user
+        // console.log(resp.data)
         this.setState({email,firstName, lastName, phone, deliveryAddress, admin})
       })
       .catch( err => console.log(err) )
@@ -31,7 +28,6 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    // console.log("This is userprofile props " + this.props.clearToken)
     return (
       <>
         <div>

@@ -8,7 +8,7 @@ export default class RetrieveSubscription extends Component {
 
     //I am using this cdm a lot - can we DRY it up?
     componentDidMount = () => {
-      const url = 'http://localhost:5000/me' // 
+      const url = `${process.env.REACT_APP_DOMAIN}/me`
       const token = Cookies.get('token')
         axios.get(url, {
           headers: {
@@ -23,12 +23,11 @@ export default class RetrieveSubscription extends Component {
         .catch( err => console.log(err) )
     }
   
-    //I am reusing this method in component did mount a lot - we should make it DRY - turn it into a function, so that we don't waste so much space in coding the same
   onToken = (token) => {
-    // const url = 'https://cocktail-app.now.sh/addsubscription' //PROD
     const stripeId = this.props.stripeId
     const email = this.props.email
-    const url = 'http://localhost:5000/retrievesubscription' // DEV
+    const url = `${process.env.REACT_APP_DOMAIN}/retrievesubscription`
+    
     const data = { token, stripeId, email }
 
     axios.post(url, data)
@@ -55,7 +54,7 @@ export default class RetrieveSubscription extends Component {
             label="Update Card"
             panelLabel="Update"
             token = {this.onToken}
-            stripeKey = {"pk_test_22vQKgTT4CWWMUuAzR2OsHUn"}
+            stripeKey = {`${process.env.REACT_APP_STRIPE_KEY}`}
             data-panel-label = {"Update you card details"}
             email={this.state.email}
             description={"Update your card details"}
