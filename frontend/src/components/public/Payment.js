@@ -45,7 +45,7 @@ export default class Payment extends Component {
           currency = "AUD"
           token = {this.onToken}
           stripeKey = {"pk_test_22vQKgTT4CWWMUuAzR2OsHUn"}
-          // email={this.props.email}
+          // email={this.state.email}
           label="Join Bottle Batched"
           panelLabel="Start my Subscription"
           data-panel-label = {"Welcome to Bottle Batched your cocktail subscription service"}

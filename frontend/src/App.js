@@ -27,8 +27,7 @@ require('dotenv').config()
 class App extends React.Component {
 
   state = {
-    loggedIn: false,
-    stripeId: false
+    loggedIn: false
   }
 
   componentDidMount() {
@@ -44,7 +43,7 @@ class App extends React.Component {
       .then ( resp => {
         const { admin, stripeId } = resp.data
         // console.log(resp.data)
-        this.setState({token, admin, loggedIn: true, stripeId: false})
+        this.setState({token, admin, loggedIn: true, stripeId: stripeId})
       })
       .catch( err => console.log(err) )
     }
@@ -56,7 +55,7 @@ class App extends React.Component {
   }
 
   clearToken = () => {
-    this.setState({token: null, loggedIn: false, admin: false})
+    this.setState({token: null, loggedIn: false, admin: false, stripeId:false})
   }
 
   setAdmin = (isAdmin) =>{
