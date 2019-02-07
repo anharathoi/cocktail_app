@@ -93,11 +93,7 @@ const authenticateUser = (req, res, next) => {
 router.post('/login', authenticateUser) 
 
 router.get('/me', passport.authenticate('jwt', {session: false}), (req,res) => {
-<<<<<<< HEAD
-  // console.log(req.user)
-=======
   // console.log(`96 - auth.controller - login ${req.body}`)
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
   res.send(req.user)
 })
 

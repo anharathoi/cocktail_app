@@ -225,76 +225,64 @@ addQuarterlySubscription = () => {
     if (this.state.email) {
     
     return (
-<<<<<<< HEAD
 
       <div>
-
-      <div className="userprofile">
-        {/* <PersonalDetails
-              firstName={this.state.firstName}
-              lastName={this.state.lastName}
-              email={this.state.email}
-              streetAddress={this.streetAddress}
-              suburb={this.suburb}
-              postcode={this.postcode}
-              state={this.ausState}              
-            /> */}
-=======
-      <>
-        <div className="personal-info">
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
-          <p>Hello {this.state.firstName} {this.state.lastName}</p>
-          <p style={{fontStyle:"italic"}}>{this.state.email}</p>
-          <p>These are the details you have provided to us:</p>
-          <p>Street Address: {this.state.streetAddress}</p>
-          <p>Suburb: {this.state.suburb}</p>
-          <p>Postcode: {this.state.postcode}</p>
-          <p>State: {this.state.ausState}</p>
-          <input type="submit" value="Update Details" onClick={this.updateDetails} />
-          { this.state.updateDetailsState ? <UpdateDetails /> : null }
-          
-        </div>
+        <div className="userprofile">
+          {/* <PersonalDetails
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                email={this.state.email}
+                streetAddress={this.streetAddress}
+                suburb={this.suburb}
+                postcode={this.postcode}
+                state={this.ausState}              
+              /> */}
+            <p>Hello {this.state.firstName} {this.state.lastName}</p>
+            <p style={{fontStyle:"italic"}}>{this.state.email}</p>
+            <p>These are the details you have provided to us:</p>
+            <p>Street Address: {this.state.streetAddress}</p>
+            <p>Suburb: {this.state.suburb}</p>
+            <p>Postcode: {this.state.postcode}</p>
+            <p>State: {this.state.ausState}</p>
+            <input type="submit" value="Update Details" onClick={this.updateDetails} />
+            { this.state.updateDetailsState ? <UpdateDetails /> : null }
+            
+          </div>
 
         <div className="userprofile">
-           
-<<<<<<< HEAD
-            <ListCustomerCharges
-              stripeId={this.state.stripeId} // it is HERE
-            />
-
-
-<button onClick={this.listCustomerOrders}>View all your orders</button>
+        
+          <button onClick={this.listCustomerOrders}>View all your orders</button>
    
 
- {this.state.orders && 
-    <>
-      <h4>Your Orders:</h4>
-        <table className="customers-table pure-table pure-table-horizontal">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>Description</th> 
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.orders.map(order => 
-                { return (
-                <tr>
-                  <td>{this.timeConverter(order.created)}</td>
-                  <td>{this.moneyConverter(order.amount)}</td>  
-                  <td>Bottle Batched Subscription</td>
-                </tr>)
-              }
-              )}
-              </tbody>
-        </table>
-{/* 
-        <input type="submit" value="Hide Orders" onClick={this.toggleOrders}/>
-        {this.state.showOrders ? <p>hi</p> : <p>bye</p>} */}
-    </>
+            {this.state.orders && 
+                <>
+                  <h4>Your Orders:</h4>
+                    <table className="customers-table pure-table pure-table-horizontal">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Description</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.orders.map(order => 
+                            { return (
+                            <tr>
+                              <td>{this.timeConverter(order.created)}</td>
+                              <td>{this.moneyConverter(order.amount)}</td>  
+                              <td>Bottle Batched Subscription</td>
+                            </tr>)
+                          }
+                          )}
+                          </tbody>
+                    </table>
+            {/* 
+                    <input type="submit" value="Hide Orders" onClick={this.toggleOrders}/>
+                    {this.state.showOrders ? <p>hi</p> : <p>bye</p>} */}
+                </>
 
- }
+            }
 
 {/* toggleOrders = () => {
   this.setState.showOrders = true
@@ -306,38 +294,6 @@ addQuarterlySubscription = () => {
 
 
         <div className="userprofile">
-=======
-          <button onClick={this.listCustomerOrders}>View all your orders</button>
-           
-          {this.state.orders && 
-              <>
-                <h4>Your Orders:</h4>
-                  <table className="customers-table pure-table pure-table-horizontal">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Description</th> 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.orders.map(order => 
-                          { return (
-                          <tr>
-                            <td>{this.timeConverter(order.created)}</td>
-                            <td>{this.moneyConverter(order.amount)}</td>  
-                            <td>Bottle Batched Subscription</td>
-                          </tr>)
-                        }
-                        )}
-                        </tbody>
-                  </table>
-                </>
-          }
-        </div>
-
-        <div className="plan-details">
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
             <h4>Your Subscription Details:</h4>
             <p>Your next delivery is expected between the 1st and 5th of March</p>
 
@@ -364,8 +320,6 @@ addQuarterlySubscription = () => {
               
             <p>Your Next Subscription Payment will be for $87 and will be charged on the 8th of March</p>
             
-            
-
           </div> 
 
           <div className="userprofile">
@@ -380,14 +334,10 @@ addQuarterlySubscription = () => {
               updateCardView={this.updateCardView}
               onToken={this.onToken}
               email={this.state.email}
-            />
-<<<<<<< HEAD
-
-            
-=======
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
-        </div>
-      </>
+            /> 
+          </div>
+      </div>
+      
     )}
      else  {
       return (

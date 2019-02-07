@@ -19,13 +19,8 @@ router.post('/add-monthly-subscription', (req, res)  => {
         customer: stripeId,
         items: [
           {
-<<<<<<< HEAD
-            plan: "plan_ETzeK7ZRfVnU6j",  
-        },
-=======
             plan: process.env.MONTHLY_PLAN,
           },
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
         ]
       }, function(err, subscription) {
         //   console.log(`26 ${subscription}`);
@@ -54,11 +49,7 @@ router.post('/add-quarterly-subscription', (req, res)  => {
         customer: stripeId,
         items: [
           {
-<<<<<<< HEAD
-            plan: "plan_ETzejNRas25Hwt",
-=======
             plan: process.env.QUARTERLY_PLAN,
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
           },
         ]
       }, function(err, subscription) {
@@ -86,11 +77,7 @@ router.post('/updatetomonthlysubscription', (req, res)  => { // DEV
 
     stripe.subscriptions.update(
         subscriptionId, 
-<<<<<<< HEAD
-        {plan: "plan_ETzeK7ZRfVnU6j"},
-=======
         { plan: process.env.MONTHLY_PLAN },
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                 function(err, subscription) {
                     // console.log(`82 - subscriptions.controller.js - update to a monthly subscription  ${subscription}`)
 
@@ -116,11 +103,7 @@ router.post('/updatetoquarterlysubscription', (req, res)  => {
 
         stripe.subscriptions.update(
             subscriptionId, 
-<<<<<<< HEAD
-            { plan: "plan_ETzejNRas25Hwt" },
-=======
             { plan: process.env.QUARTERLY_PLAN },
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                 function(err, subscription) {
                     // console.log(`108 - subscriptions.controller.js - update to a quarterly subscription  ${subscription}`)
 

@@ -34,11 +34,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-<<<<<<< HEAD
-                                        plan: "plan_ETzeK7ZRfVnU6j",  
-=======
                                         plan: `${process.env.MONTHLY_PLAN}`,
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                                     },
                                 ],
                             }, function(err, subscription) {
@@ -71,11 +67,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-<<<<<<< HEAD
-                                        plan: "plan_ETzejNRas25Hwt",
-=======
                                         plan: `${process.env.QUARTERLY_PLAN}`,
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                                     },
                                 ],
                             }, function(err, subscription) {

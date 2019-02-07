@@ -9,11 +9,7 @@ const CardUpdate = (props) => {
           label="Update Card"
           panelLabel="Update"
           token = {props.onToken}
-<<<<<<< HEAD
-          stripeKey = {"pk_test_PaDGT4uUhSf2yNoqbv08QU6X"}
-=======
           stripeKey = {`${process.env.REACT_APP_STRIPE_KEY}`}
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
           data-panel-label = {"Update you card details"}
           email={props.email}
           description={"Update your card details"}

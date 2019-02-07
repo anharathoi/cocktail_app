@@ -26,17 +26,10 @@ export default class Cocktails extends Component {
     render() {
       if(this.props.admin){
       return (
-<<<<<<< HEAD
-        <div>
-          <nav>
-            {/* <AdminSidebar {...this.props}/> */}
-          </nav>
-          
-=======
         <>
           <div id="cocktails" className="cocktails">
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
             <h2>Your Cocktails</h2>
+            </div>
           <div id="cocktails" className="createcocktailshow">
             <table className="customers-table pure-table pure-table-horizontal">
               <thead>

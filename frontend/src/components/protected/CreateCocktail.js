@@ -45,16 +45,10 @@ export default class CreateCocktail extends React.Component {
         this.setState({cocktails: cocktails})
     })
     .catch( err => {
-<<<<<<< HEAD
         // this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
     console.log(err)
       })
 }
-=======
-        this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
-    })
-  }
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
 
   componentDidMount() {
     this.getData()

@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-<<<<<<< HEAD
 import { Redirect } from 'react-router-dom';
 import Login from '../public/Login'
 import './UserProfile.css'
-=======
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
 
 export default class UserProfile extends Component {
   state = {}

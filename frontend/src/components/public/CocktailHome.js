@@ -23,7 +23,6 @@ export default class CocktailHome extends Component {
     if(this.state.rendered) {
       return (
         <div>
-<<<<<<< HEAD
 
           <div class="containercocktail">
             {this.state.cocktails.map( cocktail => {return (
@@ -45,16 +44,6 @@ export default class CocktailHome extends Component {
 </div>
           {/* <p>Nothing</p> */}
           {/* <p>{this.state.cocktail.title}</p> */}
-=======
-          <p>Cocktails this month</p>
-          {this.state.cocktails.map( cocktail => {return (
-            <>
-             <h2>Title {cocktail.title}</h2>
-             <img src={cocktail.photo}/>
-            </>
-          )}
-          )}
->>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
         </div>
       )}
       else {
