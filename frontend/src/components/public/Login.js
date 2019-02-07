@@ -40,6 +40,7 @@ export default class Login extends Component {
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
         this.props.setToken(token)
         this.props.setAdmin(admin)
+        this.props.setPayment()
         // console.log("props from login " + this.props.setAdmin)
       })
       .catch(err => {

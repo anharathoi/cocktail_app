@@ -88,7 +88,7 @@ export default class Register extends React.Component {
           <input type="email" id="email" onChange={this.handleInputChange}/><br/>
           
           <label htmlFor="password">Password: </label>
-          <input type="string" id="password" onChange={this.handleInputChange}/><br/>
+          <input type="password" id="password" onChange={this.handleInputChange}/><br/>
           
           <h4>Where would you like your cocktails delivered?</h4>
 
