@@ -23,8 +23,6 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     selectedOption: String
-
-
 })
 
 module.exports = mongoose.model('User', userSchema)

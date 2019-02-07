@@ -105,7 +105,7 @@ export default class CreateCocktail extends React.Component {
                 <form>
                 <label htmlFor="title">Cocktail Name:</label>
                 <input type="text" id="title" onChange={this.handleInputChange}/><br/>
-                <label htmlFor="photo">Image:</label>
+                {/* <label htmlFor="photo">Image:</label> */}
                 <input type="text" /* image */ id="photo" onChange={this.handleInputChange}/><br/>
                 <label htmlFor="description">Description:</label>
                 <input type="text" id="description" onChange={this.handleInputChange}/><br/>
