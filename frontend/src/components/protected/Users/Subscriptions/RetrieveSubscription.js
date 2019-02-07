@@ -55,7 +55,7 @@ export default class RetrieveSubscription extends Component {
             label="Update Card"
             panelLabel="Update"
             token = {this.onToken}
-            stripeKey = {"pk_test_315Jrr5E4VK9O1motqWvTJS9"}
+            stripeKey = {"pk_test_PaDGT4uUhSf2yNoqbv08QU6X"}
             data-panel-label = {"Update you card details"}
             email={this.state.email}
             description={"Update your card details"}

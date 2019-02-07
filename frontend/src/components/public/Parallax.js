@@ -10,6 +10,7 @@ import './Parallax.css'
 import logo from '../../images/logo.svg';
 import MyStoreCheckout from './MyStoreCheckout'
 import type {InjectedProps} from '../../src/components/inject';
+import CocktailHome from './CocktailHome'
 import {
   CardElement,
   CardNumberElement,
@@ -67,6 +68,7 @@ export default class Parallax extends React.Component {
   <div class="block">
     <p class="line-break margin-top-10"></p>
     <h3 className="sub">CURRENT OFFER</h3>
+    <CocktailHome/>
     <p class="margin-top-10">cocktail cards</p>
   </div>
 </section>
@@ -97,14 +99,9 @@ export default class Parallax extends React.Component {
 
 <section>
   <div class="parallax-reg">
-  <Register {...this.props}/>
-    {/* <StripeProvider apiKey={`${process.env.REACT_APP_STRIPE_KEY}`}>
-      <MyStoreCheckout {...this.props}/>
-    </StripeProvider> */}
-<h2 className="sub">Already have an account?</h2>
-<hr/>
       {/* <CreateCocktail /> */}
-      <Login {...this.props}/>
+      {!this.props.payment && <Register {...this.props}/>}
+          <Login {...this.props}/>
   </div>
 </section>
 

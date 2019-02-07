@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function HowItWorks() {
   return (
-    <div id="howItWorksText" class="howitworkstext">
+    <div id="how-it-works" class="howitworkstext">
 <h4>What type of Cocktails will I receive through Bottle Batched?</h4>
 <hr/>
 <p>We are constantly on the look out for old school classics, modern twists, and exciting original cocktails for us to batch, bottle and send to our Bottle Bactched members. You will get the chance to enjoy some of your favourites, discover new variations, and try something completely different as we guide you on your cocktail journey. Part of the fun is the surpise of what each delivery contains - enjoying discovering and drinking new things. We also work with many Australian producers to source local ingredents for our Bottle Batched cocktails whereever possible, bringing you a taste of the amazing products that Australia is producing. Some of the cocktails our members will enjoy are Negroni, Martini (Wet and Dry, Shaken or Stirred), Rob Roy, Old Fashioned, Sidecar,  Boulevardier, Sazerac, Manhatten, Martinez, Corpse Reviver and many many more.</p>

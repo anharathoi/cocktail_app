@@ -15,8 +15,13 @@ import LiquorLicence from './components/public/LiquorLicence'
 
 import { Route , Switch } from 'react-router-dom'
 import axios from 'axios'
+
+import Cocktail from './components/protected/Cocktail.js'
+import CreateCocktail from './components/protected/CreateCocktail'
+
 import './App.css';
 import Cookies from 'js-cookie';
+
 require('dotenv').config()
 
 class App extends React.Component {
@@ -36,8 +41,9 @@ class App extends React.Component {
         }
       })
       .then ( resp => {
-        const { admin } = resp.data
-        this.setState({token, admin, loggedIn: true})
+        const { admin, stripeId } = resp.data
+        // console.log(resp.data)
+        this.setState({token, admin, loggedIn: true, stripeId: stripeId})
       })
       .catch( err => console.log(err) )
     }
@@ -49,14 +55,19 @@ class App extends React.Component {
   }
 
   clearToken = () => {
-    this.setState({token: null, loggedIn: false})
+    this.setState({token: null, loggedIn: false, admin: false, stripeId:false})
   }
 
   setAdmin = (isAdmin) =>{
     this.setState({admin: isAdmin})
   }
 
+  setPayment = () => {
+    return this.setState({stripeId: true})
+  }
+
   render() {
+    console.log(this.state)
     return (
         <div className="App">
           <div className="Main">
@@ -66,7 +77,7 @@ class App extends React.Component {
             <Switch>
               <Route
                 exact path="/"
-                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin}/> }
+                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin} setPayment={this.setPayment} payment={this.state.stripeId}/> }
               />
 
               {this.state.token && !this.state.admin && (<Route
@@ -78,13 +89,19 @@ class App extends React.Component {
                 exact path="/Admin"
                 render={(props) => <Admin {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
               />
-
+              <Route
+                exact path="/admin/cocktails"
+                render={(props) => <CreateCocktail {...props} setToken={this.setToken} token={this.state.token}  clearToken={this.clearToken} setAdmin={this.setAdmin} admin={this.state.admin}/>}
+              />
+              <Route exact path="/admin/cocktail/:title" component={Cocktail}
+              />
               <Route path="/who_we_are" component={WhoWeAre} exact/>
               <Route path="/terms" component={Terms} exact/>
               <Route path="/privacy" component={Privacy} exact/>
               <Route path="/liquor_licence" component={LiquorLicence} exact/>
               <Route path="/faqs" component={Faqs} exact/>
               <Route path="/contact_us" component={ContactUs} exact/>
+              
             </Switch>
           </div>
 

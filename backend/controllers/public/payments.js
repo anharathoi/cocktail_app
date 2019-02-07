@@ -44,7 +44,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-                                        plan: "plan_EOUDCdORXev2JW",
+                                        plan: "plan_ETzeK7ZRfVnU6j",  
                                     },
                                 ],
                             }, function(err, subscription) {
@@ -85,7 +85,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-                                        plan: "plan_EOUE6qieRKFekI",
+                                        plan: "plan_ETzejNRas25Hwt",
                                     },
                                 ],
                             }, function(err, subscription) {
