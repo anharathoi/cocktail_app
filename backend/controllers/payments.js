@@ -7,6 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET)
 
 router.post('/api/stripe', (req, res, next) => {
     const { token, email, selectedOption } = req.body
+    console.log(req.body);
     stripe.customers.create({
 	    email: email,
 	    source: token.id,
