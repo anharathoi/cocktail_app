@@ -74,7 +74,8 @@ router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false
   if(req.user.admin){ 
     // console.log(req.user)
     const {title, photo, description, directions, ingredients, available, availabilityMonth} = req.body;
-    console.log(`48  - cocktails.controller.js - get cocktails  ${req.user}`)
+    // console.log(`48  - cocktails.controller.js - get cocktails  ${req.user}`)
+    // console.log(`49  - cocktails.controller.js - get cocktails  ${JSON.stringify(req.body)}`)
     Cocktail.create ({
       title,
       photo,
@@ -85,6 +86,10 @@ router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false
       availabilityMonth
     })
     .then ( cocktail => {
+      // console.log(`50  - cocktails.controller.js - get cocktails ${cocktail}`)
+      console.log("-------------------------------")
+      console.log(cocktail)
+      console.log("-------------------------------")
       res.send(cocktail);
     })
     .catch( err => {

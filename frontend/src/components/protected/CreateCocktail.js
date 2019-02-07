@@ -74,8 +74,8 @@ export default class CreateCocktail extends React.Component {
         .catch(err => {
             console.log(err.response)
             if (err.response === 403) {
-            this.setState({ error: 'Be a better admin!', message: null})
-        }
+              this.setState({ error: 'Be a better admin!', message: null})
+            }
          })
     }
 
@@ -101,7 +101,7 @@ export default class CreateCocktail extends React.Component {
                 <option value={false}>False</option>
               </select><br/>
 
-              <select defaultValue={this.state.available} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
+              <select defaultValue={this.state.availabilityMonth} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
                 <option value="this month">This Month</option>
                 <option value="next month">Next Month</option>
               </select><br/>
