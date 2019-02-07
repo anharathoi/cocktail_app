@@ -59,17 +59,12 @@ export default class Register extends React.Component {
 
   submitForm = (e) => {
     e.preventDefault()
-<<<<<<< HEAD
-    const {  firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption } = this.state
-  
-    const url =  `${process.env.REACT_APP_DOMAIN}/register`
-=======
+
     const {  firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption, passwordConfirm} = this.state
->>>>>>> 5187a6f23b832105ed7ef8027d0d0d3822c5a3db
+    const url = `${process.env.REACT_APP_DOMAIN}/register`
 
     if(password === passwordConfirm){
       this.setState({passwordMsg: "passwords match!"})
-      const url = "http://localhost:5000/register" //DEV
 
       const data = { firstName, lastName, email, password, session, phone, streetAddress, suburb, postcode, ausState, dateJoined, numberOfOrders, stripeId, active, admin, selectedOption }
     
