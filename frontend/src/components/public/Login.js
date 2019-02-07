@@ -24,19 +24,15 @@ export default class Login extends Component {
     e.preventDefault()
     // console.log(this.state)
     const { email, password } = this.state
-    // headers: { authorization: localStorage.getItem('token') }
     
-    // const url = "https://cocktail-app.now.sh/login" // PROD
-    const url = "http://localhost:5000/login" // DEV
+    const url =  `${process.env.REACT_APP_DOMAIN}/login`
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {
         console.log(resp)
         const { user, token } = resp.data
         const { admin } = user
-        // const admin = user.admin
-        // console.log(admin)// console logs false
-        // console.log("Login token " + token)
+        // console.log(admin)
         Cookies.set('token', token)
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
         this.props.setToken(token)
@@ -48,10 +44,6 @@ export default class Login extends Component {
         this.setState({ error: 'Invalid Details!', message: "Please try again"})
       })
     }
-
-  //   clearToken = () => {
-  //    this.setState({token: null})
-  //  }
 
     render() {
       // console.log(this.state)
@@ -66,8 +58,7 @@ export default class Login extends Component {
       else {
         if(!this.props.token){
           return (
-            <div>
-              {/* <Navbar/> */}
+            <>
               <div className="site-form login">
                   <h2>Sign In</h2>
                   <form >
@@ -84,11 +75,11 @@ export default class Login extends Component {
                   { error && <p style={{color: '#ed4337'}}>{ error }</p> }
                   { message && <p style={{color: '#ed4337'}}>{ message }</p>}
               </div>
-            </div>
+            </>
           )
         } else {   
             return (
-              <p >You're currently Logged in</p>
+              <p>You're currently Logged in</p>
             ) 
         }
       }

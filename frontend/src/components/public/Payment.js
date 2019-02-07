@@ -13,10 +13,9 @@ export default class Payment extends Component {
     // props are being passed down from the Register.js component
     const email = this.props.email
     const selectedOption = this.props.selectedOption
-    //
+    
     const data = { token, email, selectedOption,}
-    // const url = 'https://cocktail-app.now.sh/api/stripe' // PROD
-    const url = 'http://localhost:5000/api/stripe' // PROD
+    const url =  `${process.env.REACT_APP_DOMAIN}/api/stripe`
 
     axios.post(url, data)
       .then( response => {
@@ -44,7 +43,7 @@ export default class Payment extends Component {
           amount = {8700}
           currency = "AUD"
           token = {this.onToken}
-          stripeKey = {"pk_test_22vQKgTT4CWWMUuAzR2OsHUn"}
+          stripeKey = {`${process.env.REACT_APP_STRIPE_KEY}`}
           // email={this.state.email}
           label="Join Bottle Batched"
           panelLabel="Start my Subscription"

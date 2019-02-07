@@ -63,24 +63,3 @@ const userSchema = new mongoose.Schema({
 module.exports = mongoose.model('User', userSchema)
 
 
-//thinking that for ausState is could be a drop down
-
-/**
-|--------------------------------------------------
-| update these to the following layout:
-email: {
-    type: String,
-    required: true
-},
-and so on - this is to make fields required 
-|--------------------------------------------------
-*/
-
-    // date: {
-    //     type: Date,
-    //     default: Date.now
-    // },
-    // admin: {
-    //     type: Boolean,
-    //     default: false
-    // }

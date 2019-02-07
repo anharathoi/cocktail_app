@@ -8,7 +8,7 @@ export default class Cocktail extends Component {
     console.log("Cocktail.js mounted")
     const { title } = this.props.match.params
     // this.setState({title})
-    const url = `http://localhost:5000/admin/cocktail/${title}`
+    const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/${title}`
     const token = Cookies.get('token')
     axios.get(url, {
         headers: {
@@ -31,15 +31,11 @@ export default class Cocktail extends Component {
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
-    // const available = e.currentTarget.value
-    // console.log(e.currentTarget.value)
-    // this.setState({ available })
-    // console.log(`this is ${JSON.stringify(this.state)}`)
   }
 
   handleSubmit = () => {
     const { title } = this.props.match.params
-    const url = `http://localhost:5000/admin/cocktail/edit/${title}`
+    const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/edit${title}`
     const token = Cookies.get('token')
     const available = this.state.available
     const availabilityMonth = this.state.availabilityMonth

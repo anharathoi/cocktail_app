@@ -6,8 +6,6 @@ import About from './About';
 import CocktailHome from './CocktailHome'
 import './Home.css'
 
-
-
 export default class Home extends React.Component {
   state = {}
 
