@@ -16,7 +16,8 @@ export default class CreateCocktail extends React.Component {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    axios.post('http://localhost:5000/upload', formData, config)
+   
+    axios.post( `${process.env.REACT_APP_DOMAIN}/upload`, formData, config)
     .then( (res) => {
       const photo= res.data.secure_url
       this.setState({ photo })
@@ -29,12 +30,10 @@ export default class CreateCocktail extends React.Component {
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
-    // console.log(`this is ${JSON.stringify(this.state)}`)
-    // console.log(value, id)
   }
 
   getData = () => {
-    const url = 'http://localhost:5000/cocktails'
+    const url =  `${process.env.REACT_APP_DOMAIN}/cocktails`
     const token = Cookies.get('token')
     axios.get(url, {
         headers: {
@@ -46,10 +45,16 @@ export default class CreateCocktail extends React.Component {
         this.setState({cocktails: cocktails})
     })
     .catch( err => {
+<<<<<<< HEAD
         // this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
     console.log(err)
       })
 }
+=======
+        this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
+    })
+  }
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
 
   componentDidMount() {
     this.getData()
@@ -59,10 +64,8 @@ export default class CreateCocktail extends React.Component {
     e.preventDefault()
     // console.log(`this is ${JSON.stringify(this.state)}`)
     const {  title, description, directions, ingredients, photo, available, availabilityMonth } = this.state
-    console.log(availabilityMonth, available)
-    // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
-    // const available = JSON.parse(this.state.available)
-    const url = "http://localhost:5000/newcocktail"
+    console.log(this.state.available)
+    const url =  `${process.env.REACT_APP_DOMAIN}/newcocktail`
     const data = { title, photo, description, directions, ingredients, available, availabilityMonth}
     const token = Cookies.get('token')
         axios.post(url, data,{
@@ -111,7 +114,6 @@ export default class CreateCocktail extends React.Component {
                 <option value="next month">Next Month</option>
               </select><br/>
 
-
               <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
               <div>
                 {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
@@ -122,7 +124,6 @@ export default class CreateCocktail extends React.Component {
             { error && <p>{ error }</p> }
             { message && <p>{ message }</p>}
 
-            {/* { user.stripeId && <Link to = /admin/>} */}
             </div>
               <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
             </div>

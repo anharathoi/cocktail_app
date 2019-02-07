@@ -7,8 +7,6 @@ import CocktailHome from './CocktailHome'
 import './Home.css'
 import Parallax from './Parallax';
 
-
-
 export default class Home extends React.Component {
   state = {}
 

@@ -31,15 +31,4 @@ const Frequency = (props) => (
     </div>
 );
 
-// Frequency.propTypes = {
-//     title: PropTypes.string.isRequired,
-//     type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
-// 	setName: PropTypes.string.isRequired,
-// 	options: PropTypes.array.isRequired,
-// 	selectedOptions: PropTypes.array,
-//     controlFunc: PropTypes.func.isRequired
-// };
-
-//GUY - you can change the type: - not including checkbox in this one.
-
 export default Frequency

@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import './Admin.css';
-import AdminUserChart from './AdminUserChart.js'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+<<<<<<< HEAD
 import './Admin.css'
 
+=======
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
 import Customers from '../Customers';
-// import Login from '../../public/Login';
-// import Cocktails from './Cocktails.js'
-import CreateCocktail from './../CreateCocktail'
-// import { Redirect } from 'react-router-dom'
 
 class Admin extends Component {
   state = {}
   componentDidMount (){
-    const url = 'http://localhost:5000/me'
+    const url = `${process.env.REACT_APP_DOMAIN}/me`
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {
@@ -30,7 +28,6 @@ class Admin extends Component {
   }
   render() {
     // console.log(this.props.admin)
-
       return (
         <div className="Admin" >
           <div id="page-wrap">

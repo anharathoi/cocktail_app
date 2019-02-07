@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Navbar.css'
 import { HashLink as Link } from "react-router-hash-link"
-// import { Hashlink as Link } from 'react-router-hash-link'
 import Logout from './Logout'
 import logonav from '../../images/logo.bare.svg';
 
@@ -28,7 +27,6 @@ export default class Navbar extends Component {
         document.body.style.paddingTop = 0:
         document.body.style.paddingTop = 0
     }
-    
     
   render() {
     // console.log(this.props)

@@ -6,7 +6,7 @@ import './Customers.css';
 export default class Customers extends Component {
   state = {customers: []}
   componentDidMount (){
-    const url = 'http://localhost:5000/admin/users'
+    const url =  `${process.env.REACT_APP_DOMAIN}/admin/users`
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {

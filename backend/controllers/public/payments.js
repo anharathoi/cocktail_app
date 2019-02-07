@@ -3,20 +3,11 @@ const router = express.Router();
 const User = require('../../models/User.model');
 require('dotenv').config();
 
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY) 
-   
-// const stripeChargeCallback = res => (stripeErr, stripeRes) => {
-//     if (stripeErr) {
-//       res.status(500).send({ error: stripeErr });
-//     } else {
-//       res.status(200).send({ success: stripeRes });
-//     }
-//   };
-// The above is what we can pass as a second option (stripeChargeCallback) instead of providing the stripeErr, stripe res stuff -
-//GUY - CLEAN UP THE ABOVE CODE AND THEN USE IT WHERE APPROPRIATE
+const stripe = require("stripe")(process.env.STRIPE_SECRET) 
 
 router.post('/api/stripe', (req, res, next) => {
     const { token, email, selectedOption } = req.body
+    // console.log(`10 - payment.controller - making the initial payment ${req.body}`)
 
     stripe.customers.create({
 	    email: email,
@@ -26,8 +17,7 @@ router.post('/api/stripe', (req, res, next) => {
                 .then( user => {
                     user.stripeId = customer.id;
                     user.paymentSource = customer.sources.data[0]
-                    // user.subscriptionId = customer.subscriptions.data.id // won't work here - as the subscription has not yet been created - i tried below but that didn't work either 
-                    // console.log(customer.sources.data[0].card.last4) 
+                    // console.log(`20 - payment.controller ${customer.sources.data[0].card.last4}`) 
                     return user.save();
                 })
                 .catch( err => 
@@ -44,7 +34,11 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
+<<<<<<< HEAD
                                         plan: "plan_ETzeK7ZRfVnU6j",  
+=======
+                                        plan: `${process.env.MONTHLY_PLAN}`,
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                                     },
                                 ],
                             }, function(err, subscription) {
@@ -57,8 +51,6 @@ router.post('/api/stripe', (req, res, next) => {
                                 }
                                 User.findOne({email})
                                     .then( user => {
-                                        // user.stripeId = customer.id;
-                                        // user.paymentSource = customer.sources.data[0]
                                         user.subscriptionId = subscription.id
                                         user.save()
                                         .then((response) => {
@@ -70,22 +62,20 @@ router.post('/api/stripe', (req, res, next) => {
                                             console.log(err + "you got errors!")
                                         });
                                     })
-                            //     else {
-                            //         res.send({
-                            //         success: true,
-                            //         message: 'Success'
-                            //     })
-                            // }
                         })
                     }
                     else if (selectedOption === "quarterlyFrequency") {
                             const { id } = customer
-                            console.log('hello')
+                            
                             stripe.subscriptions.create({
                                 customer: id, 
                                 items: [
                                     {
+<<<<<<< HEAD
                                         plan: "plan_ETzejNRas25Hwt",
+=======
+                                        plan: `${process.env.QUARTERLY_PLAN}`,
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
                                     },
                                 ],
                             }, function(err, subscription) {
@@ -95,11 +85,9 @@ router.post('/api/stripe', (req, res, next) => {
                                         message: 'Error'
                                     })
                                 }
-// //HERE
+
                                 User.findOne({email})
                                     .then( user => {
-                                        // user.stripeId = customer.id;
-                                        // user.paymentSource = customer.sources.data[0]
                                 user.subscriptionId = subscription.id
                                         user.save()
                                         .then((response) => {
@@ -111,7 +99,6 @@ router.post('/api/stripe', (req, res, next) => {
                                             console.log(err + "you got errors!")
                                         });
                                     })
-//     //HERE
                                 
                         })
                     }

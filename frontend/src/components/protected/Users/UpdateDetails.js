@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import './UserProfile.css'
@@ -9,9 +8,6 @@ export default class UpdateDetails extends Component {
     super(props)
     this.state = { 
       isSubmitted: false,
-      
-
-     
       email: this.email,
       firstName: "", 
       lastName: "",  
@@ -20,12 +16,11 @@ export default class UpdateDetails extends Component {
       postcode: "", 
       ausState: ""
     }
-
   }
 
   componentDidMount() {
-    // const url = 'https://cocktail-app.now.sh/me' // PROD
-    const url = 'http://localhost:5000/me' // 
+    const url = `${process.env.REACT_APP_DOMAIN}/me`
+    console.log(url)
     const token = Cookies.get('token')
       axios.get(url, {
         headers: {
@@ -35,12 +30,10 @@ export default class UpdateDetails extends Component {
       .then ( resp => {
         const {email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState } = resp.data
         this.setState({email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState })
+        console.log(resp)
       })
       .catch(err => console.log(err) )
   }
-
-// GUY THIS IS A CLASS - NOT FUNCTIONAL - YOU WILL NEED TO DRAW
-  // const {firstName, lastName, email,  streetAddress, suburb, postcode, ausState,
 
   handleInputChange = (e) => {
     const { value, id } = e.currentTarget;
@@ -51,15 +44,12 @@ export default class UpdateDetails extends Component {
     e.preventDefault()
     const {  firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message } = this.state
   
-    // const url = "https://cocktail-app.now.sh/update-details:email" // PROD
-    const url = "http://localhost:5000/update-details" //DEV
-
+    const url = `${process.env.REACT_APP_DOMAIN}/update-details`
     const data = { firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message }
     
-
     axios.put(url, data)
       .then(resp => {
-        this.setState({ message: 'well done buddy you just updated your details', error: null, isSubmitted: true })
+        this.setState({ message: 'You have successfully updated your details!', error: null, isSubmitted: true })
         console.log(resp)
       })
       .catch(err => {
@@ -75,12 +65,12 @@ export default class UpdateDetails extends Component {
 
   render() {
     const { firstName, lastName, streetAddress, suburb, postcode, ausState, error, message, email } = this.state
-   
     
     if (this.state.isSubmitted === false) {
     return (
-    <div>
-      <p>This is where we update those details y'all. READY PLAYER ONE</p>  <p>Just update what's changed.</p>
+    <>
+      <p>Update your details</p>  
+      <p>Just update what's changed.</p>
       <form>
 
         <input type="hidden" id="email" defaultValue={email} onChange={this.handleInputChange}/><br/>
@@ -108,12 +98,10 @@ export default class UpdateDetails extends Component {
 
        
         {this.state.isSubmitted && email && <div>yep you did it!</div> }
-        {/* {this.state.isSubmitted && email && <Payment email={email} selectedOption={selectedOption} />} */}
                   
         { error && <p>{ error }</p> }
         { message && <p>{ message }</p>}
-
-    </div>
+    </>
   )}
   else {
     return (

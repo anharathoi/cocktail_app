@@ -34,4 +34,3 @@ function AdminSidebar(props) {
 }
 
 export default AdminSidebar
-//Change the above <a> tags to Link to="" for routing purposes

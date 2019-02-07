@@ -10,9 +10,8 @@ app.use(cors())
 app.use(express.json());
 app.use(passport.initialize());
 
-const url = 'mongodb://localhost:27017/cocktail-app'// DEV_url
-mongoose.connect(url, { useNewUrlParser: true }) // DEV_url
-// mongoose.connect(process.env.DB_PROD_URL);
+const url = process.env.DB_URL
+mongoose.connect(url, { useNewUrlParser: true }) 
 mongoose.connection.on('connected', () => {
   console.log('connected to mongod');
 });
@@ -26,4 +25,4 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`listening on port: ${PORT}`));

@@ -7,8 +7,7 @@ class Logout extends Component {
   logoutHandle = (e) => {
     e.preventDefault()
     console.log("logging out")
-    // const url = "https://cocktail-app.now.sh/logout" // PROD
-    const url = "http://localhost:5000/logout" // DEV
+    const url =  `${process.env.REACT_APP_DOMAIN}/logout`
     const token = Cookies.get('token')
     axios.get(url, {
       headers: {
@@ -24,8 +23,6 @@ class Logout extends Component {
   }
 
   render() {
-    // console.log(this.props)
-    // if(this.props.loggedIn === true){
       return (
         <Link to="#" onClick={this.logoutHandle}>Logout</Link>
       )

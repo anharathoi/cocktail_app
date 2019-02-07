@@ -19,5 +19,3 @@ export default function Footer() {
     
   )
 }
-
-//to make the Link's work - make sure that the uri's in this file match up to the uri's in the app.js file within the Switch statement

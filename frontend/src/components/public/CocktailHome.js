@@ -5,7 +5,7 @@ import './CocktailHome.css'
 export default class CocktailHome extends Component {
   state = {rendered: false}
   componentDidMount () {
-    const url = 'http://localhost:5000/home/cocktail'
+    const url =  `${process.env.REACT_APP_DOMAIN}/home/cocktail`
     axios.get(url)
     .then(resp => {
       console.log(resp)
@@ -23,6 +23,7 @@ export default class CocktailHome extends Component {
     if(this.state.rendered) {
       return (
         <div>
+<<<<<<< HEAD
 
           <div class="containercocktail">
             {this.state.cocktails.map( cocktail => {return (
@@ -44,6 +45,16 @@ export default class CocktailHome extends Component {
 </div>
           {/* <p>Nothing</p> */}
           {/* <p>{this.state.cocktail.title}</p> */}
+=======
+          <p>Cocktails this month</p>
+          {this.state.cocktails.map( cocktail => {return (
+            <>
+             <h2>Title {cocktail.title}</h2>
+             <img src={cocktail.photo}/>
+            </>
+          )}
+          )}
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
         </div>
       )}
       else {

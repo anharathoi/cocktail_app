@@ -70,24 +70,21 @@ router.post('/register', (req,res) => {
 const authenticateUser = (req, res, next) => {
   passport.authenticate('local', {session: false}, (err, user, info) => {
     if (err) { 
-      // console.log('anhar says error4')
+      // console.log(`73 - auth.controller - login ${err}`)
       return next(err)
     }
     if (!user) { 
-      // console.log(`anhar says ${user}`)
+      // console.log(`77 - auth.controller - login ${err}`)
       return res.status(401).send(info.message)
     }
     req.logIn(user, {session: false}, (err) => {
       if (err) { 
-        // console.log('anhar says error6')
+        // console.log(`82 - auth.controller - login ${err}`)
         return next(err)
       }
 
-      // console.log(user.email) // prints user email - checked
+      // console.log(`86 - auth.controller - prints user email ${user.email}`)
       const token = generateToken(user)
-      // res.send(req.session)
-      // setting cookie in the header
-      // res.setHeader('token', token)
       return res.send({user,token});
     });
   })(req, res, next);
@@ -96,7 +93,11 @@ const authenticateUser = (req, res, next) => {
 router.post('/login', authenticateUser) 
 
 router.get('/me', passport.authenticate('jwt', {session: false}), (req,res) => {
+<<<<<<< HEAD
   // console.log(req.user)
+=======
+  // console.log(`96 - auth.controller - login ${req.body}`)
+>>>>>>> 9683d1d9cc18372c0e647d1d369ba48e08064a9b
   res.send(req.user)
 })
 
