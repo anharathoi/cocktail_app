@@ -24,14 +24,14 @@ module.exports = (passport) =>{
   
         // Match Password
         bcrypt.compare( password, user.password, (err, resp) => {
-          console.log('err')
+          // console.log('err')
           if(err) throw err;
-          console.log('err1')
+          // console.log('err1')
           if(resp){
-            console.log('err2')
+            // console.log('err2')
             return done(null, user)
           } else {
-            console.log('err3')
+            // console.log('err3')
             return  done(null, false, { 
             message: 'Incorrect password'})
           }
