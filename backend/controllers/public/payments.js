@@ -34,7 +34,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-                                        plan: `${process.env.MONTHLY_PLAN}`,
+                                        plan: process.env.MONTHLY_PLAN,
                                     },
                                 ],
                             }, function(err, subscription) {
@@ -67,7 +67,7 @@ router.post('/api/stripe', (req, res, next) => {
                                 customer: id, 
                                 items: [
                                     {
-                                        plan: `${process.env.QUARTERLY_PLAN}`,
+                                        plan: process.env.QUARTERLY_PLAN,
                                     },
                                 ],
                             }, function(err, subscription) {
