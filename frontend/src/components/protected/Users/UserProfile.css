@@ -1,0 +1,12 @@
+.personal-info {
+    color: green;
+}
+.plan-details {
+ color: red;
+ /* border: 1px solid black;   */
+ /* padding: -300px;  */
+}
+
+.order-history {
+    color: purple;
+}

@@ -15,12 +15,17 @@ router.use(passport.session());
 const storage = multer.memoryStorage();
 const upload = multer({ storage })
 
-// get cocktails
+/**
+|--------------------------------------------------
+| GET COCKTAILS
+|--------------------------------------------------
+*/
+
 router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, res) => {
   Cocktail.find({})
   .then(cocktails =>{
     if(req.user.admin){
-      console.log(`hello ${cocktails}`)
+      console.log(`27  - cocktails.controller.js - get cocktails  ${cocktails}`)
       return res.send(cocktails)
     } else {
         return res.status(403).send("Admin privileges required")
@@ -30,24 +35,61 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
     res.status(400).send(err)
   })
 })
-    
-  // console.log("hello this is cocktails backend"+req.user.admin)
 
-// post cocktails
+
+// publicly available cocktail
+router.get('/home/cocktail', (req, res) => {
+  Cocktail.find({available: true})
+  .then( cocktails => {
+    console.log(cocktails)
+    return res.send(cocktails)
+  })
+  .catch (err => res.status(404).send(err))
+})
+
+// get single cocktail by title
+router.get('/admin/cocktail/:title',passport.authenticate('jwt', {session: false}), (req, res) => {
+  let {title} = req.params;
+  Cocktail.findOne({title})
+  .then( cocktail => {
+    if(req.user.admin){
+      res.send(cocktail);
+    } else {
+        return res.status(403).send("Admin privileges required")
+    }
+  })
+  .catch ( err => {
+    res.status(400).send(err);
+  })
+})
+    
+/**
+|--------------------------------------------------
+| POST COCKTAILS
+|--------------------------------------------------
+*/
+
  router.post('/newcocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
-   console.log('here')
+  console.log(`46  - cocktails.controller.js - get cocktails  ${req.body}`)
   if(req.user.admin){ 
-    console.log(req.user)
-    const {title, photo, description, directions, ingredients, available} = req.body;
+    // console.log(req.user)
+    const {title, photo, description, directions, ingredients, available, availabilityMonth} = req.body;
+    // console.log(`48  - cocktails.controller.js - get cocktails  ${req.user}`)
+    // console.log(`49  - cocktails.controller.js - get cocktails  ${JSON.stringify(req.body)}`)
     Cocktail.create ({
       title,
       photo,
       description,
       directions,
       ingredients,
-      available
+      available,
+      availabilityMonth
     })
     .then ( cocktail => {
+      // console.log(`50  - cocktails.controller.js - get cocktails ${cocktail}`)
+      console.log("-------------------------------")
+      console.log(cocktail)
+      console.log("-------------------------------")
       res.send(cocktail);
     })
     .catch( err => {
@@ -59,9 +101,16 @@ router.get('/cocktails', passport.authenticate('jwt', {session: false}),(req, re
   
  })
 
-// delete cocktails
+/**
+|--------------------------------------------------
+| DELETE COCKTAILS
+|--------------------------------------------------
+*/
+
 router.delete('/admin/cocktail/delete/:title',passport.authenticate('jwt', {session: false}), (req, res) => {
   const {title} = req.params;
+  // console.log(`78  - cocktails.controller.js - delete cocktails  ${req.params}`)
+
   Cocktail.findOneAndRemove({title})
   .then( cocktail => {
     if(req.user.admin){
@@ -75,17 +124,27 @@ router.delete('/admin/cocktail/delete/:title',passport.authenticate('jwt', {sess
   })
 })
 
+/**
+|--------------------------------------------------
+| UPLOAD IMAGE
+|--------------------------------------------------
+*/
+
 // put/patch cocktails
-router.patch('/admin/cocktail', passport.authenticate('jwt', {session: false}),(req, res) => {
-  const {title} = req.body
-  const {newtitle} = req.body
+router.patch('/admin/cocktail/edit/:title', passport.authenticate('jwt', {session: false}),(req, res) => {
+console.log(`edit ${req}`)
+  const {title} = req.params;
+  // const {newtitle} = req.body
+  const {available, availabilityMonth} = req.body
+  console.log(available)
   Cocktail.findOne({title})
   .then( cocktail => {   
     if(req.user.admin){
-      console.log(newtitle)
-      console.log(title)
-      console.log(cocktail)
-      cocktail.title = newtitle
+      // console.log(newtitle)
+      // console.log(title)
+      // console.log(cocktail)
+      cocktail.available = available
+      cocktail.availabilityMonth = availabilityMonth
       cocktail.save()
       res.send(cocktail)
     } else {
@@ -97,16 +156,14 @@ router.patch('/admin/cocktail', passport.authenticate('jwt', {session: false}),(
   })
 })
 
-// Upload Image
-
 router.post('/upload', upload.single('file'), (req, res) => {
   const { buffer } = req.file
-  // console.log(buffer)
+  // console.log(`127  - cocktails.controller.js - upload image  ${buffer}`)
+
   uploadFile(buffer)
   .then( resp => {
     const { secure_url } = resp
-    console.log(secure_url)
-    // console.log(secure_url)
+    console.log(`132  - cocktails.controller.js - upload image  ${secure_url}`)
     res.send(resp)
   })
   .catch(err => res.status(500).send('there was an error with cloudinary'))

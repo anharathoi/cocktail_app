@@ -3,19 +3,13 @@ This is an app for a cocktail subscription service.
 ---
 # Readme Content
 
-Project documentation is to be compiled as a single markdown file named README.md:
+- URL to our App:
 
-This file should contain:
+[Our Published App](https://nervous-mestorf-14ea21.netlify.com/)
 
-- A link (URL) to your published App:
-
-www.deployedtonetlifyandstuff.com
-
-- A link to your GitHub repository
+- A link to our GitHub repository
 
 [Our GitHub Organization](https://github.com/Cocktail-Subscription-Application/cocktail_app)
-
-- Ensure the repo is accessible by your Educators
 
 ## Description of your project, including:
 1. Problem definition / purpose:
@@ -24,19 +18,19 @@ www.deployedtonetlifyandstuff.com
 
 2. Functionality / features:
 
-    This applications highlight features are Stripe integration with subscription functionality and the ability to manage thd subscriptions via changing the frequency and the ability to pause whilst retaining all user information. The site also has a admin dashboard area where they can add cocktails that are to be included in the monthly rotation, the admin dashboard feeds directly into the app database. Users have the ability to see past orders and update their payment and delivery details in their own user dashboard. The front end of the app features several dynamic pages and responsive elements to user interaction.
+    This applications highlight features are Stripe integration with subscription functionality and the ability to manage the subscriptions via changing the frequency and the ability to pause whilst retaining all user information. The site also has an admin dashboard area where they can add cocktails that are to be included in the monthly rotation, the admin dashboard feeds directly into the app database. Users have the ability to see past orders and update their payment and delivery details in their own user dashboard. The front end of the app features several dynamic pages and responsive elements to user interaction.
 
 3. Screenshots:
 
-    - TBC
+    ![Screenshot](/docs/screenshot.png)
 
 4. Tech stack (e.g. html, css, deployment platform, etc):
 
-    MERN
     MongoDB
     Express
     React
     Node
+    Javascript
     HTML
     CSS    
     Now.sh
@@ -54,21 +48,36 @@ www.deployedtonetlifyandstuff.com
     2. Once you've installed the software you can clone the repo
         <pre><code>~/ $ git clone git@github.com:Cocktail-Subscription-Application/cocktail_app.git</code></pre>
 
-        <pre><code> ~/ $ cd cocktail_app && npm install</code></pre>
+        <pre><code> ~/ $ cd cocktail_app/frontend && npm install</code></pre>
 
-        <pre><code> ~/ $ cd frontend && touch .env && cd .. && cd backend && touch .env</code></pre>
+        <pre><code> ~/ $ cd cocktail_app/backend && npm install</code></pre>
 
-        The .env file in front and backend require the following configuration variables.
+        <pre><code> ~/ $ cd frontend && touch .env.production .env.development && cd ../backend && touch .env now.json</code></pre>
+        
+        BACKEND
+
+        In the .env created on the backend, incude:
+
+        <pre><code>
+        DB_URL=<INSERT YOUR MONGOD:DB INFO>
+
+        STRIPE_SECRET=<INSERT YOUR Sk KEY FROM STRIPE>
+
+        MONTHLY_PLAN=<INSERT THE MONTHLY PLAN ID FROM THE PLAN YOUR CREATED IN STRIPE>
+
+        QUARTERLY_PLAN=<INSERT THE QUARTERLY PLAN ID FROM THE PLAN YOUR CREATED IN STRIPE>
+        </code></pre>
 
         FRONTEND
 
-        <pre><code>REACT_APP_STRIPE_KEY="your key here"</code></pre>
+        <pre><code>
+        REACT_APP_DOMAIN=http://localhost:5000
 
-        BACKEND
+        REACT_APP_STRIPE_KEY=<INSERT YOUR pk KEY FROM STRIPE>
+        </code></pre>
 
-        <pre><code>DB_DEV_URL=mongodb://localhost:27017/cocktail-app</code></pre>
-
-
+        Add the above code into both front end env files - with the exact same information.
+        
 6. Design documentation including:
 
     - Design process:
@@ -156,41 +165,99 @@ www.deployedtonetlifyandstuff.com
 
         - Cocktail Model
 
-            <pre><code>const cocktailSchema = new Schema ({
-            title: String,
-            photo: String,
-            description: String,
-            directions: String,
-            ingredients: String,
-            available: Boolean
-            })</code></pre>
+        <pre><code>
+            const cocktailSchema = new Schema ({
+                title: {
+                    type: String,
+                    required: true
+                },
+                photo: {
+                    type: String,
+                    required: true
+                },
+                description: {
+                    type: String,
+                    required: true
+                },
+                directions: {
+                    type: String,
+                    required: true
+                },
+                ingredients: {
+                    type: String,
+                    required: true
+                },
+                available: {
+                    type: Boolean,
+                    required: true
+                },
+                availabilityMonth: {
+                    type: String,
+                    required: true
+                }
+            })
+        </code></pre>
 
         - User Model
 
-            <pre><code>const userSchema = new mongoose.Schema({
-                firstName: String,
-                lastName: String,
+        <pre><code>
+            const userSchema = new mongoose.Schema({
+                firstName: {
+                    type: String,
+                    required: true
+                },
+                lastName: {
+                    type: String,
+                    required: true
+                },
                 email: {
                     type: String,
                     required: true
                 },
-                password: String,
-                session: Boolean,
-                phone: Number, 
-                deliveryAddress: String,
+                password: {
+                    type: String,
+                    required: true
+                },
+            
                 dateJoined: {
                     type: Date,
                     default: Date.now
                 },
-                numberOfOrders: Number,
+
                 stripeId: String,
-                active: Boolean,
+                
                 admin: {
                     type: Boolean,
                     default: false
                 },
-                selectedOption: String
-            })</code></pre>
+
+                selectedOption: {
+                    type: String,
+                    required: true
+                },
+
+                streetAddress: {
+                    type: String,
+                    required: true
+                },
+                suburb: {
+                    type: String,
+                    required: true
+                },
+                postcode: {
+                    type: Number,
+                    required: true
+                },
+                ausState: {
+                    type: String,
+                    required: true
+                },
+
+                orderList: Array,
+                paymentSource: Array,
+                subscriptionId: String,
+            })
+        </code></pre>
 
     -  Data Flow Diagram:
 
@@ -211,30 +278,67 @@ www.deployedtonetlifyandstuff.com
                     /admin/
                         /cocktails.js
                         /users.js
-                auth.js
+                    /user/
+                        /cards.js
+                        /orders.js
+                        /subscriptons.js
+                        /userDetails.js
+                /public/
+                    /auth.js
+                    /payments.js
                 index.js 
-                payments.js
                 public.js
-                seed.js
+                payments.js
             /models/
                /Cocktail.model.js
-               /Order.model.js
                /User.model.js
             api.js
             package.json
         -- /frontend/
             /src/
                 /components/
-                    /Admin.css
-                    /Admin.js
-                    /AdminSidebar.css
-                    /AdminSideBar.js
-                    /AdminUserChart.js
+                    /protected/
+                        /Admin/
+                            /Admin.css
+                            /Admin.js
+                            /AdminSidebar.css
+                            /AdminSideBar.js
+                            /AdminUserChart.js
+                        /Users/
+                            /Cards/
+                                /CardUpdate.js
+                            /PersonalDetails/
+                                /PersonalDetails.js
+                            /Subscriptions/
+                                /AddSubscription.js
+                                /RetrieveSubscription.js
+                                /Subscription.js
+                                /UpdateSubscription.js
+                                /UpdateToMonthly.js
+                                /UpdateToQuarterly.js
+                            /ListCustomerCharges.js
+                            /UpdateDetails.js
+                            /UserProfile.css
+                            /Userprofile.js
+                    /public/
+                        /About.js
+                        /CocktailHome.js
+                        /ContactUs.js
+                        /Faqs.js
+                        /Footer.js
+                        /Form.css
+                        /Frequency.js
+                        /Home.css
+                        /Home.js
+                        /HowItWorks.js
+                        /...etc
+                    /Cocktail.js
                     /Cocktails.css
                     /Cocktails.js
                     /CreateCocktails.js
                     /Customers.css
                     /Customers.js
+                    /Subscription.js
                     /UserProfile.js
                 App.css
                 App.js
@@ -247,11 +351,7 @@ www.deployedtonetlifyandstuff.com
         -- /README.md
 </code></pre>
 
-7. Details of Project Management & Planning process including: 
-  
-    -  Project plan & timeline:
-
-        
+7. Details of Project Management & Planning process including:
 
     -  Client communications:
 
@@ -280,8 +380,6 @@ www.deployedtonetlifyandstuff.com
 
             cloudinary - Cloudinary is an cloud image hosting service that allows developers to host images for their website outside of its database. This is especially useful when using a document based database such as MongoDB and helps spread storage requirements across several different locations. We used this so we could include images of the drinks on our website that also fit in with our database requirements.
 
-            // cookie-session - Cookie-session is used to store use sessions. Once a user has successfully logged in we are able to store their 'session' for a chosen period of time so they they don't always have to log back in to the website whenever they return. We used this to provide a convenient user experience.
-
             cors - Cors (Cross Origin Resource Sharing) is used to allow our application to retrieve resources from different sources. As our front and back end are split up we require cors to stop the browser throwing a single origin resource error.
 
             dotenv - Dotenv is package that allows us to store environment variables in one secure location. Specific routes for the database and various hosting services as well as usernames and passwords to access those services can be stored in the .env file and we can then also ignore the .env file in our git repository so that this information is not compromised.
@@ -302,11 +400,11 @@ www.deployedtonetlifyandstuff.com
 
             stripe - The stripe package gives us access to the stripe API allowing us to implement stripe payment within our application.
 
-            axios - Axios is a package that assists with HTTP requests using promises and assists with asynchronous requests that can be used to perform CRUD operations.
+            axios - Axios is a package that assists with HTTP requests using promises and assists with asynchronous requests that can be used to perform CRUD operations. Allowing us to write routes so admins can perform tasks such as edit, create and delete cocktails.
 
             js-cookie - A package that allows us to manage cookies for our user sessions. It gives us the ability to determine how long a user cookie is to be valid and under which conditions it will be deleted.
 
-            react - React is one of the most popular packages for creating user interfaces. Its dynamic ability allows it to 'react' and update based on user inputs without having to reload an entire page.
+            react - React is one of the most popular packages for creating user interfaces. Its dynamic ability allows it to 'react' and update based on user inputs without having to reload an entire page, and for the page to change based on a state such as the user being signed in or not.
 
             react-burger-menu - React-burger-menu is a simple package that allows us to include a 'burger' icon for our side menu, this is commonly used especially on mobile sites and when clicked it includes a smooth transition which brings the menu into view.
         
@@ -326,7 +424,13 @@ www.deployedtonetlifyandstuff.com
             - Analytical thinking
             - Problem solving
             - Fitting code examples to your own requirements
+            - Persistence
+            - Collaboration
 
         - Evaluate how effective your knowledge and skills were this project, using examples, and suggest changes or improvements for future projects of a similar nature?
 
             As a group we had a good combination of skills to accomplish the various things that were required to fulfill our requirements. Some were stronger in front end, some in back end and some good at finding solutions to the more complex problems, as a whole we worked together well and learnt a lot from the entire project time. If we were to work on another project again we could benefit from spending some more time with wireframes and user walkthroughs. Consistent stand ups daily would have assisted with the workflow of the group as well as discussions about what was going to be tackled, why and how it fitted into the requirements of the project. 
+
+Thank you for reading about our app!
+
+Created by GAEL (Guy, Anhar, Eathan & Laurence) @ CoderAcademy

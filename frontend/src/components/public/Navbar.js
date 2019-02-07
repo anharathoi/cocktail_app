@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Navbar.css'
 import { HashLink as Link } from "react-router-hash-link"
 // import { Hashlink as Link } from 'react-router-hash-link'
-import Logout from '../Logout'
+import Logout from './Logout'
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -34,14 +34,16 @@ export default class Navbar extends Component {
       <div>
         {/* <div>We can also put a message up here if we want to</div> */}
         <nav className={this.state.scroll > this.state.top ? "fixed-nav" : ""}>
-            <ul>
-                <li><Link to='/#home'>The Back Bar</Link></li>
-                <li><Link to='/#about'>About</Link></li>
-                <li><Link to='/#how-it-works'>How it Works</Link></li>
-                {!this.props.token && <li><Link to='/#register' >Register/ Login</Link></li>}
-                {/* {this.props.admin && <li><Link to='/admin/#customers'>ADMIN</Link></li>} */}
-                {this.props.token && <li><Logout {...this.props}/></li>}
-            </ul>
+          <ul>
+              <li><Link to='/#home'>The Back Bar</Link></li>
+              {!this.props.adminStatus && <li><Link to='/#about'>About</Link></li>}
+              {!this.props.adminStatus && <li><Link to='/#how-it-works'>How it Works</Link></li>}
+              {this.props.token && !this.props.adminStatus && <li><Link to='/userprofile'>Your Profile</Link></li>}
+              {!this.props.token && <li><Link to='/#register' >Register/ Login</Link></li>}
+              {this.props.adminStatus && <li><Link to='/admin/#customers'>Dashboard</Link></li>}
+              {this.props.adminStatus && <li><Link to="/admin/cocktails">Cocktails</Link></li>} 
+              {this.props.token && <li><Logout {...this.props}/></li>}
+          </ul>
         </nav>
       </div>
     )

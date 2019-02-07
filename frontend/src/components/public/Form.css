@@ -20,9 +20,9 @@
 }
 
 .form-check input {
-  outline: none;
-  margin: -24%;
-  text-align: left;
+   outline: none;
+  /* margin: -24%; */
+  text-align: left; 
 }
 .site-form form input{
   text-align: left

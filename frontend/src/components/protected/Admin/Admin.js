@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import './Admin.css';
-import AdminSidebar from './AdminSidebar.js'
 import AdminUserChart from './AdminUserChart.js'
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Customers from './Customers';
-import Login from '../public/Login';
-import Cocktails from './Cocktails.js'
-import CreateCocktail from './CreateCocktail'
-import { Redirect } from 'react-router-dom'
+
+import Customers from '../Customers';
+// import Login from '../../public/Login';
+// import Cocktails from './Cocktails.js'
+import CreateCocktail from './../CreateCocktail'
+// import { Redirect } from 'react-router-dom'
 
 class Admin extends Component {
   state = {}
@@ -29,33 +29,15 @@ class Admin extends Component {
   }
   render() {
     // console.log(this.props.admin)
-    if(this.props.token && this.props.admin){
+
       return (
         <div className="Admin" >
-          <nav>
-          <AdminSidebar {...this.props}/>
-          </nav>
           <div id="page-wrap">
             <h1>Admin Dashboard </h1>
-            <AdminUserChart/>
             <Customers {...this.props}/>
-            <CreateCocktail admin={this.state.admin}/>
           </div>
         </div>
       );
-    }
-    else if(this.props.token && !this.props.admin) {
-      return <Redirect to="/userprofile"></Redirect>
-    }
-    else {
-      return (
-        <div style={{paddingTop: '40px'}}>
-        <p> ACCESS DENIED</p>
-            Please Log in to see details
-              < Login {...this.props}/>
-          </div>
-      )
-    }
   }
 }
 

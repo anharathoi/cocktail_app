@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// import Logout from './Logout'
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './Form.css'
 
 export default class Login extends Component {
-  state = { }
+  state = { message: ''}
 
   componentDidMount(){
     const token = Cookies.get('token')
@@ -24,11 +25,13 @@ export default class Login extends Component {
     // console.log(this.state)
     const { email, password } = this.state
     // headers: { authorization: localStorage.getItem('token') }
-    // const url = "https://cocktail-app.now.sh/login" // PROD url
-    const url = "http://localhost:5000/login" //DEV url
+    
+    // const url = "https://cocktail-app.now.sh/login" // PROD
+    const url = "http://localhost:5000/login" // DEV
     const data = { email, password }
     axios.post(url, data)
       .then(resp => {
+        console.log(resp)
         const { user, token } = resp.data
         const { admin } = user
         // const admin = user.admin
@@ -38,13 +41,11 @@ export default class Login extends Component {
         this.setState({  admin:admin, message: 'well done buddy you just LOGGED IN for a cocktail subscription', error: null, email: email, loggedIn: true})
         this.props.setToken(token)
         this.props.setAdmin(admin)
+        this.props.setPayment()
         // console.log("props from login " + this.props.setAdmin)
       })
       .catch(err => {
-        // console.log(err.response)
-        if (err.response === 403) {
-          this.setState({ error: 'Nope!', message: null})
-        }
+        this.setState({ error: 'Invalid Details!', message: "Please try again"})
       })
     }
 
@@ -80,15 +81,14 @@ export default class Login extends Component {
                     </div>
                     <button onClick={this.submitForm}>Login</button>
                   </form>
-                  { message && <p>{ message }</p>}
-                  { error && <p>{ error }</p> }
+                  { error && <p style={{color: '#ed4337'}}>{ error }</p> }
+                  { message && <p style={{color: '#ed4337'}}>{ message }</p>}
               </div>
             </div>
           )
         } else {   
             return (
-              <p>You're currently Logged in</p>
-              // <Logout {...this.props}/>
+              <p >You're currently Logged in</p>
             ) 
         }
       }

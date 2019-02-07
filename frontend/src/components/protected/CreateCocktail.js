@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available:true, photo: null }
+  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month" }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
@@ -30,6 +30,7 @@ export default class CreateCocktail extends React.Component {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value})
     // console.log(`this is ${JSON.stringify(this.state)}`)
+    // console.log(value, id)
   }
 
   getData = () => {
@@ -41,11 +42,8 @@ export default class CreateCocktail extends React.Component {
         }
     })
     .then( resp => {
-        console.log(resp.data)
         const cocktails = resp.data
-        console.log(cocktails)
         this.setState({cocktails: cocktails})
-    //   console.log(cocktails)
     })
     .catch( err => {
         this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
@@ -54,17 +52,17 @@ export default class CreateCocktail extends React.Component {
 
   componentDidMount() {
     this.getData()
-    }
+  }
 
   submitForm = (e) => {
     e.preventDefault()
     // console.log(`this is ${JSON.stringify(this.state)}`)
-    const {  title, description, directions, ingredients, photo } = this.state
-    console.log(this.state.available)
+    const {  title, description, directions, ingredients, photo, available, availabilityMonth } = this.state
+    console.log(availabilityMonth, available)
     // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
-    const available = JSON.parse(this.state.available)
+    // const available = JSON.parse(this.state.available)
     const url = "http://localhost:5000/newcocktail"
-    const data = { title, photo, description, directions, ingredients, available}
+    const data = { title, photo, description, directions, ingredients, available, availabilityMonth}
     const token = Cookies.get('token')
         axios.post(url, data,{
           headers: {
@@ -79,19 +77,8 @@ export default class CreateCocktail extends React.Component {
         .catch(err => {
             console.log(err.response)
             if (err.response === 403) {
-            this.setState({ error: 'Be a better admin!', message: null})
-        }
-
-    // axios.post(url, data)
-    //   .then(resp => {
-    //     this.setState({ message: 'well done buddy you just created a new cocktail', error: null, isSubmitted: true})
-    //   })
-    //   .catch(err => {
-    //       console.log(err.response)
-    //       if (err.response === 403) {
-    //         this.setState({ error: 'Be a better admin!', message: null})
-    //       }
-    // })
+              this.setState({ error: 'Be a better admin!', message: null})
+            }
          })
     }
 
@@ -99,40 +86,44 @@ export default class CreateCocktail extends React.Component {
     const { error, message, cocktails } = this.state
         if (cocktails) {
             return (
-        <>
-            <div id="create-cocktails" style={{paddingTop: '40px'}}>
-                <h2>Hi Admin, Create a new cocktail!</h2>
-                <form>
-                <label htmlFor="title">Cocktail Name:</label>
-                <input type="text" id="title" onChange={this.handleInputChange}/><br/>
-                {/* <label htmlFor="photo">Image:</label> */}
-                <input type="text" /* image */ id="photo" onChange={this.handleInputChange}/><br/>
-                <label htmlFor="description">Description:</label>
-                <input type="text" id="description" onChange={this.handleInputChange}/><br/>
-                <label htmlFor="directions">Directions: </label>
-                <input type="text" id="directions" onChange={this.handleInputChange}/><br/>
-                <label htmlFor="ingredients">Ingredients:</label>
-                <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
-                <label htmlFor="available">Currently Available?:</label>
-                <select type="boolean" id="available" onChange={this.handleInputChange}> 
-                  <option name="true" >true</option>
-                  <option name="false" >false</option>
-                </select><br/>
-                <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
-                <div>
-                  {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
-                </div>
-          
-          {this.state.photo  && <button onClick={this.submitForm}>Create Cocktail</button> }
-                </form>
-                {this.state.isSubmitted}
-                { error && <p>{ error }</p> }
-                { message && <p>{ message }</p>}
+        <div>
+          <div id="create-cocktails" style={{paddingTop: '40px'}}>
+            <h2>Hi Admin, Create a new cocktail!</h2>
+            <form>
+              <label htmlFor="title">Cocktail Name:</label>
+              <input type="text" id="title" onChange={this.handleInputChange}/><br/>
+              <label htmlFor="description">Description:</label>
+              <input type="text" id="description" onChange={this.handleInputChange}/><br/>
+              <label htmlFor="directions">Directions: </label>
+              <input type="text" id="directions" onChange={this.handleInputChange}/><br/>
+              <label htmlFor="ingredients">Ingredients:</label>
+              <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
+              <label htmlFor="available">Currently Available?:</label>
+              <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
+                <option value={true}>True</option>
+                <option value={false}>False</option>
+              </select><br/>
 
-                {/* { user.stripeId && <Link to = /admin/>} */}
-                </div>
-                <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
-            </>
+              <select defaultValue={this.state.availabilityMonth} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
+                <option value="this month">This Month</option>
+                <option value="next month">Next Month</option>
+              </select><br/>
+
+
+              <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
+              <div>
+                {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
+              </div>
+              {this.state.photo  && <button onClick={this.submitForm}>Create Cocktail</button> }
+            </form>
+            {this.state.isSubmitted}
+            { error && <p>{ error }</p> }
+            { message && <p>{ message }</p>}
+
+            {/* { user.stripeId && <Link to = /admin/>} */}
+            </div>
+              <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
+            </div>
             )
         }
         else {
