@@ -15,9 +15,9 @@ require('dotenv').config();
 
 router.put('/update-details', (req,res) => {
   const { firstName, lastName, streetAddress, suburb, postcode, ausState, error, message, email } = req.params
-  console.log(req.body)
-  console.log(req.body.firstName)
-  console.log(req.body.email)
+  // console.log(req.body)
+  // console.log(req.body.firstName)
+  // console.log(req.body.email)
   // res.send({ status: 'SUCCESS' });
   
 

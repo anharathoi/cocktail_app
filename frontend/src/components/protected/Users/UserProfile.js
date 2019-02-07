@@ -409,7 +409,7 @@ addQuarterlySubscription = () => {
 
       <div>
 
-        <div className="personal-info">
+      <div className="userprofile">
         {/* <PersonalDetails
               firstName={this.state.firstName}
               lastName={this.state.lastName}
@@ -428,10 +428,10 @@ addQuarterlySubscription = () => {
           <p>State: {this.state.ausState}</p>
           <input type="submit" value="Update Details" onClick={this.updateDetails} />
           { this.state.updateDetailsState ? <UpdateDetails /> : null }
-          <hr/>
+          
         </div>
 
-        <div className="order-history">
+        <div className="userprofile">
            
             <ListCustomerCharges
               stripeId={this.state.stripeId} // it is HERE
@@ -476,11 +476,11 @@ addQuarterlySubscription = () => {
 } */}
 
 
-            <hr/>
+            
         </div>
 
 
-        <div className="plan-details">
+        <div className="userprofile">
             <h4>Your Subscription Details:</h4>
             <p>Your next delivery is expected between the 1st and 5th of 'moment.js - next month'</p>
 
@@ -528,11 +528,11 @@ addQuarterlySubscription = () => {
             
             <p>Your Next Subscription Payment will be for $87 and will be charged on the 15th || BILLING CYCLE DATE each month</p>
             
-            <hr/>
+            
 
           </div> 
 
-        <div className="payment-details">
+          <div className="userprofile">
             <h4> Your Card Details:</h4>
             <p>Card Type: {this.state.paymentSource[0].brand}</p>
             <p>Card on file: **** **** ****{this.state.paymentSource[0].last4}</p>
@@ -540,12 +540,13 @@ addQuarterlySubscription = () => {
             <p>Expiry Year: {this.state.paymentSource[0].exp_year}</p>
             
             <CardUpdate
+            style={{margin:"-20px"}}
               updateCardView={this.updateCardView}
               onToken={this.onToken}
               email={this.state.email}
             />
 
-            <hr/>
+            
         </div>
 
 

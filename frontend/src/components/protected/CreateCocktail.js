@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month" }
+  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month", cocktails: ["old harry", "hello"] }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
@@ -16,7 +16,7 @@ export default class CreateCocktail extends React.Component {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    axios.post('http://localhost:800/upload', formData, config)
+    axios.post('http://localhost:5000/upload', formData, config)
     .then( (res) => {
       const photo= res.data.secure_url
       this.setState({ photo })
@@ -34,7 +34,7 @@ export default class CreateCocktail extends React.Component {
   }
 
   getData = () => {
-    const url = 'http://localhost:800/cocktails'
+    const url = 'http://localhost:5000/cocktails'
     const token = Cookies.get('token')
     axios.get(url, {
         headers: {
@@ -46,8 +46,9 @@ export default class CreateCocktail extends React.Component {
         this.setState({cocktails: cocktails})
     })
     .catch( err => {
-        this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
-    })
+        // this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
+    console.log(err)
+      })
 }
 
   componentDidMount() {
@@ -87,8 +88,9 @@ export default class CreateCocktail extends React.Component {
         if (cocktails) {
             return (
         <div>
-          <div id="create-cocktails" style={{paddingTop: '40px'}}>
+          <div className="admincontain">
             <h2>Hi Admin, Create a new cocktail!</h2>
+          <div id="create-cocktails" className="site-form">
             <form>
               <label htmlFor="title">Cocktail Name:</label>
               <input type="text" id="title" onChange={this.handleInputChange}/><br/>
@@ -123,6 +125,7 @@ export default class CreateCocktail extends React.Component {
             {/* { user.stripeId && <Link to = /admin/>} */}
             </div>
               <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
+            </div>
             </div>
             )
         }

@@ -3,6 +3,7 @@ import './Admin.css';
 import AdminUserChart from './AdminUserChart.js'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './Admin.css'
 
 import Customers from '../Customers';
 // import Login from '../../public/Login';

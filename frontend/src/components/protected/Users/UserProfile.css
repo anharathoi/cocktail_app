@@ -1,12 +1,34 @@
 .personal-info {
-    color: green;
+    background-color: green;
 }
 .plan-details {
- color: red;
+ background-color: red;
  /* border: 1px solid black;   */
  /* padding: -300px;  */
 }
-
+.payment-details {
+    background-color: blue;
+}
 .order-history {
-    color: purple;
+    background-color: purple;
+}
+
+.userprofile {
+border: 2px solid #D89638;  
+margin-top: 5vh;
+background-color:#292E31;
+height: auto;
+}
+
+.userprofile p {
+    color: #D89638;
+}
+
+.userprofile h4 {
+    color: #D89638;
+    letter-spacing: 5px;
+}
+
+body {
+    /* background-image: url(../../../images/bg1.jpg) */
 }

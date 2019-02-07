@@ -25,7 +25,7 @@ export default class Navbar extends Component {
 
     componentDidUpdate() {
         this.state.scroll > this.state.top ?
-        document.body.style.paddingTop = 0 :
+        document.body.style.paddingTop = 0:
         document.body.style.paddingTop = 0
     }
     

@@ -16,7 +16,7 @@ export default class Register extends React.Component {
 
   componentDidMount = () => {
     // const url = 'https://cocktail-app.now.sh/me' //PROD
-    const url = 'http://localhost:8000/me' // DEV
+    const url = 'http://localhost:5000/me' // DEV
     const token = Cookies.get('token')
     // console.log("this is token " + token)
 

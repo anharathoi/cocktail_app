@@ -3,12 +3,13 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
 import Login from '../public/Login'
+import './UserProfile.css'
 
 export default class UserProfile extends Component {
   state = {}
   
   componentDidMount () {
-    const url = 'http://localhost:8000/me' // 
+    const url = 'http://localhost:5000/me' // 
     const token = Cookies.get('token')
     if (token) {
       axios.get(url, {

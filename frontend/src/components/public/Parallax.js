@@ -66,10 +66,10 @@ export default class Parallax extends React.Component {
 </section>
 <section>
   <div class="block">
-    <p class="line-break margin-top-10"></p>
-    <h3 className="sub">CURRENT OFFER</h3>
+    <h3 className="sub">CURRENT COCKTAILS THIS MONTH</h3>
+    <hr/>
     <CocktailHome/>
-    <p class="margin-top-10">cocktail cards</p>
+    <br/>
   </div>
 </section>
 
@@ -83,8 +83,8 @@ export default class Parallax extends React.Component {
 
 <section>
   <div class="block">
-    <p class="line-break margin-top-10"></p>
     <h3 className="sub">Register now to receive your first box</h3>
+    <hr/>
     <p class="margin-top-10">Join with us now to receive your complimentary gift.</p>
   </div>
 </section>

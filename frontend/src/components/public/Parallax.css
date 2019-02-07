@@ -89,6 +89,10 @@ justify-content: space-between;
   border: #d89638 2px solid;
 }
 
+button {
+    border: #d89638 2px solid;
+}
+
 .about p {
     width: 100%;
 font-size: 1.4em;
