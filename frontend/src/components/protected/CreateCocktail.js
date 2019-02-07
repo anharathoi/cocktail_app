@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month" }
+  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month", cocktails: ["defaul cocktail1", "default cocktail2"] }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
