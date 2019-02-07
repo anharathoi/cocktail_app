@@ -32,7 +32,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const token = Cookies.get('token')
-    const url = 'http://localhost:5000/me'
+    const url = `${process.env.REACT_APP_DOMAIN}/me`
 
     if (token) { 
       axios.get(url, {

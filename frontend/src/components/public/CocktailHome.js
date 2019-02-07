@@ -4,7 +4,7 @@ import axios from 'axios'
 export default class CocktailHome extends Component {
   state = {rendered: false}
   componentDidMount () {
-    const url = 'http://localhost:5000/home/cocktail'
+    const url =  `${process.env.REACT_APP_DOMAIN}/home/cocktail`
     axios.get(url)
     .then(resp => {
       console.log(resp)
@@ -30,8 +30,6 @@ export default class CocktailHome extends Component {
             </>
           )}
           )}
-          {/* <p>Nothing</p> */}
-          {/* <p>{this.state.cocktail.title}</p> */}
         </div>
       )}
       else {

@@ -4,8 +4,6 @@ export default function HowItWorks() {
   return (
     <div id="how-it-works" className="how-it-works">
 
-    {/* The paddingTop style is so that the sliding/dynamic navbar doesn't cover the first part of the section when it jumps - the header is 38px, this is why i choose 40 as padding */}
-    
     <h3>How it Works</h3>
       <p>Rock n roll star professor plum erudite headmaster chevron big daft brush tricky sneezes, leader of men tricky sneezes sam elliott erudite headmaster rock n roll star professor plum helllloooo nuremberg rally chevron big daft brush, professor plum vincent price erudite headmaster big daft brush clone zone shopper chevron sam elliott leader of men bruce forsyth tricky sneezes I drink your milkshake dick dastardly nuremberg rally helllloooo rock n roll star.</p>
 

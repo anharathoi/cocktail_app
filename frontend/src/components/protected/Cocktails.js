@@ -9,7 +9,7 @@ export default class Cocktails extends Component {
     handleDelete = (e) => {
         const title =(e.currentTarget.parentNode.parentNode.children[0].innerText)
         const token = Cookies.get('token')
-        const url = `http://localhost:5000/admin/cocktail/delete/${title}`
+        const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/delete/${title}`
         axios.delete(url, {
             headers: {
               'Authorization': `bearer ${token}`
@@ -23,16 +23,10 @@ export default class Cocktails extends Component {
         })
     }
 
-
     render() {
-        
       if(this.props.admin){
       return (
-        <div>
-          <nav>
-            {/* <AdminSidebar {...this.props}/> */}
-          </nav>
-          
+        <>
           <div id="cocktails" className="cocktails">
             <h2>Your Cocktails</h2>
             <table className="customers-table pure-table pure-table-horizontal">
@@ -63,7 +57,7 @@ export default class Cocktails extends Component {
               </tbody>
             </table>
           </div>
-        </div>
+        </>
       )} else {
           return(
             <div>

@@ -6,7 +6,6 @@ export default function LiquorLicence() {
       <div style={{paddingTop: '40px'}}>
         This is our liquor licence.
 
-        Read it.  Please it took us time and money to get it.
       </div>
     </>
   )

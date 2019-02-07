@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User.model');
 require('dotenv').config();
 
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY) // this is not posting
+const stripe = require("stripe")(process.env.STRIPE_SECRET) 
 
 router.post('/api/stripe', (req, res, next) => {
     const { token, email, selectedOption } = req.body
@@ -11,6 +11,7 @@ router.post('/api/stripe', (req, res, next) => {
 	    email: email,
 	    source: token.id,
     }, ((err, customer) => {
+
 			User.findOne({email})
 
                 .then( user => {
@@ -25,11 +26,12 @@ router.post('/api/stripe', (req, res, next) => {
                     })
             } else if (selectedOption === "monthlyFrequency") {
                     const { id } = customer
+                    // console.log(`29 - payments.controller - selected option quarterly frequency ${customer})
                     stripe.subscriptions.create({
                         customer: id, 
                         items: [
                             {
-                                plan: "plan_EOj3sJNhbq39cy",
+                                plan: process.env.MONTHLY_PLAN
                             },
                         ],
                     }, function(err, subscription) {
@@ -49,12 +51,12 @@ router.post('/api/stripe', (req, res, next) => {
             }
             else if (selectedOption === "quarterlyFrequency") {
 					const { id } = customer
-					console.log('hello')
+					// console.log(`54 - payments.controller - selected option quarterly frequency ${customer})
                     stripe.subscriptions.create({
                         customer: id, 
                         items: [
                             {
-                                plan: "plan_EOj3QIWZuZUbNI",
+                                plan: process.env.QUARTERLY_PLAN,
                             },
                         ],
                     }, function(err, subscription) {
