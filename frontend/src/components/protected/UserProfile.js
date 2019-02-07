@@ -8,7 +8,7 @@ export default class UserProfile extends Component {
   state = {}
   
   componentDidMount () {
-    const url = 'http://localhost:5000/me' // 
+    const url = 'http://localhost:8000/me' // 
     const token = Cookies.get('token')
     if (token) {
       axios.get(url, {

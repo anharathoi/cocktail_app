@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User.model');
 require('dotenv').config();
 
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY) // this is not posting
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY) // this is not posting
 
 router.post('/api/stripe', (req, res, next) => {
     const { token, email, selectedOption } = req.body
@@ -29,7 +29,7 @@ router.post('/api/stripe', (req, res, next) => {
                         customer: id, 
                         items: [
                             {
-                                plan: "plan_EOj3sJNhbq39cy",
+                                plan: "plan_ETzeK7ZRfVnU6j",
                             },
                         ],
                     }, function(err, subscription) {
@@ -54,7 +54,7 @@ router.post('/api/stripe', (req, res, next) => {
                         customer: id, 
                         items: [
                             {
-                                plan: "plan_EOj3QIWZuZUbNI",
+                                plan: "plan_ETzejNRas25Hwt",
                             },
                         ],
                     }, function(err, subscription) {

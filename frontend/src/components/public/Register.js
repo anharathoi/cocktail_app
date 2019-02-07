@@ -31,7 +31,7 @@ export default class Register extends React.Component {
 
   componentDidMount = () => {
     // const url = 'https://cocktail-app.now.sh/me' //PROD
-    const url = 'http://localhost:5000/me' // DEV
+    const url = 'http://localhost:8000/me' // DEV
     const token = Cookies.get('token')
     // console.log("this is token " + token)
     if(token){
@@ -88,8 +88,8 @@ export default class Register extends React.Component {
   render() {
     const { error, message, email, selectedOption } = this.state
     return (
-      <div id="register" style={{paddingTop: '40px'}}>
-        <h2>Sign up for a Cocktail Subscription</h2>
+      <div id="register" className="site-form">
+        <h2>SIGN UP FOR A COCKTAIL SUBSCRIPTION</h2>
         <form>
           <label htmlFor="firstName">First Name:</label>
           <input type="text" id="firstName" onChange={this.handleInputChange}/><br/>
@@ -97,7 +97,7 @@ export default class Register extends React.Component {
           <label htmlFor="lastName">Last Name:</label>
           <input type="text" id="lastName" onChange={this.handleInputChange}/><br/>
           
-          <label htmlFor="email">email</label>
+          <label htmlFor="email">Email</label>
           <input type="email" id="email" onChange={this.handleInputChange}/><br/>
           
           <label htmlFor="password">Password: </label>
@@ -109,7 +109,7 @@ export default class Register extends React.Component {
 
           {/* <label htmlFor="deliveryAddress">Delivery Address:</label>
           <input type="text" id="deliveryAddress" onChange={this.handleInputChange}/><br/> */}
-          <h4>Where would you like your cocktails delivered?</h4>
+          <h4>WHERE WOULD YOU LIKE YOUR COCKTAILS DELIVERED</h4>
 
           <label htmlFor="streetAddress">Street Address:</label>
           <input type="text" id="streetAddress" onChange={this.handleInputChange}/><br/>

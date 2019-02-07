@@ -16,7 +16,7 @@ export default class CreateCocktail extends React.Component {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    axios.post('http://localhost:5000/upload', formData, config)
+    axios.post('http://localhost:800/upload', formData, config)
     .then( (res) => {
       const photo= res.data.secure_url
       this.setState({ photo })
@@ -33,7 +33,7 @@ export default class CreateCocktail extends React.Component {
   }
 
   getData = () => {
-    const url = 'http://localhost:5000/cocktails'
+    const url = 'http://localhost:800/cocktails'
     const token = Cookies.get('token')
     axios.get(url, {
         headers: {
@@ -63,7 +63,7 @@ export default class CreateCocktail extends React.Component {
     console.log(this.state.available)
     // the JSON.parse is required as "available" is being saved as a string in the state instead of a boolean
     const available = JSON.parse(this.state.available)
-    const url = "http://localhost:5000/newcocktail"
+    const url = "http://localhost:8000/newcocktail"
     const data = { title, photo, description, directions, ingredients, available}
     const token = Cookies.get('token')
         axios.post(url, data,{

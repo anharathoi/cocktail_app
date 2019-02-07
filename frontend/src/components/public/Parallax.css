@@ -1,0 +1,101 @@
+
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+
+
+
+
+/* Override UGG site */
+#main {width: 100%; padding:0; text-align: center;}
+.content-asset p {margin:0 auto;}
+.breadcrumb {display:none;}
+
+/* Helpers */
+/**************************/
+.margin-top-10 {padding-top:10px; font-size: 1.5em; text-align: center;}
+.margin-bot-10 {padding-bottom:10px;}
+
+/* Typography */
+/**************************/
+#cocktailparallax h1 {  font-family: 'Ropa Sans', sans-serif;
+  font-size:24px; font-weight:400; text-transform: uppercase; color:black; padding:0; margin:0;}
+#cocktailparallax h2 .parallax-h2 {  font-family: 'Ropa Sans', sans-serif; margin-left:5%;
+  font-size:70px; letter-spacing:40px; text-align:center; color:#d89638; font-weight:400; text-transform:uppercase; z-index:10; opacity:.9;}
+#cocktailparallax h3 {   font-family: 'Ropa Sans', sans-serif;
+  font-size:1.5em; line-height:0; font-weight:600; letter-spacing:8px; text-transform: uppercase; color:black; text-align: center;}
+  /* #cocktailparallax h4 {   font-family: 'Ropa Sans', sans-serif;
+    font-size:1.2em; line-height:0; font-weight:600; letter-spacing:8px; text-transform: uppercase; color:black; text-align: center;}   */
+  #cocktailparallax .sub {  font-family: 'Ropa Sans', sans-serif;
+  font-size:1.5em; line-height:0; font-weight:600; letter-spacing:8px; text-transform: uppercase; color:#d89638; text-align: center;}
+
+
+  #cocktailparallax p .parallax-p{  font-family: 'Ropa Sans', sans-serif;
+  font-weight:400; font-size:em; line-height:24px; text-align: center;}
+.first-character {font-weight:400; float: left; font-size: 84px; line-height: 64px; padding-top: 4px; padding-right: 8px; padding-left: 3px; font-family: 'Source Sans Pro', sans-serif;}
+
+.sc {color: #000000;}
+.ny {color: #3d3c3a;}
+.atw {color: #c48660;}
+
+/* Section - Title */
+/**************************/
+#cocktailparallax .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#cocktailparallax .title h1 {font-size:35px; letter-spacing:8px;}
+
+/* Section - Block */
+/**************************/
+#cocktailparallax .block {background: white; padding: 60px; width:820px; margin:0 auto; text-align:justify;}
+#cocktailparallax .block-gray {background: #f2f2f2;padding: 60px;}
+#cocktailparallax .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
+
+/* Section - IMG */
+.logo {position: sticky; width: 40vw}
+
+/* Section - Parallax */
+/**************************/
+#cocktailparallax .parallax-one {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("https://www.mailexperiences.co.uk/content/img/product/large/royal-cocktails-with-sharing-18100237.jpg"); background-attachment: fixed; background-size:100vw;  -moz-background-size:100vw; -webkit-background-size:100vw; background-repeat: no-repeat; background-position: center right;}
+#cocktailparallax .parallax-two {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("../../images/bg1.jpg"); background-attachment: fixed; background-size: cover;  -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#cocktailparallax .parallax-one img {margin: 0 auto;}
+#cocktailparallax .parallax-three {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("../../images/bg1.jpg"); background-attachment: fixed; background-size: cover;  -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center; }
+#cocktailparallax .parallax-cocktail {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("../../images/bg-cocktails.png"); background-attachment: fixed; background-size: cover;  -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center; }
+#cocktailparallax .parallax-reg {width:100%; padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("../../images/bg1.jpg"); background-attachment: fixed; background-size: cover;  -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+#cocktailparallax .parallax-reg h2 {
+  font-size: 2em;
+  margin-bottom: 7vh;
+}
+#cocktailparallax .parallax-reg label {
+  font-size: 1em;
+}
+#cocktailparallax .parallax-reg .site-form .registration {
+  margin-left: 800px;
+}
+
+#cocktailparallax .parallax-gift {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url("../../images/bg1.jpg"); background-attachment: fixed; background-size: cover;  -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+
+#cocktailparallax .howitworks {
+width: 100%;
+display: flex;
+justify-content: space-between;
+    border: #d89638 2px solid;
+    background-color: #3d3c3a;
+    /* padding: 20%; */
+}
+
+
+#cocktailparallax .howCard {
+  display: block;
+  justify-content: space-evenly;
+  border: #d89638 2px solid;
+}
+
+.about p {
+    width: 100%;
+font-size: 1.4em;
+}
+/* Extras */
+/**************************/
+#cocktailparallax .line-break {border-bottom:1px solid black; width: 150px; margin:0 auto;}
+#p-sub { font-family: 'Ropa Sans', sans-serif;
+    font-size:1.5em; line-height:0; font-weight:600; letter-spacing:8px; text-transform: uppercase; color:#d89638; text-align: center;}
+  

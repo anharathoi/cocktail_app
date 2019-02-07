@@ -6,7 +6,8 @@
   text-align: center;
   border: #d89638 2px solid;
   color: #d89638;
-  padding: 15px;
+  letter-spacing: .2em;
+  /* padding: 15px; */
 }
 .site-form h2{
   text-align: center;
