@@ -27,7 +27,8 @@ require('dotenv').config()
 class App extends React.Component {
 
   state = {
-    loggedIn: false
+    loggedIn: false,
+    stripeId: false
   }
 
   componentDidMount() {
@@ -41,8 +42,9 @@ class App extends React.Component {
         }
       })
       .then ( resp => {
-        const { admin } = resp.data
-        this.setState({token, admin, loggedIn: true})
+        const { admin, stripeId } = resp.data
+        // console.log(resp.data)
+        this.setState({token, admin, loggedIn: true, stripeId: false})
       })
       .catch( err => console.log(err) )
     }
@@ -61,7 +63,12 @@ class App extends React.Component {
     this.setState({admin: isAdmin})
   }
 
+  setPayment = () => {
+    return this.setState({stripeId: true})
+  }
+
   render() {
+    console.log(this.state)
     return (
         <div className="App">
           <div className="Main">
@@ -71,7 +78,7 @@ class App extends React.Component {
             <Switch>
               <Route
                 exact path="/"
-                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin}/> }
+                render={(props) => <Home {...props} setToken={this.setToken} clearToken={this.clearToken} token={this.state.token} setAdmin={this.setAdmin} setPayment={this.setPayment} payment={this.state.stripeId}/> }
               />
 
               {this.state.token && !this.state.admin && (<Route

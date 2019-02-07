@@ -13,21 +13,6 @@ export default class Register extends React.Component {
       frequencyOptions: []
     }
   }
-////////GUY COMMENTED OUT FOR MERGE
-  componentDidMount = () => {
-    // const url = 'https://cocktail-app.now.sh/me' //PROD
-    const url = 'http://localhost:5000/me' // DEV
-      axios.get(url)
-      .then(res => res.json())
-			.then(data => {
-				this.setState({
-					selectedFrequency: data.frequencyOptions	
-				});
-      });
-    }
-  //thinking i may have to add in all of the fields within this.state.  and then below set the state of each of these components in this.setState.
-  ////////////////END GUY COMMENTED OUT
-
 
   componentDidMount = () => {
     // const url = 'https://cocktail-app.now.sh/me' //PROD
@@ -137,7 +122,7 @@ export default class Register extends React.Component {
 
             <button onClick={this.submitForm}>JOIN UP</button>
           </form>
-            {this.state.isSubmitted && email && <Payment email={email} selectedOption={selectedOption} />}
+            {this.state.isSubmitted && email && <Payment {...this.props} email={email} selectedOption={selectedOption} />}
             { error && <p>{ error }</p> }
             { message && <p>{ message }</p>}
 

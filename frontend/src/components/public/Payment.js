@@ -25,6 +25,8 @@ export default class Payment extends Component {
         this.setState({ 
           success
         })
+        // console.log(this.props)
+        this.props.setPayment()
       })
       .catch ( err => {
         console.log(err.response)
