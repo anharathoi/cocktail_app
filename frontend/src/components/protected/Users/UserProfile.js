@@ -272,7 +272,7 @@ addQuarterlySubscription = () => {
 
         <div className="plan-details">
             <h4>Your Subscription Details:</h4>
-            <p>Your next delivery is expected between the 1st and 5th of 'moment.js - next month'</p>
+            <p>Your next delivery is expected between the 1st and 5th of March</p>
 
             {/* Displays the users current subscription type */}
             { this.state.selectedOption === "monthlyFrequency" && <p>You have a monthly subscription</p>}
@@ -295,7 +295,7 @@ addQuarterlySubscription = () => {
 
             <p style={{fontSize:".8em"}}>This will stop you getting billed while still allowing you to keep your account information</p>
               
-            <p>Your Next Subscription Payment will be for $87 and will be charged on the 15th || BILLING CYCLE DATE each month</p>
+            <p>Your Next Subscription Payment will be for $87 and will be charged on the 8th of March</p>
             
             <hr/>
 

@@ -30,6 +30,7 @@ export default class UpdateDetails extends Component {
       .then ( resp => {
         const {email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState } = resp.data
         this.setState({email, firstName, lastName, phone, stripeId, selectedOption, paymentSource, subscriptionId, streetAddress, suburb, postcode, ausState })
+        console.log(resp)
       })
       .catch(err => console.log(err) )
   }
@@ -43,7 +44,7 @@ export default class UpdateDetails extends Component {
     e.preventDefault()
     const {  firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message } = this.state
   
-    const url = `'${process.env.REACT_APP_DOMAIN}/update-details:email'`
+    const url = `${process.env.REACT_APP_DOMAIN}/update-details`
     const data = { firstName, lastName, email, streetAddress, suburb, postcode, ausState,  stripeId, error, message }
     
     axios.put(url, data)
