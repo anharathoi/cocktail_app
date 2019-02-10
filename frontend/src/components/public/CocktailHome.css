@@ -1,0 +1,86 @@
+.cocktailcard {
+    /* display:flex; */
+    /* justify-content: -around; */
+    /* Add shadows to create the "card" effect */
+    align-content: space-between;
+    height: 30vh;
+    width: 30vh;
+    text-align: center;
+    /* transition: 0.3s; */
+    background-size: cover;
+  }
+
+.containercocktail {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 60%;
+    width: 90%;
+    margin-top: 10vh;
+    overflow: hidden;
+    /* padding: 2px 4vw; */
+    /* background: #d89638 */
+}
+
+.admincontain {
+    display:block;
+    /* align-content: center; */
+    height: 60%;
+    width: 100%;
+    margin-top: 10vh;
+    /* padding: 2px 4vw; */
+    /* background: #d89638 */
+}
+
+.admincontain h2 {
+    text-transform: uppercase;
+    letter-spacing: .5em;
+}
+
+.containercocktail p {
+    font-size: .7em;
+    margin-top: -3vh;
+    color: #d89638;
+  }
+
+.cocktailcard-details h1 {
+  font-size: .7em;
+  /* margin-top: 5vh; */
+  text-decoration: #d89638;
+  }
+  
+  .cocktails {
+      margin: 0 auto;
+      margin-left: 23%;
+  }
+
+  .cocktailcard-details {
+      /* margin: 0 auto; */
+      /* vertical-align: top; */
+      /* height: 10%; */
+      height:20px;
+      width:50vh;
+      /* background: pink; */
+      margin-bottom:5em;
+      margin-left:-4em;
+      text-align: center;
+      letter-spacing: .5em;
+      /* margin-top: -25%; */
+  }
+
+.cocktailcardimage {
+  margin: 0 auto;
+  position: relative;
+  min-width: 100%;
+  min-height: 88%;
+  /* background: blue; */
+  border: #d89638 2px solid;
+  }
+
+  .cocktailcardimage img {
+    margin: 0 auto;
+    position: inherit;
+    min-width: 90%;
+    min-height: 90%;
+    background: white;
+    }

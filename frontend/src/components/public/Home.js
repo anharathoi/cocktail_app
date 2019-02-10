@@ -5,6 +5,7 @@ import HowItWorks from './HowItWorks';
 import About from './About';
 import CocktailHome from './CocktailHome'
 import './Home.css'
+import Parallax from './Parallax';
 
 export default class Home extends React.Component {
   state = {}
@@ -14,12 +15,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <div id="home" className="home">
-          <About />
-          <HowItWorks/>
-          <CocktailHome/>
-          {/* <Register {...this.props}/> */}
-          {!this.props.payment && <Register {...this.props}/>}
-          <Login {...this.props}/>
+          <Parallax {...this.props}/>
         </div>
       </div>
     )

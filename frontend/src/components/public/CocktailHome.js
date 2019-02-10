@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './CocktailHome.css'
 
 export default class CocktailHome extends Component {
   state = {rendered: false}
@@ -22,14 +23,27 @@ export default class CocktailHome extends Component {
     if(this.state.rendered) {
       return (
         <div>
-          <p>Cocktails this month</p>
-          {this.state.cocktails.map( cocktail => {return (
-            <>
-             <h2>Title {cocktail.title}</h2>
-             <img src={cocktail.photo}/>
-            </>
-          )}
-          )}
+
+          <div class="containercocktail">
+            {this.state.cocktails.map( cocktail => {return (
+              <div class="cocktailcard">
+                <div class="cocktailcard-details">
+                  <h1>{cocktail.title}</h1>
+                  <br/>
+                  <hr/>
+                </div>
+                  <div class="cocktailcardimage">
+                    <img src={`${cocktail.photo}`}/>
+                  </div>
+               </div>
+
+
+
+)}
+)}
+</div>
+          {/* <p>Nothing</p> */}
+          {/* <p>{this.state.cocktail.title}</p> */}
         </div>
       )}
       else {

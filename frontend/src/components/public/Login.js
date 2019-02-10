@@ -60,10 +60,10 @@ export default class Login extends Component {
           return (
             <>
               <div className="site-form login">
-                  <h2>Sign In</h2>
+                  <h2>SIGN IN</h2>
                   <form >
                     <div>
-                      <label htmlFor="email">email</label>
+                      <label htmlFor="email">Email</label>
                       <input type="email" id="email" onChange={this.handleInputChange}/>
                     </div>
                     <div>

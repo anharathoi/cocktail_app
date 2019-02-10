@@ -10,7 +10,11 @@ const User = require('../../../models/User.model');
 
 router.put('/update-details', (req,res) => {
   const { firstName, lastName, streetAddress, suburb, postcode, ausState, error, message, email } = req.params
-  // console.log(`13 - userDetails.controller.js - update user personal info ${req.body}`)
+  // console.log(req.body)
+  // console.log(req.body.firstName)
+  // console.log(req.body.email)
+  // res.send({ status: 'SUCCESS' });
+  
 
   User.findOneAndUpdate({ email: { $eq: req.body.email}}, {$set: {
       firstName: req.body.firstName, 

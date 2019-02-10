@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './Admin.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './Admin.css'
+
 import Customers from '../Customers';
 
 class Admin extends Component {

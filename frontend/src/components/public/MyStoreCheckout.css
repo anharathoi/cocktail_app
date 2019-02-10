@@ -1,0 +1,17 @@
+.stripecard{
+    font-family: 'Ropa Sans', sans-serif;
+    background: #292E31;
+    width: 49%;
+    margin: auto;
+    margin-top: -2px;
+    text-align: center;
+    border: #d89638 2px solid;
+    color: #d89638;
+    padding: 15px;
+
+}
+
+
+form CardField {
+    font-size: 50em;
+}

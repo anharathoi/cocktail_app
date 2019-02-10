@@ -225,54 +225,77 @@ addQuarterlySubscription = () => {
     if (this.state.email) {
     
     return (
-      <>
-        <div className="personal-info">
-          <p>Hello {this.state.firstName} {this.state.lastName}</p>
-          <p style={{fontStyle:"italic"}}>{this.state.email}</p>
-          <p>These are the details you have provided to us:</p>
-          <p>Street Address: {this.state.streetAddress}</p>
-          <p>Suburb: {this.state.suburb}</p>
-          <p>Postcode: {this.state.postcode}</p>
-          <p>State: {this.state.ausState}</p>
-          <input type="submit" value="Update Details" onClick={this.updateDetails} />
-          { this.state.updateDetailsState ? <UpdateDetails /> : null }
-          <hr/>
-        </div>
 
-        <div className="order-history">
-           
+      <div className="userprofile-container">
+        <div className="userprofile">
+          {/* <PersonalDetails
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                email={this.state.email}
+                streetAddress={this.streetAddress}
+                suburb={this.suburb}
+                postcode={this.postcode}
+                state={this.ausState}              
+              /> */}
+            <h4>Hello {this.state.firstName.toUpperCase()} {this.state.lastName.toUpperCase()}</h4>
+            <p style={{fontStyle:"italic"}}>{this.state.email}</p>
+            <p>These are the details you have provided to us:</p>
+            <p>Street Address: {this.state.streetAddress}</p>
+            <p>Suburb: {this.state.suburb}</p>
+            <p>Postcode: {this.state.postcode}</p>
+            <p>State: {this.state.ausState}</p>
+            <input type="submit" value="Update Details" onClick={this.updateDetails} />
+            { this.state.updateDetailsState ? <UpdateDetails /> : null }
+            
+          </div>
+
+        <div className="userprofile">
+        
           <button onClick={this.listCustomerOrders}>View all your orders</button>
-           
-          {this.state.orders && 
-              <>
-                <h4>Your Orders:</h4>
-                  <table className="customers-table pure-table pure-table-horizontal">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Description</th> 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.orders.map(order => 
-                          { return (
-                          <tr>
-                            <td>{this.timeConverter(order.created)}</td>
-                            <td>{this.moneyConverter(order.amount)}</td>  
-                            <td>Bottle Batched Subscription</td>
-                          </tr>)
-                        }
-                        )}
-                        </tbody>
-                  </table>
+   
+
+            {this.state.orders && 
+                <>
+                  <h4>Your Orders:</h4>
+                    <table className="customers-table pure-table pure-table-horizontal">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Description</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.orders.map(order => 
+                            { return (
+                            <tr>
+                              <td>{this.timeConverter(order.created)}</td>
+                              <td>{this.moneyConverter(order.amount)}</td>  
+                              <td>Bottle Batched Subscription</td>
+                            </tr>)
+                          }
+                          )}
+                          </tbody>
+                    </table>
+            {/* 
+                    <input type="submit" value="Hide Orders" onClick={this.toggleOrders}/>
+                    {this.state.showOrders ? <p>hi</p> : <p>bye</p>} */}
                 </>
-          }
+
+            }
+
+{/* toggleOrders = () => {
+  this.setState.showOrders = true
+} */}
+
+
+            
         </div>
 
-        <div className="plan-details">
+
+        <div className="userprofile">
             <h4>Your Subscription Details:</h4>
-            <p>Your next delivery is expected between the 1st and 5th of 'moment.js - next month'</p>
+            <p>Your next delivery is expected between the 1st and 5th of March</p>
 
             {/* Displays the users current subscription type */}
             { this.state.selectedOption === "monthlyFrequency" && <p>You have a monthly subscription</p>}
@@ -295,13 +318,11 @@ addQuarterlySubscription = () => {
 
             <p style={{fontSize:".8em"}}>This will stop you getting billed while still allowing you to keep your account information</p>
               
-            <p>Your Next Subscription Payment will be for $87 and will be charged on the 15th || BILLING CYCLE DATE each month</p>
+            <p>Your Next Subscription Payment will be for $87 and will be charged on the 8th of March</p>
             
-            <hr/>
-
           </div> 
 
-        <div className="payment-details">
+          <div className="userprofile">
             <h4> Your Card Details:</h4>
             <p>Card Type: {this.state.paymentSource[0].brand}</p>
             <p>Card on file: **** **** ****{this.state.paymentSource[0].last4}</p>
@@ -309,12 +330,14 @@ addQuarterlySubscription = () => {
             <p>Expiry Year: {this.state.paymentSource[0].exp_year}</p>
             
             <CardUpdate
+            style={{margin:"-20px"}}
               updateCardView={this.updateCardView}
               onToken={this.onToken}
               email={this.state.email}
-            />
-        </div>
-      </>
+            /> 
+          </div>
+      </div>
+      
     )}
      else  {
       return (

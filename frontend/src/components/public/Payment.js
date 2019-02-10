@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
+import './Payment.css'
 require('dotenv').config()
 
 export default class Payment extends Component {

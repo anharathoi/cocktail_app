@@ -7,28 +7,30 @@ import { Link } from 'react-router-dom';
 export default class Cocktails extends Component {
     state = {}
     handleDelete = (e) => {
-        const title =(e.currentTarget.parentNode.parentNode.children[0].innerText)
-        const token = Cookies.get('token')
-        const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/delete/${title}`
-        axios.delete(url, {
-            headers: {
-              'Authorization': `bearer ${token}`
-            }
-        })
-        .then((res) => {
-            this.props.getData()
-        })
-        .catch((err) => {
-            console.log(err.response)
-        })
+      const title =(e.currentTarget.parentNode.parentNode.children[0].innerText)
+      const token = Cookies.get('token')
+      const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/delete/${title}`
+      axios.delete(url, {
+          headers: {
+            'Authorization': `bearer ${token}`
+          }
+      })
+      .then((res) => {
+          this.props.getData()
+      })
+      .catch((err) => {
+          console.log(err.response)
+      })
     }
 
     render() {
       if(this.props.admin){
       return (
-        <>
-          <div id="cocktails" className="cocktails">
+        <div>
+          <div id="cocktails">
             <h2>Your Cocktails</h2>
+            </div>
+          <div id="cocktails">
             <table className="customers-table pure-table pure-table-horizontal">
               <thead>
                 <tr>
@@ -36,7 +38,6 @@ export default class Cocktails extends Component {
                   <th>Photo</th>
                   <th>Description</th> 
                   <th>Month available</th>
-                  <th>Available</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -45,10 +46,9 @@ export default class Cocktails extends Component {
                   { return(
                       <tr key={cocktail._id}>
                         <td><Link to={`/admin/cocktail/${cocktail.title}`}>{cocktail.title}</Link></td>
-                        <td> <img style={{height:"140px"}} src={cocktail.photo}/> </td>
+                        <td> <img style={{width:"140px"}} src={cocktail.photo}/> </td>
                         <td>{cocktail.description}</td>
                         <td>{cocktail.availabilityMonth}</td>
-                        <td>{cocktail.available}</td>
                         <td><button onClick={this.handleDelete}>Delete</button></td>
                       </tr>
                     )
@@ -57,7 +57,7 @@ export default class Cocktails extends Component {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )} else {
           return(
             <div>

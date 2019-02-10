@@ -93,8 +93,8 @@ export default class Register extends React.Component {
   render() {
     const { error, message, email, selectedOption } = this.state
     return (
-      <div id="register" style={{paddingTop: '40px'}}>
-        <h2>Sign up for a Cocktail Subscription</h2>
+      <div id="register" className="site-form">
+        <h2>SIGN UP FOR A COCKTAIL SUBSCRIPTION</h2>
         <form>
           <strong>You must be over 18 in order to sign up.</strong><br/>
           {/* make a checkbox that is required for this */}
@@ -105,7 +105,7 @@ export default class Register extends React.Component {
           <label htmlFor="lastName">Last Name:</label>
           <input type="text" id="lastName" onChange={this.handleInputChange}/><br/>
           
-          <label htmlFor="email">email</label>
+          <label htmlFor="email">Email</label>
           <input type="email" id="email" onChange={this.handleInputChange}/><br/>
           
           <label htmlFor="password">Password: </label>

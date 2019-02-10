@@ -35,7 +35,7 @@ export default class Cocktail extends Component {
 
   handleSubmit = () => {
     const { title } = this.props.match.params
-    const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/edit${title}`
+    const url = `${process.env.REACT_APP_DOMAIN}/admin/cocktail/edit/${title}`
     const token = Cookies.get('token')
     const available = this.state.available
     const availabilityMonth = this.state.availabilityMonth

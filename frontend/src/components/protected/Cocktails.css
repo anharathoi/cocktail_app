@@ -1,10 +1,47 @@
 .cocktails {
-    justify-content: center;
+    /* justify-content: center; */
     overflow-x:auto;
-    padding: 10px 40px;
+    /* padding: 10px 40px; */
   }
-  .cocktails .cocktails-table {
+  .cocktails.cocktails-table {
+    width: 100%;
     text-align: left;
-    margin: 40px auto;
+    /* margin: 40px auto; */
     padding: 10px;
   }
+
+  .createcocktailshow {
+    /* margin-left: 20vw; */
+    /* width: 100vw; */
+  }
+.customers-table {
+  text-align: left;
+  width: 100vw;
+  padding: 5%;
+}
+
+.customers-table a{
+  text-decoration: none;
+  color: #d89638
+}
+.customers-table a:hover{
+  text-decoration: none;
+  color: #d89638;
+  border-bottom: 1px solid #d89638;
+}
+.create-cocktails.site-form{
+  width: 100vw;
+  padding: 20px;
+}
+
+.create-cocktails.site-form input {
+  text-align: left;
+  margin: 20px;
+}
+
+
+#image-upload.select-button {
+  color: #d89638;
+  border: #d89638 2px solid;
+  font-family: 'Ropa Sans', sans-serif;
+}

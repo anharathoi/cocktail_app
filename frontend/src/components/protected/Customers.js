@@ -18,7 +18,8 @@ export default class Customers extends Component {
         this.setState({customers: customers, token})
       })
       .catch( err => {
-        this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
+        // this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
+        console.log(err)
       })
   }
   render() {
@@ -26,7 +27,9 @@ export default class Customers extends Component {
     return (
       <div>
         <div id="customers" className="customers">
-          <h2>Your Customers</h2>
+          <h2>YOUR CUSTOMERS</h2>
+          <br/>
+          <hr/>
           <table className="customers-table pure-table pure-table-horizontal">
             <thead>
               <tr>

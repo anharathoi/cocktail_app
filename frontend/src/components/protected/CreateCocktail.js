@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import Cocktails from './Cocktails'
 
 export default class CreateCocktail extends React.Component {
-  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month", cocktails: ["defaul cocktail1", "default cocktail2"] }
+  state = { isSubmitted: false, available: true, photo: null, availabilityMonth:"this month", cocktails: ["default cocktail1", "default cocktail2"] }
 
   handleUpload = (e) => {
     const file = e.target.files[0]
@@ -45,9 +45,10 @@ export default class CreateCocktail extends React.Component {
         this.setState({cocktails: cocktails})
     })
     .catch( err => {
-        this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
-    })
-  }
+        // this.setState({error: JSON.stringify(err.response.data), status:JSON.stringify(err.response.status)})
+    console.log(err)
+      })
+}
 
   componentDidMount() {
     this.getData()
@@ -84,41 +85,43 @@ export default class CreateCocktail extends React.Component {
         if (cocktails) {
             return (
         <div>
-          <div id="create-cocktails" style={{paddingTop: '40px'}}>
+          <div className="admincontain">
             <h2>Hi Admin, Create a new cocktail!</h2>
-            <form>
-              <label htmlFor="title">Cocktail Name:</label>
-              <input type="text" id="title" onChange={this.handleInputChange}/><br/>
-              <label htmlFor="description">Description:</label>
-              <input type="text" id="description" onChange={this.handleInputChange}/><br/>
-              <label htmlFor="directions">Directions: </label>
-              <input type="text" id="directions" onChange={this.handleInputChange}/><br/>
-              <label htmlFor="ingredients">Ingredients:</label>
-              <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
-              <label htmlFor="available">Currently Available?:</label>
-              <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
-                <option value={true}>True</option>
-                <option value={false}>False</option>
-              </select><br/>
+            <div id="create-cocktails" className="create-cocktails site-form">
+              <form>
+                <label htmlFor="title">Cocktail Name:</label>
+                <input type="text" id="title" onChange={this.handleInputChange}/><br/>
+                <label htmlFor="description">Description:</label>
+                <input type="text" id="description" onChange={this.handleInputChange}/><br/>
+                <label htmlFor="directions">Directions: </label>
+                <input type="text" id="directions" onChange={this.handleInputChange}/><br/>
+                <label htmlFor="ingredients">Ingredients:</label>
+                <input type="text" id="ingredients" onChange={this.handleInputChange}/><br/>
+                <label htmlFor="available">Currently Available?:</label>
+                <select defaultValue={this.state.available} type="boolean" id="available" onChange={this.handleInputChange}> 
+                  <option value={true}>True</option>
+                  <option value={false}>False</option>
+                </select><br/>
 
-              <select defaultValue={this.state.availabilityMonth} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
-                <option value="this month">This Month</option>
-                <option value="next month">Next Month</option>
-              </select><br/>
+                <label htmlFor="available">Available this month?</label>
+                <select defaultValue={this.state.availabilityMonth} type="text" id="availabilityMonth" onChange={this.handleInputChange}> 
+                  <option value="this month">This Month</option>
+                  <option value="next month">Next Month</option>
+                </select><br/>
 
-              <input type="file" name="image-upload" id="image-upload" onChange={this.handleUpload} />
-              <div>
-                {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
-              </div>
-              {this.state.photo  && <button onClick={this.submitForm}>Create Cocktail</button> }
-            </form>
-            {this.state.isSubmitted}
-            { error && <p>{ error }</p> }
-            { message && <p>{ message }</p>}
-
+                <input type="file" name="image-upload" id="image-upload" className="select-button" onChange={this.handleUpload} />
+                <div>
+                  {this.state.photo && <img style={{height: "100px"}}src={this.state.photo} alt="cloudinary-upload"/>}
+                </div>
+                {this.state.photo  && <button className="select-button" onClick={this.submitForm}>Create Cocktail</button> }
+              </form>
+              {this.state.isSubmitted}
+              { error && <p>{ error }</p> }
+              { message && <p>{ message }</p>}
             </div>
-              <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
-            </div>
+            <Cocktails {...this.props} cocktails={cocktails} getData={this.getData} />
+          </div>
+        </div>
             )
         }
         else {

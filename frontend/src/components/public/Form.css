@@ -6,10 +6,21 @@
   text-align: center;
   border: #d89638 2px solid;
   color: #d89638;
-  padding: 15px;
+  letter-spacing: .2em;
+  /* padding: 15px; */
 }
 .site-form h2{
   text-align: center;
+}
+
+select {
+  border: #d89638 2px solid;
+}
+
+input,
+input h1 {
+  border: #d89638 2px solid;  
+  text-decoration: #292E31;
 }
 
 .site-form form label{
@@ -28,8 +39,9 @@
   text-align: left
 }
 .site-form form button {
-  margin: 15px auto;
-  display: inline-block;
+  margin: 10px auto;
+  display: flex;
+  border: #d89638 2px solid;
 }
 .site-form input {
   width: 50%;
@@ -37,4 +49,8 @@
 
 .site-form.registration {
   margin-top: 60px;
+}
+
+.customers-table pure-table pure-table-horizontal {
+  text-align: center;
 }
